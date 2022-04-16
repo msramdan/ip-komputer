@@ -33,6 +33,12 @@ return [
             'produk_update',
             'produk_delete',
         ],
+        'supplier' =>[
+            'supplier_show',
+            'supplier_create',
+            'supplier_update',
+            'supplier_delete',
+        ],
     ],
 
     'models' => [

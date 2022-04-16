@@ -37,7 +37,7 @@
         </li>
     @endcanany
 
-    {{-- @canany(['unit_show','kategori*','produk*']) --}}
+    @canany(['unit_show','kategori*','supplier*'])
     <li class="nav-item {{ set_active([]) }}">
         <a class="nav-link {{ request()->routeIs() ? '' : 'collapsed' }}" href="#"
             data-toggle="collapse" data-target="#collapseMasterKontak" aria-expanded="true" aria-controls="collapseMasterKontak">
@@ -50,13 +50,13 @@
                 {{-- @can('produk_show') --}}
                     <a class="collapse-item {{ set_active(['produk*']) }}" href="{{ route('produk.index') }}"> Customer</a>
                 {{-- @endcan --}}
-                {{-- @can('kategori_show') --}}
-                    <a class="collapse-item {{ set_active(['kategori*']) }}" href="{{ route('kategori.index') }}"> Supplier</a>
-                {{-- @endcan --}}
+                @can('supplier_show')
+                    <a class="collapse-item {{ set_active(['supplier*']) }}" href="{{ route('supplier.index') }}"> Supplier</a>
+                @endcan
             </div>
         </div>
     </li>
-{{-- @endcanany --}}
+@endcanany
 
 
     @canany(['user_show', 'role_show'])

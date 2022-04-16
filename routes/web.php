@@ -9,11 +9,11 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SupplierController;
 
 // Front End
 use App\Http\Controllers\Frontend\DashboardCrontroller;
-
-
+use Illuminate\Support\Facades\Auth;
 
 Auth::routes([
     'register' => false,
@@ -35,4 +35,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('/unit', UnitController::class)->except('show');
     Route::resource('/kategori', KategoriController::class)->except('show');
     Route::resource('/produk', ProdukController::class)->except('show');
+    Route::resource('/supplier', SupplierController::class)->except('show');
+
 });
