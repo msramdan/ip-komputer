@@ -78,6 +78,23 @@ Breadcrumbs::for('supplier-edit', function (BreadcrumbTrail $trail, $supplier) {
     $trail->push($supplier->kode_supplier. ' - ' .$supplier->nama_supplier , route('supplier.edit', $supplier));
 });
 
+// ============================================================================================================
+//pesan
+Breadcrumbs::for('pesan_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data pesan', route('pesan.index'));
+});
+//pesan > Tambah
+Breadcrumbs::for('pesan-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('pesan_index');
+    $trail->push('Tambah pesan', route('pesan.create'));
+});
+//pesan > Edit
+Breadcrumbs::for('pesan-edit', function (BreadcrumbTrail $trail, $pesan) {
+    $trail->parent('pesan_index');
+    $trail->push('Edit', route('pesan.edit', $pesan));
+    $trail->push($pesan->kode_pesan. ' - ' .$pesan->nama_pesan , route('pesan.edit', $pesan));
+});
+
 
 // ============================================================================================================
 // Roles

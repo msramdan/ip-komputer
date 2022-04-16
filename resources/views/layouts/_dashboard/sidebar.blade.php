@@ -37,7 +37,7 @@
         </li>
     @endcanany
 
-    @canany(['unit_show','kategori*','supplier*'])
+    @canany(['unit_show','customer*','supplier*'])
     <li class="nav-item {{ set_active([]) }}">
         <a class="nav-link {{ request()->routeIs() ? '' : 'collapsed' }}" href="#"
             data-toggle="collapse" data-target="#collapseMasterKontak" aria-expanded="true" aria-controls="collapseMasterKontak">
@@ -56,7 +56,15 @@
             </div>
         </div>
     </li>
-@endcanany
+    @endcanany
+
+    @canany(['unit_show','customer*','supplier*'])
+    <li class="nav-item {{ set_active('pesan*') }}">
+        <a class="nav-link" href="{{ route('pesan.index') }}">
+            <i class="fas fa-fw fa-envelope"></i>
+            <span>Pesan</span></a>
+    </li>
+    @endcanany
 
 
     @canany(['user_show', 'role_show'])
