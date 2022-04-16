@@ -12,13 +12,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 class SupplierController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('permission:supplier_show')->only('index');
-    //     $this->middleware('permission:supplier_create')->only('create', 'store');
-    //     $this->middleware('permission:supplier_update')->only('edit', 'update');
-    //     $this->middleware('permission:supplier_delete')->only('delete');
-    // }
+    public function __construct()
+    {
+        $this->middleware('permission:supplier_show')->only('index');
+        $this->middleware('permission:supplier_create')->only('create', 'store');
+        $this->middleware('permission:supplier_update')->only('edit', 'update');
+        $this->middleware('permission:supplier_delete')->only('delete');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +59,7 @@ class SupplierController extends Controller
             $request->all(),
             [
                 'kode_supplier' => "required|string|max:100|unique:supplier,kode_supplier",
-                'nama_supplier' => "required|string|max:100",
+                'nama' => "required|string|max:100",
                 'alamat' => "required|string",
                 'telpon' => "required|string",
                 'email' => "required|string",
@@ -70,7 +70,7 @@ class SupplierController extends Controller
         }
         $supplier = Supplier::create([
             'kode_supplier'   => $request->kode_supplier,
-            'nama_supplier'   => $request->nama_supplier,
+            'nama'            => $request->nama,
             'alamat'          => $request->alamat,
             'telpon'          => $request->telpon,
             'email'           => $request->email,
@@ -119,7 +119,7 @@ class SupplierController extends Controller
             $request->all(),
             [
                 'kode_supplier' => "required|string|max:100|unique:supplier,kode_supplier,$supplier->id",
-                'nama_supplier' => "required|string|max:100",
+                'nama' => "required|string|max:100",
                 'alamat' => "required|string",
                 'telpon' => "required|string",
                 'email' => "required|string",
@@ -133,7 +133,7 @@ class SupplierController extends Controller
             $supplier = Supplier::findOrFail($supplier->id);
             $supplier->update([
                 'kode_supplier'   => $request->kode_supplier,
-                'nama_supplier'   => $request->nama_supplier,
+                'nama'   => $request->nama,
                 'alamat'          => $request->alamat,
                 'telpon'          => $request->telpon,
                 'email'           => $request->email,

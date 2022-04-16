@@ -39,6 +39,19 @@ return [
             'supplier_update',
             'supplier_delete',
         ],
+        'pesan' =>[
+            'pesan_show',
+            'pesan_create',
+            'pesan_update',
+            'pesan_delete',
+        ],
+        'customer' =>[
+            'customer_show',
+            'customer_create',
+            'customer_update',
+            'customer_delete',
+        ],
+        
     ],
 
     'models' => [

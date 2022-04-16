@@ -40,7 +40,7 @@
 @push('js')
     <script>
         const action =
-            '{{ auth()->user()->can('kategori_update') ||auth()->user()->can('kategori_delete')? 'yes yes yes': '' }}'
+            '{{ auth()->user()->can('supplier_update') ||auth()->user()->can('supplier_delete')? 'yes yes yes': '' }}'
         let columns = [
             {
                 data: 'DT_RowIndex',
@@ -49,9 +49,25 @@
                 searchable: false
             },
             {
-                data: 'nama_kategori',
-                name: 'nama_kategori'
-            }
+                data: 'kode_supplier',
+                name: 'kode_supplier'
+            },
+            {
+                data: 'nama',
+                name: 'nama'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'telpon',
+                name: 'telpon'
+            },
+            {
+                data: 'alamat',
+                name: 'alamat'
+            },
         ]
 
         if (action) {
@@ -66,7 +82,7 @@
         $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('kategori.index') }}",
+            ajax: "{{ route('supplier.index') }}",
             columns: columns
         });
     </script>

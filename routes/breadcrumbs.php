@@ -62,6 +62,24 @@ Breadcrumbs::for('kategori-edit', function (BreadcrumbTrail $trail, $kategori) {
 
 
 // ============================================================================================================
+//supplier
+Breadcrumbs::for('supplier_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data supplier', route('supplier.index'));
+});
+//supplier > Tambah
+Breadcrumbs::for('supplier-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('supplier_index');
+    $trail->push('Tambah supplier', route('supplier.create'));
+});
+//supplier > Edit
+Breadcrumbs::for('supplier-edit', function (BreadcrumbTrail $trail, $supplier) {
+    $trail->parent('supplier_index');
+    $trail->push('Edit', route('supplier.edit', $supplier));
+    $trail->push($supplier->kode_supplier. ' - ' .$supplier->nama_supplier , route('supplier.edit', $supplier));
+});
+
+
+// ============================================================================================================
 // Roles
 Breadcrumbs::for('roles', function (BreadcrumbTrail $trail) {
     $trail->push('Roles', route('roles.index'));
