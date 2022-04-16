@@ -374,89 +374,47 @@
                     <div class="sidebar-module-container">
 
                         <div class="sidebar-filter">
-                            <div class="sidebar-widget wow fadeInUp">
-                                <div class="widget-header">
-                                    <h4 class="widget-title">Price Slider</h4>
-                                </div>
-                                <div class="sidebar-widget-body m-t-10">
-                                    <div class="price-range-holder">
-                                        <span class="min-max">
-                                            <span class="pull-left">$200.00</span>
-                                            <span class="pull-right">$800.00</span>
-                                        </span>
-                                        <input type="text" id="amount"
-                                            style="border:0; color:#666666; font-weight:bold;text-align:center;">
-
-                                        <input type="text" class="price-slider" value="">
-
-                                    </div>
-                                    <a href="#" class="lnk btn btn-primary">Show Now</a>
-                                </div>
-                            </div>
-
-                            <!-- ============================================== PRODUCT TAGS ============================================== -->
-                            <div class="sidebar-widget product-tag wow fadeInUp outer-top-vs">
-                                <h3 class="section-title">Product tags</h3>
-                                <div class="sidebar-widget-body outer-top-xs">
-                                    <div class="tag-list">
-                                        <a class="item" title="Phone" href="category.html">Phone</a>
-                                        <a class="item active" title="Vest" href="category.html">Vest</a>
-                                        <a class="item" title="Smartphone"
-                                            href="category.html">Smartphone</a>
-                                        <a class="item" title="Furniture" href="category.html">Furniture</a>
-                                        <a class="item" title="T-shirt" href="category.html">T-shirt</a>
-                                        <a class="item" title="Sweatpants"
-                                            href="category.html">Sweatpants</a>
-                                        <a class="item" title="Sneaker" href="category.html">Sneaker</a>
-                                        <a class="item" title="Toys" href="category.html">Toys</a>
-                                        <a class="item" title="Rose" href="category.html">Rose</a>
-                                    </div><!-- /.tag-list -->
-                                </div>
-                            </div>
 
                             <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
                                 <div id="advertisement" class="advertisement">
                                     <div class="item">
-                                        <div class="avatar"><img src="assets/images/testimonials/member1.png"
+                                        <div class="avatar"><img src="{{ asset('temp-front-end/assets/images/testimonials/member1.png') }}"
                                                 alt="Image"></div>
                                         <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem
                                             lacus port mollis. Nunc condime tum metus eud molest sed
                                             consectetuer.<em>"</em></div>
                                         <div class="clients_author">John Doe <span>Abc Company</span> </div>
-                                        <!-- /.container-fluid -->
-                                    </div><!-- /.item -->
+
+                                    </div>
 
                                     <div class="item">
-                                        <div class="avatar"><img src="assets/images/testimonials/member3.png"
+                                        <div class="avatar"><img src="{{ asset('temp-front-end/assets/images/testimonials/member1.png') }}"
                                                 alt="Image"></div>
                                         <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus
                                             port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em>
                                         </div>
                                         <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-                                    </div><!-- /.item -->
+                                    </div>
 
                                     <div class="item">
-                                        <div class="avatar"><img src="assets/images/testimonials/member2.png"
+                                        <div class="avatar"><img src="{{ asset('temp-front-end/assets/images/testimonials/member1.png') }}"
                                                 alt="Image"></div>
                                         <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem
                                             lacus port mollis. Nunc condime tum metus eud molest sed
                                             consectetuer.<em>"</em></div>
                                         <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-                                        <!-- /.container-fluid -->
-                                    </div><!-- /.item -->
 
-                                </div><!-- /.owl-carousel -->
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="home-banner">
-                                <img src="assets/images/banners/LHS-banner.jpg" alt="Image">
+                                <img src="{{ asset('temp-front-end/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
                             </div>
-
-                        </div><!-- /.sidebar-filter -->
-                    </div><!-- /.sidebar-module-container -->
-                </div><!-- /.sidebar -->
+                        </div>
+                    </div>
+                </div>
                 <div class='col-md-9'>
-                    <!-- ========================================== SECTION – HERO ========================================= -->
-
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
                             <div class="image">
@@ -474,16 +432,10 @@
                                     <div class="excerpt-normal hidden-sm hidden-md">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit
                                     </div>
-
-                                </div><!-- /.caption -->
-                            </div><!-- /.container-fluid -->
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
-
-
-                    <!-- ========================================= SECTION – HERO : END ========================================= -->
                     <div class="clearfix filters-container m-t-10">
                         <div class="row">
                             <div class="col col-sm-6 col-md-2">
@@ -496,7 +448,7 @@
                                         <li><a data-toggle="tab" href="#list-container"><i
                                                     class="icon fa fa-th-list"></i>List</a></li>
                                     </ul>
-                                </div><!-- /.filter-tabs -->
+                                </div>
                             </div>
                             <div class="col col-sm-12 col-md-6">
                                 <div class="col col-sm-3 col-md-6 no-padding">
@@ -628,7 +580,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -690,7 +642,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -752,7 +704,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -814,7 +766,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -876,7 +828,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -938,7 +890,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -1000,7 +952,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -1062,7 +1014,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -1124,7 +1076,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -1186,7 +1138,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -1248,7 +1200,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
@@ -1310,7 +1262,7 @@
                                                 </div><!-- /.product -->
 
                                             </div><!-- /.products -->
-                                        </div><!-- /.item -->
+                                        </div>
                                     </div>
                                 </div><!-- /.category-product -->
 
