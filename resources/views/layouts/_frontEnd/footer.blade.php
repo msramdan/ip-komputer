@@ -53,11 +53,10 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                            <li><a href="#" title="About us">Order History</a></li>
-                            <li><a href="#" title="faq">FAQ</a></li>
-                            <li><a href="#" title="Popular Searches">Specials</a></li>
-                            <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+                            <li class="first"><a href="#" title="Contact us">Sale</a></li>
+                            <li><a href="#" title="About us">About Us</a></li>
+                            <li><a href="#" title="faq">Kontak</a></li>
+                            <li><a href="#" title="Popular Searches">Cara Belanja</a></li>
                         </ul>
                     </div>
                 </div>
@@ -68,13 +67,8 @@
                     </div>
 
                     <div class="module-body">
-                        <ul class='list-unstyled'>
-                            <li class="first"><a title="Your Account" href="#">About us</a></li>
-                            <li><a title="Information" href="#">Cara Berbelanja</a></li>
-                            <li><a title="Addresses" href="#">Contact Us</a></li>
-                            <li><a title="Addresses" href="#">Investor Relations</a></li>
-                            <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
-                        </ul>
+                        <p><b style="color: white">Senin - Jumat : <span class="badge badge-secondary"> 07:00 - 21:00 </span> </b></p>
+                        <p><b style="color: white">Sabtu - Minggu :  <span class="badge badge-secondary">Menyesuaikan</span> </b></p>
                     </div>
                 </div>
 
@@ -83,6 +77,11 @@
                         <h4 class="module-title">Sosial Media</h4>
                     </div>
                     <div class="module-body">
+                        <img src="{{ asset('temp-front-end/facebook.png') }}" alt="" width="25px" height="25px">
+                        &nbsp;
+                        <img src="{{ asset('temp-front-end/instagram.png') }}" alt="" width="27px" height="27px">
+                        &nbsp;
+                        <img src="{{ asset('temp-front-end/youtube.png') }}" alt="" width="32px" height="35px">
 
                     </div>
                 </div>

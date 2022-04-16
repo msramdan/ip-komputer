@@ -33,6 +33,12 @@ return [
             'produk_update',
             'produk_delete',
         ],
+        'customer' =>[
+            'customer_show',
+            'customer_create',
+            'customer_update',
+            'customer_delete',
+        ],
     ],
 
     'models' => [
