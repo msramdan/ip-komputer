@@ -67,14 +67,14 @@
     @endcanany
 
 
-    @canany(['user_show', 'role_show'])
-        <li class="nav-item {{ set_active(['roles*', 'user*']) }}">
-            <a class="nav-link {{ request()->routeIs('roles*', 'user*') ? '' : 'collapsed' }}" href="#"
+    @canany(['user_show', 'role_show','toko_show'])
+        <li class="nav-item {{ set_active(['roles*', 'user*','setting-toko*']) }}">
+            <a class="nav-link {{ request()->routeIs('roles*', 'user*','setting-toko*') ? '' : 'collapsed' }}" href="#"
                 data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages3">
                 <i class="fas fa-fw fa-cogs"></i>
                 <span>Setting</span>
             </a>
-            <div id="collapsePages3" class="collapse {{ request()->routeIs('roles*', 'user*') ? 'show' : '' }}"
+            <div id="collapsePages3" class="collapse {{ request()->routeIs('roles*', 'user*','setting-toko*') ? 'show' : '' }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     @can('user_show')
@@ -82,6 +82,9 @@
                     @endcan
                     @can('role_show')
                         <a class="collapse-item {{ set_active(['roles*']) }}" href="{{ route('roles.index') }}"> Roles</a>
+                    @endcan
+                    @can('toko_show')
+                        <a class="collapse-item {{ set_active(['setting-toko*']) }}" href="{{ route('setting-toko.index') }}"> Setting Toko</a>
                     @endcan
                 </div>
             </div>

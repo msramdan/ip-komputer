@@ -14,6 +14,8 @@ use App\Http\Controllers\PesanController;
 
 // Front End
 use App\Http\Controllers\Frontend\DashboardCrontroller;
+use App\Http\Controllers\SettingTokoController;
+use App\Models\SettingToko;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes([
@@ -38,5 +40,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('/produk', ProdukController::class)->except('show');
     Route::resource('/pesan', PesanController::class)->except('show');
     Route::resource('/supplier', SupplierController::class)->except('show');
+    Route::resource('/setting-toko', SettingTokoController::class)->except('show');
 
+    // Route::get('/setting-toko', [SettingTokoController::class, 'index']);
+    // Route::post('/setting-toko', [SettingTokoController::class, 'store']);
 });

@@ -92,8 +92,27 @@ Breadcrumbs::for('pesan-tambah', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('pesan-edit', function (BreadcrumbTrail $trail, $pesan) {
     $trail->parent('pesan_index');
     $trail->push('Edit', route('pesan.edit', $pesan));
-    $trail->push($pesan->kode_pesan. ' - ' .$pesan->nama_pesan , route('pesan.edit', $pesan));
+    $trail->push($pesan->nama , route('pesan.edit', $pesan));
 });
+
+
+// ============================================================================================================
+//setting-toko
+Breadcrumbs::for('toko_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Setting Toko', route('setting-toko.index'));
+});
+//setting-toko > Tambah
+Breadcrumbs::for('toko-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('toko_index');
+    $trail->push('Tambah Toko', route('setting-toko.create'));
+});
+//setting-toko > Edit
+Breadcrumbs::for('toko-edit', function (BreadcrumbTrail $trail, $setting_toko) {
+    $trail->parent('toko_index');
+    $trail->push('Edit Toko', route('setting-toko.edit', $setting_toko));
+    $trail->push($setting_toko->nama_toko, route('setting-toko.edit', $setting_toko));
+});
+
 
 
 // ============================================================================================================

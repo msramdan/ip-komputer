@@ -51,6 +51,12 @@ return [
             'customer_update',
             'customer_delete',
         ],
+        'setting-toko' =>[
+            'toko_show',
+            'toko_create',
+            'toko_update',
+            'toko_delete',
+        ],
         
     ],
 
