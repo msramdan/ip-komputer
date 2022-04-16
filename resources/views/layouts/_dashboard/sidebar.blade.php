@@ -12,26 +12,51 @@
             <span>Home</span></a>
     </li>
 
-    @canany(['unit_show','kategori*'])
-        <li class="nav-item {{ set_active(['unit*','kategori*']) }}">
-            <a class="nav-link {{ request()->routeIs('unit*','kategori*') ? '' : 'collapsed' }}" href="#"
-                data-toggle="collapse" data-target="#collapseMasterData" aria-expanded="true" aria-controls="collapseMasterData">
-                <i class="fas fa-fw fa-list"></i>
-                <span>Master Data</span>
+    @canany(['unit_show','kategori*','produk*'])
+        <li class="nav-item {{ set_active(['unit*','kategori*','produk*']) }}">
+            <a class="nav-link {{ request()->routeIs('unit*','kategori*','produk*') ? '' : 'collapsed' }}" href="#"
+                data-toggle="collapse" data-target="#collapseMasterProduk" aria-expanded="true" aria-controls="collapseMasterProduk">
+                <i class="fas fa-fw fa-cube"></i>
+                <span>Data Produk</span>
             </a>
-            <div id="collapseMasterData" class="collapse {{ request()->routeIs('unit*','kategori*') ? 'show' : '' }}"
+            <div id="collapseMasterProduk" class="collapse {{ request()->routeIs('unit*','kategori*','produk*') ? 'show' : '' }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    @can('unit_show')
-                        <a class="collapse-item {{ set_active(['unit*']) }}" href="{{ route('unit.index') }}"> Unit</a>
+                    @can('produk_show')
+                        <a class="collapse-item {{ set_active(['produk*']) }}" href="{{ route('produk.index') }}"> Produk</a>
                     @endcan
                     @can('kategori_show')
                         <a class="collapse-item {{ set_active(['kategori*']) }}" href="{{ route('kategori.index') }}"> Kategori Produk</a>
                     @endcan
+                    @can('unit_show')
+                        <a class="collapse-item {{ set_active(['unit*']) }}" href="{{ route('unit.index') }}"> Unit</a>
+                    @endcan
+
                 </div>
             </div>
         </li>
     @endcanany
+
+    {{-- @canany(['unit_show','kategori*','produk*']) --}}
+    <li class="nav-item {{ set_active([]) }}">
+        <a class="nav-link {{ request()->routeIs() ? '' : 'collapsed' }}" href="#"
+            data-toggle="collapse" data-target="#collapseMasterKontak" aria-expanded="true" aria-controls="collapseMasterKontak">
+            <i class="fas fa-address-card"></i>
+            <span>Kontak</span>
+        </a>
+        <div id="collapseMasterKontak" class="collapse {{ request()->routeIs() ? 'show' : '' }}"
+            aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                {{-- @can('produk_show') --}}
+                    <a class="collapse-item {{ set_active(['produk*']) }}" href="{{ route('produk.index') }}"> Customer</a>
+                {{-- @endcan --}}
+                {{-- @can('kategori_show') --}}
+                    <a class="collapse-item {{ set_active(['kategori*']) }}" href="{{ route('kategori.index') }}"> Supplier</a>
+                {{-- @endcan --}}
+            </div>
+        </div>
+    </li>
+{{-- @endcanany --}}
 
 
     @canany(['user_show', 'role_show'])

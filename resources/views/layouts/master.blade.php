@@ -27,6 +27,7 @@
     </a>
     {{-- logout modal --}}
     @include('layouts._dashboard.logoutModal')
+    @include('layouts._dashboard.edit-profile')
     {{-- script --}}
     @include('layouts._dashboard.script')
     @stack('js')

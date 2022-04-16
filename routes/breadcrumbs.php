@@ -7,6 +7,25 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('home'));
 });
+
+// ============================================================================================================
+//Produk
+Breadcrumbs::for('produk_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data Produk', route('produk.index'));
+});
+//Produk > Tambah
+Breadcrumbs::for('produk-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('produk_index');
+    $trail->push('Tambah Produk', route('produk.create'));
+});
+//Produk > Edit
+Breadcrumbs::for('produk-edit', function (BreadcrumbTrail $trail, $produk) {
+    $trail->parent('produk_index');
+    $trail->push('Edit', route('produk.edit', $produk));
+    $trail->push($produk->kode_produk. ' - ' .$produk->nama , route('produk.edit', $produk));
+});
+
+
 // ============================================================================================================
 //unit
 Breadcrumbs::for('unit_index', function (BreadcrumbTrail $trail) {
@@ -40,7 +59,6 @@ Breadcrumbs::for('kategori-edit', function (BreadcrumbTrail $trail, $kategori) {
     $trail->push('Edit', route('kategori.edit', $kategori));
     $trail->push($kategori->nama_kategori, route('kategori.edit', $kategori));
 });
-
 
 
 // ============================================================================================================

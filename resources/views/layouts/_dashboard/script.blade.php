@@ -4,3 +4,12 @@
 <script src="{{ asset('temp/js/sb-admin-2.min.js') }}"></script>
 <script src="{{ asset('temp/vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('temp/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+{{-- @if (count($errors) > 0)
+<script type="text/javascript">
+    $( document ).ready(function() {
+         $('#edit-profile').modal('show');
+    });
+</script> --}}
+{{-- @endif --}}
+

@@ -11,11 +11,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UnitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:unit_show')->only('index');
+        $this->middleware('permission:unit_create')->only('create', 'store');
+        $this->middleware('permission:unit_update')->only('edit', 'update');
+        $this->middleware('permission:unit_delete')->only('delete');
+    }
     public function index()
     {
         if (request()->ajax()) {

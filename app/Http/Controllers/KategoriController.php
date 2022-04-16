@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class KategoriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:kategori_show')->only('index');
+        $this->middleware('permission:kategori_create')->only('create', 'store');
+        $this->middleware('permission:kategori_update')->only('edit', 'update');
+        $this->middleware('permission:kategori_delete')->only('delete');
+    }
+
     public function index()
     {
         if (request()->ajax()) {

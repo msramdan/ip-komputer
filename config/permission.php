@@ -27,6 +27,12 @@ return [
             'kategori_update',
             'kategori_delete',
         ],
+        'produk' =>[
+            'produk_show',
+            'produk_create',
+            'produk_update',
+            'produk_delete',
+        ],
     ],
 
     'models' => [

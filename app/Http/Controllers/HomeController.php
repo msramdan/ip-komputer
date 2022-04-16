@@ -24,12 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $jml_produk = DB::table("produk")
+            ->count();
+        $jml_kategori = DB::table("kategori")
+            ->count();
         $jml_user = DB::table("users")
             ->count();
         $jml_role = DB::table("roles")
             ->count();
 
         return view('home.index', [
+            'jml_produk' => $jml_produk,
+            'jml_kategori' => $jml_kategori,
             'jml_user' => $jml_user,
             'jml_role' => $jml_role,
         ]);

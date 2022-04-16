@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             UnitSeeder::class,
             KategoriSeeder::class,
+            ProdukSeeder::class,
         ]);
     }
 }

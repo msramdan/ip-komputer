@@ -163,6 +163,49 @@ class UserController extends Controller
         }
     }
 
+    public function editProfile(Request $request, User $user)
+    {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => "required|string|max:50|unique:users,name, " . auth()->user()->id,
+                'email' => "required|email|unique:users,email," . auth()->user()->id,
+                'password' => "confirmed",
+            ],
+        );
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
+        }
+
+        DB::beginTransaction();
+        try {
+            $user = User::findOrFail(auth()->user()->id);
+            if ($request->password == "" || $request->password == null) {
+                $user->update([
+                    'name'   => $request->name,
+                    'email'   => $request->email,
+                ]);
+            } else {
+                $user->update([
+                    'name'   => $request->name,
+                    'email'   => $request->email,
+                    'password'   => Hash::make($request->password),
+                ]);
+            }
+            Alert::toast('Data berhasil diupdate', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Alert::toast('Data gagal diupdate', 'error');
+            return redirect()->back();
+        } finally {
+            DB::commit();
+        }
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *
