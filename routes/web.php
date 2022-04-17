@@ -44,7 +44,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/customer', CustomerController::class)->except('show');
     Route::resource('/pesan', PesanController::class)->except('show');
     Route::resource('/supplier', SupplierController::class)->except('show');
-    Route::resource('/setting-toko', SettingTokoController::class)->except('show');
+    Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);
     // Route::get('/setting-toko', [SettingTokoController::class, 'index']);
     // Route::post('/setting-toko', [SettingTokoController::class, 'store']);
 });

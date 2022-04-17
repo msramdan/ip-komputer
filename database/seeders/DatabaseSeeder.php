@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             KategoriSeeder::class,
             ProdukSeeder::class,
+            SettingTokoSeeder::class,
         ]);
     }
 }
