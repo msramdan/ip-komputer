@@ -33,11 +33,29 @@ return [
             'produk_update',
             'produk_delete',
         ],
+        'supplier' =>[
+            'supplier_show',
+            'supplier_create',
+            'supplier_update',
+            'supplier_delete',
+        ],
+        'pesan' =>[
+            'pesan_show',
+            'pesan_create',
+            'pesan_update',
+            'pesan_delete',
+        ],
         'customer' =>[
             'customer_show',
             'customer_create',
             'customer_update',
             'customer_delete',
+        ],
+        'setting-toko' =>[
+            'toko_show',
+            'toko_create',
+            'toko_update',
+            'toko_delete',
         ],
     ],
 

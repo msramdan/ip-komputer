@@ -62,6 +62,60 @@ Breadcrumbs::for('kategori-edit', function (BreadcrumbTrail $trail, $kategori) {
 
 
 // ============================================================================================================
+//supplier
+Breadcrumbs::for('supplier_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data supplier', route('supplier.index'));
+});
+//supplier > Tambah
+Breadcrumbs::for('supplier-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('supplier_index');
+    $trail->push('Tambah supplier', route('supplier.create'));
+});
+//supplier > Edit
+Breadcrumbs::for('supplier-edit', function (BreadcrumbTrail $trail, $supplier) {
+    $trail->parent('supplier_index');
+    $trail->push('Edit', route('supplier.edit', $supplier));
+    $trail->push($supplier->kode_supplier. ' - ' .$supplier->nama_supplier , route('supplier.edit', $supplier));
+});
+
+// ============================================================================================================
+//pesan
+Breadcrumbs::for('pesan_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data pesan', route('pesan.index'));
+});
+//pesan > Tambah
+Breadcrumbs::for('pesan-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('pesan_index');
+    $trail->push('Tambah pesan', route('pesan.create'));
+});
+//pesan > Edit
+Breadcrumbs::for('pesan-edit', function (BreadcrumbTrail $trail, $pesan) {
+    $trail->parent('pesan_index');
+    $trail->push('Edit', route('pesan.edit', $pesan));
+    $trail->push($pesan->nama , route('pesan.edit', $pesan));
+});
+
+
+// ============================================================================================================
+//setting-toko
+Breadcrumbs::for('toko_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Setting Toko', route('setting-toko.index'));
+});
+//setting-toko > Tambah
+Breadcrumbs::for('toko-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('toko_index');
+    $trail->push('Tambah Toko', route('setting-toko.create'));
+});
+//setting-toko > Edit
+Breadcrumbs::for('toko-edit', function (BreadcrumbTrail $trail, $setting_toko) {
+    $trail->parent('toko_index');
+    $trail->push('Edit Toko', route('setting-toko.edit', $setting_toko));
+    $trail->push($setting_toko->nama_toko, route('setting-toko.edit', $setting_toko));
+});
+
+
+
+// ============================================================================================================
 // Roles
 Breadcrumbs::for('roles', function (BreadcrumbTrail $trail) {
     $trail->push('Roles', route('roles.index'));
