@@ -96,6 +96,26 @@ Breadcrumbs::for('pesan-edit', function (BreadcrumbTrail $trail, $pesan) {
 });
 
 
+
+// ============================================================================================================
+//customer
+Breadcrumbs::for('customer_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data customer', route('customer.index'));
+});
+//customer > Tambah
+Breadcrumbs::for('customer-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('customer_index');
+    $trail->push('Tambah customer', route('customer.create'));
+});
+//customer > Edit
+Breadcrumbs::for('customer-edit', function (BreadcrumbTrail $trail, $customer) {
+    $trail->parent('customer_index');
+    $trail->push('Edit', route('customer.edit', $customer));
+    $trail->push($customer->nama , route('customer.edit', $customer));
+});
+
+
+
 // ============================================================================================================
 //setting-toko
 Breadcrumbs::for('toko_index', function (BreadcrumbTrail $trail) {

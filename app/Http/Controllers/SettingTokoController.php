@@ -27,7 +27,6 @@ class SettingTokoController extends Controller
 
     public function edit(SettingToko $settingToko)
     {
-        // $setting_toko = SettingToko::where('id', 1)->first();
         return view('setting-toko.edit',['setting_toko' => $settingToko]);
     }
 
