@@ -56,7 +56,7 @@ class CustomerController extends Controller
     {
         $validator = Validator::make(
             $request->all(),
-            [ 
+            [
                 'nama' => 'required|string|max:100',
                 'tanggal_lahir' => 'required|date',
                 'jenis_kelamin' => 'required|string|max:100',
@@ -90,9 +90,9 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function address(Customer $customer)
     {
-        //
+        return view('customer.address');
     }
 
     /**
@@ -117,7 +117,7 @@ class CustomerController extends Controller
     {
         $validator = Validator::make(
             $request->all(),
-            [ 
+            [
                 'nama' => 'required|string|max:100',
                 'tanggal_lahir' => 'required|date',
                 'jenis_kelamin' => 'required|string|max:100',

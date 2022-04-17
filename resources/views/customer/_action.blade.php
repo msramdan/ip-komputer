@@ -1,6 +1,6 @@
 <td>
-    @can('customer_update')
-    <a href="{{ route('customer.edit', $model->id) }}" class="btn btn-success btn-xs mb-1" title="Data Alamat">
+    @can('address_show')
+    <a href="{{ route('address', $model->id) }}" class="btn btn-success btn-xs mb-1" title="Data Alamat">
         <i class="fas fa-address-book"></i>
     </a>
 @endcan
