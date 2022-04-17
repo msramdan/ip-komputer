@@ -5,10 +5,11 @@
                 <div class="cnt-account">
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+                        <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-                        <li><a href="#"><i class="icon fa fa-lock"></i>Login</a></li>
+                        <li><a href="{{ route('auth-web') }}"><i class="icon fa fa-lock"></i>Login</a></li>
+                        <li><a href="{{ route('signin-web') }}"><i class="icon fa fa-lock"></i>Register</a></li>
                     </ul>
                 </div>
             </div>
@@ -59,7 +60,9 @@
                                     <div class="row">
                                         <div class="col-xs-4">
                                             <div class="image">
-                                                <a href="detail.html"><img src="{{ asset('temp-front-end/assets/images/cart.jpg') }}" alt=""></a>
+                                                <a href="detail.html"><img
+                                                        src="{{ asset('temp-front-end/assets/images/cart.jpg') }}"
+                                                        alt=""></a>
                                             </div>
                                         </div>
                                         <div class="col-xs-7">
@@ -87,52 +90,50 @@
                             </li>
                         </ul>
                     </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="header-nav animate-dropdown">
-        <div class="container">
-            <div class="yamm navbar navbar-default" role="navigation">
-                <div class="navbar-header">
-                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"
-                        class="navbar-toggle collapsed" type="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
                 </div>
-                <div class="nav-bg-class">
-                    <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
-                        <div class="nav-outer">
-                            <ul class="nav navbar-nav">
-                                <li class="active dropdown yamm-fw">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle"
-                                        data-toggle="dropdown">SALE</a>
+            </div>
 
-                                </li>
-                                <li class="active dropdown yamm-fw">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle"
-                                        data-toggle="dropdown">ABOUT US</a>
+        </div>
+        <div class="header-nav animate-dropdown">
+            <div class="container">
+                <div class="yamm navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"
+                            class="navbar-toggle collapsed" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="nav-bg-class">
+                        <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
+                            <div class="nav-outer">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown hidden-sm">
+                                        <a href="{{ route('dashboard') }}"><span
+                                                class="menu-label hot-menu hidden-xs">hot</span>SALE</a>
+                                    </li>
 
-                                </li>
-                                <li class="active dropdown yamm-fw">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle"
-                                        data-toggle="dropdown">KONTAK</a>
+                                    <li class="dropdown">
+                                        <a href="{{ route('kontak') }}">TENTANG KAMI</a>
+                                    </li>
 
-                                </li>
-                                <li class="active dropdown yamm-fw">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle"
-                                        data-toggle="dropdown">CARA BELANJA</a>
+                                    <li class="dropdown">
+                                        <a href="{{ route('kontak') }}">CARA BELANJA</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="{{ route('kontak') }}">KONTAK</a>
+                                    </li>
 
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
+
+
+                                </ul><!-- /.navbar-nav -->
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </header>

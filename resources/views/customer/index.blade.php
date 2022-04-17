@@ -16,11 +16,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Kode</th>
-                                        <th>Nama</th>
+                                        <th>Nama Customer</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Jenis Kelamin</th>
                                         <th>Email</th>
-                                        <th>Telpon</th>
-                                        <th>Alamat</th>
+                                        <th>No Telpon</th>
                                         @canany(['customer_update', 'customer_delete'])
                                             <th>Action</th>
                                         @endcanany
@@ -68,7 +68,7 @@
                 data: 'telpon',
                 name: 'telpon'
             },
-            
+
         ]
 
         if (action) {

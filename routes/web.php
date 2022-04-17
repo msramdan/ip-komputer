@@ -17,13 +17,18 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
 // Front End
 use App\Http\Controllers\Frontend\DashboardCrontroller;
-
-
-
+use App\Http\Controllers\Frontend\KontakController;
+use App\Http\Controllers\Frontend\LoginWebController;
+use App\Http\Controllers\Frontend\RegisterWebController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
+Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
+Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 
 // Route Back end
 Route::get('/localization/{language}', [LocalizationController::class, 'switch'])->name('localization.switch');
