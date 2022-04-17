@@ -1,9 +1,9 @@
 <td>
-    @can('produk_update')
+    {{-- @can('produk_update')
         <a href="{{ route('produk.edit', $model->id) }}" class="btn btn-success btn-xs mb-1" title="Upload Photo Produk">
             <i class="fas fa-upload"></i>
         </a>
-    @endcan
+    @endcan --}}
 
     @can('produk_update')
         <a href="{{ route('produk.edit', $model->id) }}" class="btn btn-primary btn-xs mb-1" title="Edit">

@@ -10,7 +10,7 @@
                         <div class="form-group ">
                             <a href="{{ route('produk.index') }}" class="btn btn-warning" style="float: right"><i
                                     class="fa fa-arrow-left"></i> Back</a>
-                                    <br>
+                            <br>
                         </div>
                         <form method="POST" action="{{ route('produk.update', $produk->id) }}">
                             @csrf
@@ -20,8 +20,9 @@
                                     <div class="mb-3">
                                         <label for="kode_produk">Kode produk</label>
                                         <input class="form-control @error('kode_produk') is-invalid @enderror" id="
-                                                kode_produk" type="text" value="{{ old('kode_produk') ? old('kode_produk') : $produk->kode_produk }}"
-                                            placeholder="Kode Produk" name="kode_produk" autocomplete="off" >
+                                                    kode_produk" type="text"
+                                            value="{{ old('kode_produk') ? old('kode_produk') : $produk->kode_produk }}"
+                                            placeholder="Kode Produk" name="kode_produk" autocomplete="off">
                                         @error('kode_produk')
                                             <span style="color: red;">{{ $message }}</span>
                                         @enderror
@@ -29,8 +30,9 @@
                                     <div class="mb-3">
                                         <label for="nama">Nama produk</label>
                                         <input class="form-control @error('nama') is-invalid @enderror" id="
-                                                nama" type="text" value="{{ old('nama') ? old('nama') : $produk->nama }}" placeholder="Nama Produk"
-                                            name="nama" autocomplete="off">
+                                                    nama" type="text"
+                                            value="{{ old('nama') ? old('nama') : $produk->nama }}"
+                                            placeholder="Nama Produk" name="nama" autocomplete="off">
                                         @error('nama')
                                             <span style="color: red;">{{ $message }}</span>
                                         @enderror
@@ -45,8 +47,7 @@
                                             @foreach ($kategori_id as $row)
                                                 <option value="{{ $row->id }}"
                                                     {{ old('kategori_id') && old('kategori_id') == $row->id ? 'selected' : '' }}
-                                                    {{ $produk->kategori->id == $row->id ? 'selected' : '' }}
-                                                    >
+                                                    {{ $produk->kategori->id == $row->id ? 'selected' : '' }}>
                                                     {{ $row->nama_kategori }}</option>
                                             @endforeach
                                         </select>
@@ -58,7 +59,8 @@
                                     <div class="mb-1">
                                         <label for="harga">Harga Produk</label>
                                         <input class="form-control @error('harga') is-invalid @enderror" id="
-                                                harga" type="number" value="{{ old('harga') ? old('harga') : $produk->harga }}"
+                                                    harga" type="number"
+                                            value="{{ old('harga') ? old('harga') : $produk->harga }}"
                                             placeholder="Harga Produk" name="harga" autocomplete="off">
                                         @error('harga')
                                             <span style="color: red;">{{ $message }}</span>
@@ -66,6 +68,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
+
+
                                     <div class="mb-1">
                                         <label for="exampleFormControlInput1">Deskripsi</label>
                                         <textarea rows="12" class="form-control @error('deskripsi') is-invalid @enderror" id="
@@ -76,7 +80,24 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
+                                    <table class="table table-bordered" id="dynamic_field">
+                                        <thead>
+                                            <tr>
+                                                <th>Photo Produk </th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tr>
+                                            <td><input type="file" name="photo[]"
+                                                    class="form-control  @error('photo') is-invalid @enderror" /></td>
+                                            <td><button type="button" name="add_photo" id="add_photo"
+                                                    class="btn btn-success"><i class="fa fa-plus"
+                                                        aria-hidden="true"></i></button></td>
+                                        </tr>
+                                    </table>
+
                                     <div class="">
                                         <button type="submit" class="btn btn-sm btn-primary">SIMPAN</button>
                                     </div>
@@ -91,3 +112,23 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            var i = 1;
+            $('#add_photo').click(function() {
+                i++;
+                $('#dynamic_field').append('<tr id="row' + i +
+                    '"><td><input type="file" name="photo[]" class="form-control" required="" /></td><td><button type="button" name="remove" id="' +
+                    i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+            });
+
+            $(document).on('click', '.btn_remove', function() {
+                var button_id = $(this).attr("id");
+                $('#row' + button_id + '').remove();
+            });
+
+        });
+    </script>
+@endpush

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProdukController extends Controller
 {
@@ -54,6 +56,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -62,7 +65,9 @@ class ProdukController extends Controller
                 'deskripsi' => "required|string",
                 'harga' => "required|string",
                 'kategori_id' => 'required|exists:kategori,id',
+                'photo' => "required"
             ],
+            [],
         );
         if ($validator->fails()) {
             return redirect()->back()->withInput($request->all())->withErrors($validator);
@@ -77,6 +82,21 @@ class ProdukController extends Controller
             'kategori_id'   => $request->kategori_id,
             'qty'   => 0
         ]);
+        // upload photo
+        if ($produk) {
+            $insertedId = $produk->id;
+            $files = $request->file('photo');
+            if ($request->hasFile('photo')) {
+                foreach ($files as $file) {
+                    $name = $file->hashName();
+                    $file->storeAs('public/produk', $name);
+                    DB::table('produk_photo')->insert([
+                        'produk_id' => $insertedId,
+                        'photo' => $name,
+                    ]);
+                }
+            }
+        }
 
         if ($produk) {
             Alert::toast('Data berhasil disimpan', 'success');
@@ -93,10 +113,6 @@ class ProdukController extends Controller
      * @param  \App\Models\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function show(Produk $produk)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -170,6 +186,15 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         $produk = Produk::findOrFail($produk->id);
+        // unlink photo
+        $produk_photo = DB::table('produk_photo')
+            ->where('produk_id', '=', $produk->id)
+            ->get();
+
+        foreach ($produk_photo as $row) {
+            Storage::disk('local')->delete('public/produk/'.$row->photo);
+        }
+
         $produk->delete();
         if ($produk) {
             Alert::toast('Data berhasil dihapus', 'success');

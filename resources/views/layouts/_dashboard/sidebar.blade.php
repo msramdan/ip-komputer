@@ -43,17 +43,19 @@
 
     @canany(['customer_show', 'supplier_show'])
         <li class="nav-item {{ set_active(['customer*', 'supplier*']) }}">
-            <a class="nav-link {{ request()->routeIs('customer*', 'supplier*') ? '' : 'collapsed' }}" href="#" data-toggle="collapse"
-                data-target="#collapseMasterKontak" aria-expanded="true" aria-controls="collapseMasterKontak">
+            <a class="nav-link {{ request()->routeIs('customer*', 'supplier*') ? '' : 'collapsed' }}" href="#"
+                data-toggle="collapse" data-target="#collapseMasterKontak" aria-expanded="true"
+                aria-controls="collapseMasterKontak">
                 <i class="fas fa-address-card"></i>
                 <span>Kontak</span>
             </a>
-            <div id="collapseMasterKontak" class="collapse {{ request()->routeIs('customer*', 'supplier*') ? 'show' : '' }}"
+            <div id="collapseMasterKontak"
+                class="collapse {{ request()->routeIs('customer*', 'supplier*') ? 'show' : '' }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     @can('customer_show')
-                    <a class="collapse-item {{ set_active(['customer*']) }}" href="{{ route('customer.index') }}">
-                        Customer</a>
+                        <a class="collapse-item {{ set_active(['customer*']) }}" href="{{ route('customer.index') }}">
+                            Customer</a>
                     @endcan
                     @can('supplier_show')
                         <a class="collapse-item {{ set_active(['supplier*']) }}" href="{{ route('supplier.index') }}">
@@ -64,7 +66,49 @@
         </li>
     @endcanany
 
-    @canany(['unit_show', 'customer*', 'supplier*'])
+    {{-- @canany(['unit_show', 'customer*', 'supplier*']) --}}
+    <li class="nav-item {{ set_active('pesan*') }}">
+        <a class="nav-link" href="{{ route('pesan.index') }}">
+            <i class="fas fa-fw fa-money-bill"></i>
+            <span>Pembelian</span></a>
+    </li>
+    {{-- @endcanany --}}
+    {{-- @canany(['unit_show', 'customer*', 'supplier*']) --}}
+    <li class="nav-item {{ set_active('pesan*') }}">
+        <a class="nav-link" href="{{ route('pesan.index') }}">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Penjualan</span></a>
+    </li>
+    {{-- @endcanany --}}
+
+    @canany(['customer_show', 'supplier_show'])
+        <li class="nav-item {{ set_active(['customer*', 'supplier*']) }}">
+            <a class="nav-link {{ request()->routeIs('customer*', 'supplier*') ? '' : 'collapsed' }}" href="#"
+                data-toggle="collapse" data-target="#laporanToko" aria-expanded="true"
+                aria-controls="laporanToko">
+                <i class="fas fa-book"></i>
+                <span>Laporan</span>
+            </a>
+            <div id="laporanToko"
+                class="collapse {{ request()->routeIs('customer*', 'supplier*') ? 'show' : '' }}"
+                aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    @can('customer_show')
+                        <a class="collapse-item {{ set_active(['customer*']) }}" href="{{ route('customer.index') }}">
+                            Laporan Pembelian</a>
+                    @endcan
+                    @can('supplier_show')
+                        <a class="collapse-item {{ set_active(['supplier*']) }}" href="{{ route('supplier.index') }}">
+                            Laporan Prnjualan</a>
+                    @endcan
+                </div>
+            </div>
+        </li>
+    @endcanany
+
+
+
+    @canany(['pesan_show'])
         <li class="nav-item {{ set_active('pesan*') }}">
             <a class="nav-link" href="{{ route('pesan.index') }}">
                 <i class="fas fa-fw fa-envelope"></i>
