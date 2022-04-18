@@ -46,9 +46,12 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/unit', UnitController::class)->except('show');
     Route::resource('/kategori', KategoriController::class)->except('show');
     Route::resource('/produk', ProdukController::class)->except('show');
+    Route::get('/GetGambarProduk/{id}', [ProdukController::class, 'GetGambarProduk']);
     Route::resource('/customer', CustomerController::class)->except('show');
     Route::get('/address/{id}', [CustomerController::class, 'address'])->name('address');
     Route::resource('/pesan', PesanController::class)->except('show');
     Route::resource('/supplier', SupplierController::class)->except('show');
     Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);
+    Route::get('/cities/{provinsi_id}', [CustomerController::class, 'cities']);
 });
+
