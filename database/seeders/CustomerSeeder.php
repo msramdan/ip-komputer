@@ -21,7 +21,8 @@ class CustomerSeeder extends Seeder
             'tanggal_lahir' => date('d-m-y'),
             'jenis_kelamin' => 'Laki Laki',
             'email' => 'saepulramdan244@gmail.com',
-            'telpon' => '083874731480'
+            'telpon' => '083874731480',
+            'password' => bcrypt('customer')
         ]);
     }
 }

@@ -34,12 +34,16 @@
 
                                 <div class="mb-3">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
-                                    <input class="form-control @error('jenis_kelamin') is-invalid @enderror" id="
-                                    jenis_kelamin" type="text" value="{{ old('jenis_kelamin') }}" placeholder="Jenis Kelamin" name="jenis_kelamin" autocomplete="off">
+                                    <select class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin">
+                                      <option value="Laki-laki">Laki-laki</option>
+                                      <option value="Perempuan">Perempuan</option>
+                                    </select>
                                     @error('jenis_kelamin')
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1">Email</label>
@@ -47,6 +51,16 @@
                                                             exampleFormControlInput1" type="email"
                                         value="{{ old('email') }}" placeholder="Email" name="email" autocomplete="off">
                                     @error('email')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1">Password</label>
+                                    <input class="form-control @error('password') is-invalid @enderror" id="
+                                                            exampleFormControlInput1" type="password"
+                                        value="{{ old('password') }}" placeholder="Password" name="password">
+                                    @error('password')
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -62,6 +62,7 @@ class CustomerController extends Controller
                 'jenis_kelamin' => 'required|string|max:100',
                 'telpon' => 'required|string',
                 'email' => 'required|string',
+                'password' => 'required|string',
             ],
         );
         if ($validator->fails()) {
@@ -74,6 +75,7 @@ class CustomerController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'telpon' => $request->telpon,
             'email' => $request->email,
+            'password' => bcrypt($request->password),
         ]);
         if ($customer) {
             Alert::toast('Data berhasil disimpan', 'success');

@@ -36,8 +36,13 @@
 
                                 <div class="mb-3">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
-                                    <input class="form-control @error('jenis_kelamin') is-invalid @enderror" id="
-                                    jenis_kelamin" type="text" value="{{ old('jenis_kelamin') ? old('jenis_kelamin') : $customer->jenis_kelamin }}" placeholder="Jenis Kelamin" name="jenis_kelamin" autocomplete="off">
+                                    <select class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin">
+                                        @if (old('jenis_kelamin', $customer->jenis_kelamin) == 'Laki-laki')
+                                            <option value="Laki-laki" selected>Laki-laki</option>
+                                        @elseif (old('jenis_kelamin', $customer->jenis_kelamin) == 'Perempuan')
+                                            <option value="Perempuan" selected>Perempuan</option>
+                                        @endif
+                                    </select>
                                     @error('jenis_kelamin')
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
