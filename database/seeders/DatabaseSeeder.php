@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             SettingTokoSeeder::class,
             CustomerSeeder::class,
             SupplierSeeder::class,
+            LocationsSeeder::class,
         ]);
     }
 }
