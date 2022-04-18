@@ -4,14 +4,14 @@
     @push('css')
         <style>
             .img-size {
-                height: 400px;
-                width: 600px;
+                height: 450px;
+                width: 500px;
                 background-size: cover;
                 overflow: hidden;
             }
 
             .modal-content {
-                width: 600px;
+                width: 500px;
                 border: none;
             }
 
@@ -35,7 +35,7 @@
     @endpush
     <div class="modal fade" id="largeModal" id="modal-dialog tabindex=" -1" role="dialog" aria-labelledby="basicModal"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><span id="modal_nama_produk"></span></h5>
@@ -44,7 +44,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <center><img src="" id="photo_pro" width="70%" /></center>
+                    <center><img src="" id="photo_pro" width="100%" /></center>
 
                 </div>
                 <div class="modal-footer">
