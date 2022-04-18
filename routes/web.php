@@ -52,4 +52,6 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/pesan', PesanController::class)->except('show');
     Route::resource('/supplier', SupplierController::class)->except('show');
     Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);
+    Route::get('/cities/{provinsi_id}', [CustomerController::class, 'cities']);
 });
+

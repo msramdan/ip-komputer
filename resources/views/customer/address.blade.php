@@ -80,6 +80,21 @@
                 <div class="modal-body">
                     <form action="">
                         <div class="form-group">
+                            <label class="font-weight-bold">Provinsi</label>
+                            <select class="form-control provinsi-asal" name="province_origin">
+                                <option value="0">-- pilih provinsi asal --</option>
+                                @foreach ($provinsi as $item => $value)
+                                    <option value="{{ $item  }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Kota / Kabupaten</label>
+                            <select class="form-control kota-asal" name="city_origin">
+                                <option value="">-- pilih kota asal --</option>
+                            </select>
+                        </div>    
+                        {{-- <div class="form-group">
                             <label for="">Provinsi</label>
                             <select class="form-control" id="">
                                 <option value="">Pilih Provinsi</option>
@@ -98,7 +113,7 @@
                                 <option value="">Jakarta</option>
                                 <option value="">Jakarta</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="">Alamat</label>
                             <textarea class="form-control" id="alamat" rows="3"></textarea>
@@ -120,72 +135,90 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-          });
-          var table = $('.data-table').DataTable({
-              processing: true,
-              serverSide: true,
-              ajax: "",
-              columns: [
-                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                  {data: 'firstName', name: 'firstName'},
-                  {data: 'lastName', name: 'lastName'},
-                  {data: 'info', name: 'info'},
-                  {data: 'action', name: 'action', orderable: false, searchable: false},
-              ]
-          });
-          $('#createNewCustomer').click(function () {
-              $('#saveBtn').val("create-Customer");
-              $('#Customer_id').val('');
-              $('#CustomerForm').trigger("reset");
-              $('#modelHeading').html("Create New Customer");
-              $('#ajaxModel').modal('show');
-          });
-          $('body').on('click', '.editCustomer', function () {
-            var Customer_id = $(this).data('id');
-            $.get("" +'/' + Customer_id +'/edit', function (data) {
-                $('#modelHeading').html("Edit Customer");
-                $('#saveBtn').val("edit-user");
-                $('#ajaxModel').modal('show');
-                $('#Customer_id').val(data.id);
-                $('#name').val(data.name);
-                $('#detail').val(data.detail);
-            })
-         });
-          $('#saveBtn').click(function (e) {
-              e.preventDefault();
-              $(this).html('Sending..');
-              $.ajax({
-                data: $('#CustomerForm').serialize(),
-                url: "",
-                type: "POST",
-                dataType: 'json',
-                success: function (data) {
-                    $('#CustomerForm').trigger("reset");
-                    $('#ajaxModel').modal('hide');
-                    table.draw();
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
-                }
             });
-          });
-          $('body').on('click', '.deleteCustomer', function () {
-              var Customer_id = $(this).data("id");
-              confirm("Are You sure want to delete !");
-              $.ajax({
-                  type: "DELETE",
-                  url: ""+'/'+Customer_id,
-                  success: function (data) {
-                      table.draw();
-                  },
-                  error: function (data) {
-                      console.log('Error:', data);
-                  }
-              });
-          });
+            var table = $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'firstName', name: 'firstName'},
+                    {data: 'lastName', name: 'lastName'},
+                    {data: 'info', name: 'info'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+            $('#createNewCustomer').click(function () {
+                $('#saveBtn').val("create-Customer");
+                $('#Customer_id').val('');
+                $('#CustomerForm').trigger("reset");
+                $('#modelHeading').html("Create New Customer");
+                $('#ajaxModel').modal('show');
+            });
+            $('body').on('click', '.editCustomer', function () {
+                var Customer_id = $(this).data('id');
+                $.get("" +'/' + Customer_id +'/edit', function (data) {
+                    $('#modelHeading').html("Edit Customer");
+                    $('#saveBtn').val("edit-user");
+                    $('#ajaxModel').modal('show');
+                    $('#Customer_id').val(data.id);
+                    $('#name').val(data.name);
+                    $('#detail').val(data.detail);
+                })
+            });
+            $('#saveBtn').click(function (e) {
+                e.preventDefault();
+                $(this).html('Sending..');
+                $.ajax({
+                    data: $('#CustomerForm').serialize(),
+                    url: "",
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#CustomerForm').trigger("reset");
+                        $('#ajaxModel').modal('hide');
+                        table.draw();
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                        $('#saveBtn').html('Save Changes');
+                    }
+                });
+            });
+            $('body').on('click', '.deleteCustomer', function () {
+                var Customer_id = $(this).data("id");
+                confirm("Are You sure want to delete !");
+                $.ajax({
+                    type: "DELETE",
+                    url: ""+'/'+Customer_id,
+                    success: function (data) {
+                        table.draw();
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+
+            //   Ajax Select Kota
+            $('select[name="province_origin"]').change(function () {
+                var provinsi_id = $(this).val();
+                $.ajax({
+                    url: "{{ url('/cities') }}" + '/' + provinsi_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $('select[name="city_origin"]').empty();
+                        $('select[name="city_origin"]').append('<option value="">-- pilih kota asal --</option>');
+                        $.each(data, function (key, value) {
+                            $('select[name="city_origin"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    }
+                });
+            });
         });
-      </script>
+    </script>
+
 @endsection
 
 

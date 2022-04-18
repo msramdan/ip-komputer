@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\KotaKabupaten;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -94,8 +96,20 @@ class CustomerController extends Controller
      */
     public function address(Customer $customer)
     {
-        return view('customer.address');
+        $provinsi = Provinsi::pluck('nama', 'provinsi_id');
+        return view('customer.address',[
+            'customer' => $customer,
+            'provinsi' => $provinsi,
+        ]);
     }
+
+
+    public function getCities($id)
+    {
+        $kotaKabupaten = KotaKabupaten::where('provinsi_id', $id)->pluck('nama', 'kota_kabupaten_id');
+        return response()->json($kotaKabupaten);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
