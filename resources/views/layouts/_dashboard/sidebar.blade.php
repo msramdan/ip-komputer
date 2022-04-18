@@ -12,7 +12,7 @@
             <span>Home</span></a>
     </li>
 
-    @canany(['unit_show', 'kategori*', 'produk*'])
+    @canany(['unit_show', 'produk_show', 'kategori_show'])
         <li class="nav-item {{ set_active(['unit*', 'kategori*', 'produk*']) }}">
             <a class="nav-link {{ request()->routeIs('unit*', 'kategori*', 'produk*') ? '' : 'collapsed' }}" href="#"
                 data-toggle="collapse" data-target="#collapseMasterProduk" aria-expanded="true"
@@ -66,13 +66,13 @@
         </li>
     @endcanany
 
-    {{-- @canany(['unit_show', 'customer*', 'supplier*']) --}}
-    <li class="nav-item {{ set_active('pesan*') }}">
-        <a class="nav-link" href="{{ route('pesan.index') }}">
+    @canany(['pembelian_show'])
+    <li class="nav-item {{ set_active('pembelian*') }}">
+        <a class="nav-link" href="{{ route('pembelian.index') }}">
             <i class="fas fa-fw fa-money-bill"></i>
             <span>Pembelian</span></a>
     </li>
-    {{-- @endcanany --}}
+    @endcanany
     {{-- @canany(['unit_show', 'customer*', 'supplier*']) --}}
     <li class="nav-item {{ set_active('pesan*') }}">
         <a class="nav-link" href="{{ route('pesan.index') }}">
@@ -81,7 +81,7 @@
     </li>
     {{-- @endcanany --}}
 
-    @canany(['customer_show', 'supplier_show'])
+    {{-- @canany(['laporan_show']) --}}
         <li class="nav-item {{ set_active(['customer*', 'supplier*']) }}">
             <a class="nav-link {{ request()->routeIs('customer*', 'supplier*') ? '' : 'collapsed' }}" href="#"
                 data-toggle="collapse" data-target="#laporanToko" aria-expanded="true"
@@ -104,7 +104,7 @@
                 </div>
             </div>
         </li>
-    @endcanany
+    {{-- @endcanany --}}
 
 
 

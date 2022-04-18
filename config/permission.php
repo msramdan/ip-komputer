@@ -64,6 +64,12 @@ return [
             'toko_update',
             'toko_delete',
         ],
+         'pembelian' =>[
+            'pembelian_show',
+            'pembelian_create',
+            'pembelian_update',
+            'pembelian_delete',
+        ],
     ],
 
     'models' => [

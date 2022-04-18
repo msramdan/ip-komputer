@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
+use App\Http\Controllers\PembelianController;
 // Front End
 use App\Http\Controllers\Frontend\DashboardCrontroller;
 use App\Http\Controllers\Frontend\KontakController;
@@ -53,5 +54,6 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/supplier', SupplierController::class)->except('show');
     Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'cities']);
+    Route::resource('/pembelian', PembelianController::class)->except('show');
 });
 

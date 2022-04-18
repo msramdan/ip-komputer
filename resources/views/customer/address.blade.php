@@ -93,7 +93,7 @@
                             <select class="form-control kota-asal" name="city_origin">
                                 <option value="">-- pilih kota asal --</option>
                             </select>
-                        </div>    
+                        </div>
                         {{-- <div class="form-group">
                             <label for="">Provinsi</label>
                             <select class="form-control" id="">

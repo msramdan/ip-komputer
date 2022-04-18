@@ -44,6 +44,23 @@ Breadcrumbs::for('unit-edit', function (BreadcrumbTrail $trail, $unit) {
 });
 
 // ============================================================================================================
+//Pembalian
+Breadcrumbs::for('pembelian_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data Pembelian', route('pembelian.index'));
+});
+//Pembalian > Tambah
+Breadcrumbs::for('pembelian-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('pembelian_index');
+    $trail->push('Tambah Pembelian', route('pembelian.create'));
+});
+//Pembalian > Edit
+Breadcrumbs::for('pembelian-edit', function (BreadcrumbTrail $trail, $pembelian) {
+    $trail->parent('pembelian_index');
+    $trail->push('Edit', route('pembelian.edit', $pembelian));
+    $trail->push($pembelian->kode_pembelian, route('pembelian.edit', $pembelian));
+});
+
+// ============================================================================================================
 //kategori
 Breadcrumbs::for('kategori_index', function (BreadcrumbTrail $trail) {
     $trail->push('Data Kategori', route('kategori.index'));

@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:produk_show')->only('index');
+        $this->middleware('permission:produk_create')->only('create', 'store');
+        $this->middleware('permission:produk_update')->only('edit', 'update');
+        $this->middleware('permission:produk_delete')->only('delete');
+    }
     public function index()
     {
         if (request()->ajax()) {

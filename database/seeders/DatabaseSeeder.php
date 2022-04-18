@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             SupplierSeeder::class,
             LocationsSeeder::class,
+            PembelianSeeder::class,
         ]);
     }
 }
