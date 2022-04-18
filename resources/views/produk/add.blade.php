@@ -19,7 +19,7 @@
                                     <div class="mb-3">
                                         <label for="kode_produk">Kode produk</label>
                                         <input class="form-control @error('kode_produk') is-invalid @enderror" id="
-                                                            kode_produk" type="text" value="{{ old('kode_produk') }}"
+                                                                kode_produk" type="text" value="{{ old('kode_produk') }}"
                                             placeholder="Kode Produk" name="kode_produk" autocomplete="off">
                                         @error('kode_produk')
                                             <span style="color: red;">{{ $message }}</span>
@@ -28,7 +28,7 @@
                                     <div class="mb-3">
                                         <label for="nama">Nama produk</label>
                                         <input class="form-control @error('nama') is-invalid @enderror" id="
-                                                            nama" type="text" value="{{ old('nama') }}"
+                                                                nama" type="text" value="{{ old('nama') }}"
                                             placeholder="Nama Produk" name="nama" autocomplete="off">
                                         @error('nama')
                                             <span style="color: red;">{{ $message }}</span>
@@ -55,7 +55,7 @@
                                     <div class="mb-1">
                                         <label for="harga">Harga Produk</label>
                                         <input class="form-control @error('harga') is-invalid @enderror" id="
-                                                            harga" type="number" value="{{ old('harga') }}"
+                                                                harga" type="number" value="{{ old('harga') }}"
                                             placeholder="Harga Produk" name="harga" autocomplete="off">
                                         @error('harga')
                                             <span style="color: red;">{{ $message }}</span>
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <table class="table table-bordered" id="dynamic_field">
+                                    <table class="table table-bordered table-sm" id="dynamic_field">
                                         <thead>
                                             <tr>
                                                 <th>Photo Produk </th>

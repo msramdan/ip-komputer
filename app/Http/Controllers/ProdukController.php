@@ -122,9 +122,13 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
+        $photo = DB::table('produk_photo')
+            ->where('produk_id', '=', $produk->id)
+            ->get();
         $kategori = Kategori::all();
         return view('produk.edit', [
             'produk' => $produk,
+            'photo' => $photo,
             'kategori_id' => $kategori
         ]);
     }
@@ -147,14 +151,36 @@ class ProdukController extends Controller
                 'harga' => "required|string",
                 'kategori_id' => 'required|exists:kategori,id',
             ],
+            [],
         );
         if ($validator->fails()) {
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
 
+
+
+
         DB::beginTransaction();
         try {
+
+            // hapus photo produk dan unlink photo
+            if ($request->id_asal == null) {
+                $tidak_terhapus = [];
+            } else {
+                $tidak_terhapus = $request->id_asal;
+            }
+            $unlink_db_gambar = DB::table('produk_photo')
+                ->where('produk_id', '=', $produk->id)
+                ->whereNotIn('id', $tidak_terhapus)
+                ->get();
+            foreach ($unlink_db_gambar as $row) {
+                DB::table('produk_photo')->where('id', $row->id)->delete();
+                Storage::disk('local')->delete('public/produk/' . $row->photo);
+            }
+
+
             $produk = produk::findOrFail($produk->id);
+
             $slug = Str::slug($request->nama, '-');
             $produk->update([
                 'kode_produk'   => $request->kode_produk,
@@ -164,6 +190,22 @@ class ProdukController extends Controller
                 'harga'   => $request->harga,
                 'kategori_id'   => $request->kategori_id,
             ]);
+
+            if ($produk) {
+                $insertedId = $produk->id;
+                $files = $request->file('photo');
+                if ($request->hasFile('photo')) {
+                    foreach ($files as $file) {
+                        $name = $file->hashName();
+                        $file->storeAs('public/produk', $name);
+                        DB::table('produk_photo')->insert([
+                            'produk_id' => $insertedId,
+                            'photo' => $name,
+                        ]);
+                    }
+                }
+            }
+
             if ($produk) {
                 Alert::toast('Data berhasil diupdate', 'success');
                 return redirect()->route('produk.index');
@@ -192,7 +234,7 @@ class ProdukController extends Controller
             ->get();
 
         foreach ($produk_photo as $row) {
-            Storage::disk('local')->delete('public/produk/'.$row->photo);
+            Storage::disk('local')->delete('public/produk/' . $row->photo);
         }
 
         $produk->delete();
@@ -202,6 +244,32 @@ class ProdukController extends Controller
         } else {
             Alert::toast('Data gagal dihapus', 'error');
             return redirect()->route('produk.index');
+        }
+    }
+
+    public function GetGambarProduk($id)
+    {
+
+        $data = DB::table('produk_photo')
+            ->where('produk_id', '=', $id)
+            ->get();
+        $output = '';
+        $output .= '<div class="carousel-inner">';
+        $no = 1;
+        foreach ($data as $row) {
+            $output .= ' <div class="carousel-item ' . $this->active($no) . '"><img class="img-size"
+            src="' . Storage::url('public/produk/' . $row->photo) . '" />
+            </div>
+          ';
+            $no++;
+        }
+        $output .= '</div>';
+        echo $output;
+    }
+    public function active($no)
+    {
+        if ($no == 1) {
+            return "active";
         }
     }
 }

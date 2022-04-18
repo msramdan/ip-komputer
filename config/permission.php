@@ -32,6 +32,7 @@ return [
             'produk_create',
             'produk_update',
             'produk_delete',
+            'photo_view',
         ],
         'supplier' =>[
             'supplier_show',

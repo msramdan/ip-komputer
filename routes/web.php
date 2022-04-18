@@ -46,6 +46,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/unit', UnitController::class)->except('show');
     Route::resource('/kategori', KategoriController::class)->except('show');
     Route::resource('/produk', ProdukController::class)->except('show');
+    Route::get('/GetGambarProduk/{id}', [ProdukController::class, 'GetGambarProduk']);
     Route::resource('/customer', CustomerController::class)->except('show');
     Route::get('/address/{id}', [CustomerController::class, 'address'])->name('address');
     Route::resource('/pesan', PesanController::class)->except('show');
