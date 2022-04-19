@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
+use App\Models\Produk;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
@@ -43,7 +45,12 @@ class PembelianController extends Controller
      */
     public function create()
     {
-        //
+        $supplier = Supplier::all();
+        $produk = Produk::all();
+        return view('pembelian.add',[
+            'supplier' => $supplier,
+            'produk' => $produk
+        ]);
     }
 
     /**
