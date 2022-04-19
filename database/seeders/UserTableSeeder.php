@@ -31,6 +31,15 @@ class UserTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
+            [
+                'name' => 'Heru Dwi Cahya',
+                'email' => 'herudc@gmail.com',
+                'password' => Hash::make('admin'),
+                'remember_token' => Str::random(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
         ]);
     }
 }
