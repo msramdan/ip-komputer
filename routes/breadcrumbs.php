@@ -60,6 +60,25 @@ Breadcrumbs::for('pembelian-edit', function (BreadcrumbTrail $trail, $pembelian)
     $trail->push($pembelian->kode_pembelian, route('pembelian.edit', $pembelian));
 });
 
+
+
+// ============================================================================================================
+//Penjualan
+Breadcrumbs::for('penjualan_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data Penjualan', route('penjualan.index'));
+});
+//Penjualan > Tambah
+Breadcrumbs::for('penjualan-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('penjualan_index');
+    $trail->push('Tambah Penjualan', route('penjualan.create'));
+});
+//Penjualan > Edit
+Breadcrumbs::for('penjualan-edit', function (BreadcrumbTrail $trail, $penjualan) {
+    $trail->parent('penjualan_index');
+    $trail->push('Edit', route('penjualan.edit', $penjualan));
+    $trail->push($penjualan->kode_penjualan, route('penjualan.edit', $penjualan));
+});
+
 // ============================================================================================================
 //kategori
 Breadcrumbs::for('kategori_index', function (BreadcrumbTrail $trail) {

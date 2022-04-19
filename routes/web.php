@@ -22,7 +22,7 @@ use App\Http\Controllers\Frontend\KontakController;
 use App\Http\Controllers\Frontend\LoginWebController;
 use App\Http\Controllers\Frontend\RegisterWebController;
 use App\Http\Controllers\Frontend\WishlistController;
-
+use App\Http\Controllers\PenjualanController;
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
@@ -55,5 +55,6 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::resource('/pembelian', PembelianController::class)->except('show');
+    Route::resource('/penjualan', PenjualanController::class)->except('show');
 });
 

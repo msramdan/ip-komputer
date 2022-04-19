@@ -73,13 +73,14 @@
             <span>Pembelian</span></a>
     </li>
     @endcanany
-    {{-- @canany(['unit_show', 'customer*', 'supplier*']) --}}
-    <li class="nav-item {{ set_active('pesan*') }}">
-        <a class="nav-link" href="{{ route('pesan.index') }}">
+    
+    @canany(['penjualan_show'])
+    <li class="nav-item {{ set_active('penjualan*') }}">
+        <a class="nav-link" href="{{ route('penjualan.index') }}">
             <i class="fas fa-shopping-cart"></i>
             <span>Penjualan</span></a>
     </li>
-    {{-- @endcanany --}}
+    @endcanany
 
     {{-- @canany(['laporan_show']) --}}
         <li class="nav-item {{ set_active(['customer*', 'supplier*']) }}">

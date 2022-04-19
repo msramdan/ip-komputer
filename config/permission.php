@@ -70,6 +70,12 @@ return [
             'pembelian_update',
             'pembelian_delete',
         ],
+        'penjualan' =>[
+            'penjualan_show',
+            'penjualan_create',
+            'penjualan_update',
+            'penjualan_delete',
+        ],
     ],
 
     'models' => [
