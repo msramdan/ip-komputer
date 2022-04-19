@@ -13,6 +13,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Frontend\CaraBelanjaController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
@@ -23,12 +24,16 @@ use App\Http\Controllers\Frontend\DashboardCrontroller;
 use App\Http\Controllers\Frontend\KontakController;
 use App\Http\Controllers\Frontend\LoginWebController;
 use App\Http\Controllers\Frontend\RegisterWebController;
+use App\Http\Controllers\Frontend\TentangKamiController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\PenjualanController;
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
+Route::get('/cara-belanja', [CaraBelanjaController::class, 'index'])->name('cara-belanja');
+
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
