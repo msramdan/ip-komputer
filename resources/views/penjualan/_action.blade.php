@@ -1,9 +1,10 @@
 <td>
-    @can('penjualan_update')
-        <a href="{{ route('penjualan.edit', $model->id) }}" class="btn btn-primary btn-xs mb-1" title="Edit">
-            <i class="fas fa-edit"></i>
+    @can('penjualan_detail')
+        <a href="" class="btn btn-success btn-xs mb-1" title="Detail">
+            <i class="fas fa-eye"></i>
         </a>
     @endcan
+
 
     @can('penjualan_delete')
         <form action="{{ route('penjualan.destroy', $model->id) }}" method="post" class="d-inline"

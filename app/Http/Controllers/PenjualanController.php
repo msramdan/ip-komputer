@@ -45,12 +45,7 @@ class PenjualanController extends Controller
      */
     public function create()
     {   
-        $customer = Customer::all();
-        $produk = Produk::all();
-        return view('penjualan.add',[
-            'produk' => $produk,
-            'customer' => $customer
-        ]);
+        
     }
 
     /**
@@ -72,7 +67,7 @@ class PenjualanController extends Controller
      */
     public function show(Penjualan $penjualan)
     {
-        //
+        return view('penjualan.show', compact('penjualan'));
     }
 
     /**
