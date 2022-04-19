@@ -1,10 +1,8 @@
 <td>
     @can('penjualan_detail')
-        <a href="#" class="btn btn-success btn-xs mb-1" data-toggle="modal"
-        data-id="{{ $model->id }}"
-        id="view_gambar"
-        data-nama="{{ $model->nama }}"
-        data-target="#largeModal" title="Detail"><i class="fas fa-eye"></i></a>
+        <a href="" class="btn btn-success btn-xs mb-1" title="Detail">
+            <i class="fas fa-eye"></i>
+        </a>
     @endcan
 
 
