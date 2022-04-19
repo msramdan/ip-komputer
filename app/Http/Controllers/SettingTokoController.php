@@ -8,30 +8,26 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SettingTokoController extends Controller
 {
     public function __construct()
     {
         $this->middleware('permission:toko_show')->only('index');
-        $this->middleware('permission:toko_create')->only('create', 'store');
-        $this->middleware('permission:toko_update')->only('edit', 'update');
-        $this->middleware('permission:toko_delete')->only('delete');
+        $this->middleware('permission:toko_update')->only('update');
     }
 
     public function index()
     {
         $setting_toko = SettingToko::all()->first();
-        return view('setting-toko.index', compact('setting_toko'));
+        return view('setting-toko.index', ['setting_toko' => $setting_toko]);
     }
 
-    public function edit(SettingToko $settingToko)
-    {
-        return view('setting-toko.edit',['setting_toko' => $settingToko]);
-    }
 
-    public function update(Request $request, SettingToko $settingToko)
+    public function update(Request $request, $id)
     {
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -39,7 +35,7 @@ class SettingTokoController extends Controller
                 'alamat' => 'required|string',
                 'telpon' => 'required|string',
                 'email' => 'required|string',
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                // 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'deskripsi' => 'required|string',
             ]
         );
@@ -49,46 +45,41 @@ class SettingTokoController extends Controller
         }
         DB::beginTransaction();
 
-        try{
-            $setting_toko = SettingToko::findOrFail($settingToko->id);
-            $setting_toko->update([
-                'nama_toko' => $request->nama_toko,
-                'alamat' => $request->alamat,
-                'telpon' => $request->telpon,
-                'email' => $request->email,
-                'deskripsi' => $request->deskripsi,
-            ]);
-            if ($request->hasFile('logo')) {
-                $file = $request->file('logo');
-                $name = time().'.'.$file->extension();
-                $destinationPath = public_path('logo');
-                $file->move($destinationPath, $name);
-                $setting_toko['logo'] = $name;
+        try {
+            $setting_toko = SettingToko::findOrFail($id);
+            if ($request->file('logo') == "") {
+                $setting_toko->update([
+                    'nama_toko' => $request->nama_toko,
+                    'alamat' => $request->alamat,
+                    'telpon' => $request->telpon,
+                    'email' => $request->email,
+                    'deskripsi' => $request->deskripsi,
+                ]);
+            } else {
+                //hapus old logo
+                Storage::disk('local')->delete('public/logo/' . $setting_toko->logo);
+                //upload new logo
+                $logo = $request->file('logo');
+                $logo->storeAs('public/logo', $logo->hashName());
+                $setting_toko->update([
+                    'logo'     => $logo->hashName(),
+                    'nama_toko' => $request->nama_toko,
+                    'alamat' => $request->alamat,
+                    'telpon' => $request->telpon,
+                    'email' => $request->email,
+                    'deskripsi' => $request->deskripsi,
+                ]);
             }
-
             if ($setting_toko) {
                 Alert::toast('Data berhasil diupdate', 'success');
                 return redirect()->route('setting-toko.index');
             }
-        }catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             DB::rollback();
             Alert::toast('Data gagal diupdate', 'error');
             return redirect()->route('setting-toko.index');
-        }finally {
+        } finally {
             DB::commit();
         }
-    }
-
-    public function destroy(SettingToko $settingToko)
-    {
-        $setting_toko = SettingToko::findOrFail($settingToko->id);
-        $setting_toko->delete();
-        if ($setting_toko) {
-            Alert::toast('Data berhasil dihapus', 'success');
-            return redirect()->route('setting-toko.index');
-           }else{
-            Alert::toast('Data gagal dihapus', 'error');
-            return redirect()->route('setting-toko.index');
-           }
     }
 }

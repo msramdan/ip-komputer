@@ -157,18 +157,6 @@ Breadcrumbs::for('customer-edit', function (BreadcrumbTrail $trail, $customer) {
 Breadcrumbs::for('toko_index', function (BreadcrumbTrail $trail) {
     $trail->push('Setting Toko', route('setting-toko.index'));
 });
-//setting-toko > Tambah
-Breadcrumbs::for('toko-tambah', function (BreadcrumbTrail $trail) {
-    $trail->parent('toko_index');
-    $trail->push('Tambah Toko', route('setting-toko.create'));
-});
-//setting-toko > Edit
-Breadcrumbs::for('toko-edit', function (BreadcrumbTrail $trail, $setting_toko) {
-    $trail->parent('toko_index');
-    $trail->push('Edit Toko', route('setting-toko.edit', $setting_toko));
-    $trail->push($setting_toko->nama_toko, route('setting-toko.edit', $setting_toko));
-});
-
 
 
 // ============================================================================================================

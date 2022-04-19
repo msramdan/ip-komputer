@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kode_produk');
             $table->string('nama')->unique();
             $table->string('slug');
+            $table->foreignId('unit_id')->constrained('units');
             $table->foreignId('kategori_id')->constrained('kategori');
             $table->longText('deskripsi')->nullable();
             $table->integer('harga');

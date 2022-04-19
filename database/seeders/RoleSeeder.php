@@ -58,6 +58,7 @@ class RoleSeeder extends Seeder
 
         //assign Roles
         $userSuperAdmin = User::find(1)->assignRole("Super Admin");
+        $userSuperAdmin = User::find(3)->assignRole("Super Admin");
         $userEditor = User::find(2)->assignRole("Admin Olshop");
     }
 }

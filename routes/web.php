@@ -55,7 +55,12 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/alamat', CustomerAlamatController::class)->except('show');
     Route::resource('/pesan', PesanController::class)->except('show');
     Route::resource('/supplier', SupplierController::class)->except('show');
-    Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);
+    Route::controller(SettingTokoController::class)->group(function () {
+        Route::get('/setting-toko', 'index')->name('setting-toko.index');
+        Route::put('/setting-toko/update/{id}', 'update')->name('setting-toko.update');;
+    });
+
+
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::resource('/pembelian', PembelianController::class)->except('show');
     Route::resource('/penjualan', PenjualanController::class)->except('show');

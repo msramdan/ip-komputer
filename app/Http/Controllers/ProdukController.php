@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -25,11 +26,14 @@ class ProdukController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Produk::with('kategori:id,nama_kategori');
+            $query = Produk::with('kategori:id,nama_kategori','unit:id,nama_unit');
             return Datatables::of($query)
                 ->addIndexColumn()
                 ->addColumn('kategori', function ($row) {
                     return $row->kategori->nama_kategori;
+                })
+                ->addColumn('unit', function ($row) {
+                    return $row->unit->nama_unit;
                 })
                 ->addColumn('action', 'produk._action')
                 ->toJson();
@@ -45,8 +49,10 @@ class ProdukController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
+        $unit = Unit::all();
         return view('produk.add', [
-            'kategori_id' => $kategori
+            'kategori_id' => $kategori,
+            'unit_id' => $unit
         ]);
     }
 
@@ -59,6 +65,7 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
         $validator = Validator::make(
             $request->all(),
             [
@@ -67,6 +74,7 @@ class ProdukController extends Controller
                 'deskripsi' => "required|string",
                 'harga' => "required|string",
                 'kategori_id' => 'required|exists:kategori,id',
+                'unit_id' => 'required|exists:units,id',
                 'photo' => "required"
             ],
             [],
@@ -82,6 +90,7 @@ class ProdukController extends Controller
             'deskripsi'   => $request->deskripsi,
             'harga'   => $request->harga,
             'kategori_id'   => $request->kategori_id,
+            'unit_id'   => $request->unit_id,
             'qty'   => 0
         ]);
         // upload photo
@@ -128,9 +137,11 @@ class ProdukController extends Controller
             ->where('produk_id', '=', $produk->id)
             ->get();
         $kategori = Kategori::all();
+        $unit = Unit::all();
         return view('produk.edit', [
             'produk' => $produk,
             'photo' => $photo,
+            'unit_id' => $unit,
             'kategori_id' => $kategori
         ]);
     }
@@ -152,6 +163,7 @@ class ProdukController extends Controller
                 'deskripsi' => "required|string",
                 'harga' => "required|string",
                 'kategori_id' => 'required|exists:kategori,id',
+                'unit_id' => 'required|exists:units,id',
             ],
             [],
         );
@@ -191,6 +203,7 @@ class ProdukController extends Controller
                 'deskripsi'   => $request->deskripsi,
                 'harga'   => $request->harga,
                 'kategori_id'   => $request->kategori_id,
+                'unit_id'   => $request->unit_id,
             ]);
 
             if ($produk) {

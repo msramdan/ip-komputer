@@ -13,6 +13,7 @@ class Produk extends Model
     protected $fillable = [
         'kode_produk',
         'kategori_id',
+        'unit_id',
         'nama',
         'slug',
         'qty',
@@ -23,6 +24,10 @@ class Produk extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
+    }
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
     }
 
     public function produk_photo()

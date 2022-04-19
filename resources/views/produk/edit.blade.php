@@ -112,6 +112,24 @@
                                         @enderror
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1">Unit</label>
+                                        <select name="unit_id"
+                                            class="form-control  @error('unit_id') is-invalid @enderror"
+                                            id="exampleFormControlSelect1">
+                                            <option value="">-- Pilih --</option>
+                                            @foreach ($unit_id as $row)
+                                                <option value="{{ $row->id }}"
+                                                    {{ old('unit_id') && old('unit_id') == $row->id ? 'selected' : '' }}
+                                                    {{ $produk->unit->id == $row->id ? 'selected' : '' }}>
+                                                    {{ $row->nama_unit }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('unit_id')
+                                            <span style="color: red;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
                                     <div class="mb-1">
                                         <label for="harga">Harga Produk</label>
                                         <input class="form-control @error('harga') is-invalid @enderror" id="

@@ -60,9 +60,7 @@ return [
         ],
         'setting-toko' =>[
             'toko_show',
-            'toko_create',
             'toko_update',
-            'toko_delete',
         ],
          'pembelian' =>[
             'pembelian_show',

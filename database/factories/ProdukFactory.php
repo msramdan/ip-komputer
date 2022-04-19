@@ -20,6 +20,7 @@ class ProdukFactory extends Factory
             'kode_produk' => ucfirst($this->faker->word()),
             'nama' => $this->faker->name,
             'kategori_id' => 1,
+            'unit_id' => 1,
             'slug' => ucfirst($this->faker->word()),
             'deskripsi' => ucfirst($this->faker->word()),
             'harga' => $this->faker->numerify(),

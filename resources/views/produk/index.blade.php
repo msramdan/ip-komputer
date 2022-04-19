@@ -88,6 +88,7 @@
                                             <th>Kode Produk</th>
                                             <th>Nama produk</th>
                                             <th>Kategori Produk</th>
+                                            <th>Unit</th>
                                             <th>Deskripsi</th>
                                             <th>Harga</th>
                                             <th>QTY</th>
@@ -155,6 +156,10 @@
                 {
                     data: 'kategori',
                     name: 'kategori'
+                },
+                {
+                    data: 'unit',
+                    name: 'unit'
                 },
                 {
                     data: 'deskripsi',
