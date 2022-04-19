@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerAlamat;
 use App\Models\KotaKabupaten;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
@@ -88,12 +89,19 @@ class CustomerController extends Controller
         }
     }
 
-    public function address(Customer $customer)
+    public function address($id)
     {
+        $alamat = DB::table('customer_alamat')
+            ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+            ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+            ->select('customer_alamat.*', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota')
+            ->where('customer_alamat.customer_id', '=', $id)
+            ->get();
         $provinsi = Provinsi::pluck('nama', 'provinsi_id');
         return view('customer.address', [
-            'customer' => $customer,
             'provinsi' => $provinsi,
+            'customer_id' => $id,
+            'alamat' => $alamat
         ]);
     }
 
@@ -103,9 +111,9 @@ class CustomerController extends Controller
             ->where('provinsi_id', '=', $id)
             ->get();
         $output = '';
-        $output .= '<select class="form-control kota-asal" name="kota_id"><option value="">-- pilih kota asal --</option>';
+        $output .= '<select class="form-control kota-asal" id="kota_id" name="kota_id"><option value="">-- Pilih --</option>';
         foreach ($kotaKabupaten as $row) {
-            $output .= '<option value="'.$row->kota_kabupaten_id.'"> '.$row->nama.'</option>';
+            $output .= '<option value="' . $row->id . '"> ' . $row->nama . '</option>';
         }
         $output .= '</select>';
         echo $output;

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CustomerAlamatController;
 use Illuminate\Support\Facades\Route;
 
 // Back end
@@ -16,6 +17,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
 use App\Http\Controllers\PembelianController;
+
 // Front End
 use App\Http\Controllers\Frontend\DashboardCrontroller;
 use App\Http\Controllers\Frontend\KontakController;
@@ -50,6 +52,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::get('/GetGambarProduk/{id}', [ProdukController::class, 'GetGambarProduk']);
     Route::resource('/customer', CustomerController::class)->except('show');
     Route::get('/address/{id}', [CustomerController::class, 'address'])->name('address');
+    Route::resource('/alamat', CustomerAlamatController::class)->except('show');
     Route::resource('/pesan', PesanController::class)->except('show');
     Route::resource('/supplier', SupplierController::class)->except('show');
     Route::resource('/setting-toko', SettingTokoController::class)->except(['show','create','store','destroy']);

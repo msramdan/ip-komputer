@@ -10,5 +10,5 @@ class CustomerAlamat extends Model
 {
     use HasFactory;
     protected $table = 'customer_alamat';
-    protected $fillable = ['provinsi_id', 'kota_id','alamat_lengkap'];
+    protected $fillable = ['provinsi_id', 'kota_id','alamat_lengkap','customer_id'];
 }

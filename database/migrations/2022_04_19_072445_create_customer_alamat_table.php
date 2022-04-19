@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('customer');
             $table->foreignId('provinsi_id')->constrained('provinsis');
             $table->foreignId('kota_id')->constrained('kota_kabupatens');
-            $table->string('alamat_lengkap');
+            $table->text('alamat_lengkap');
             $table->timestamps();
         });
     }
