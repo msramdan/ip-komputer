@@ -21,9 +21,6 @@ return new class extends Migration
             $table->string('jenis_kelamin',50)->nullable();
             $table->string('email',100);
             $table->string('telpon',15);
-            $table->string('alamat');
-            $table->unsignedInteger('provinsi_id');
-            $table->unsignedInteger('kota_kabupaten_id');
             $table->timestamps();
         });
     }
