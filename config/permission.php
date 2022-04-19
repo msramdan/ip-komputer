@@ -75,6 +75,7 @@ return [
             'penjualan_create',
             'penjualan_update',
             'penjualan_delete',
+            'penjualan_detail',
         ],
     ],
 

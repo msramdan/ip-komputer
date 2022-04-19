@@ -7,9 +7,10 @@
             <div class="col-md-12">
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                        @can('penjualan_create')
+
+                        {{-- @can('penjualan_create')
                             <a href="{{ route('penjualan.create') }}" class="btn btn-md btn-success mb-3">TAMBAH</a>
-                        @endcan
+                        @endcan --}}
 
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -23,8 +24,8 @@
                                         <th>Diskon</th>
                                         <th>Total</th>
                                         <th>Status Bayar</th>
-                                        <th>Pengirim</th>
-                                        @canany(['penjualan_update', 'penjualan_delete'])
+                                        <th>Pengiriman</th>
+                                        @canany(['penjualan_update', 'penjualan_delete', 'penjualan_detail'])
                                             <th>Action</th>
                                         @endcanany
                                     </tr>
@@ -41,9 +42,35 @@
 @endsection
 
 @push('js')
+    <script type="text/javascript">
+        $(document).on('click', '#view_gambar', function() {
+            var id = $(this).data('id');
+            var nama = $(this).data('nama');
+            $('#largeModal #modal_nama_produk').text(nama);
+            console.log(id)
+
+            $.ajax({
+                url: '/panel/GetGambarProduk/' + id,
+                type: 'GET',
+
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                data: {
+
+                },
+                success: function(html) {
+                    $("#result").html(html);
+                }
+
+            });
+
+
+        })
+    </script>
     <script>
         const action =
-            '{{ auth()->user()->can('penjualan_update') ||auth()->user()->can('penjualan_delete')? 'yes yes yes': '' }}'
+            '{{ auth()->user()->can('pembelian_update') ||auth()->user()->can('pembelian_delete')? 'yes yes yes': '' }}'
         let columns = [
             {
                 data: 'DT_RowIndex',
@@ -78,7 +105,7 @@
             {
                 data: 'status_bayar',
                 name: 'status_bayar'
-            }
+            },
             {
                 data: 'pengiriman',
                 name: 'pengiriman'
