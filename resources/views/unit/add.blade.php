@@ -14,8 +14,6 @@
                         <div class="col-md-6">
                             <form method="POST" action="{{ route('unit.store') }}">
                                 @csrf
-
-
                                 <div class="mb-3">
                                     <label for="nama_unit">Nama Unit</label>
                                     <input class="form-control @error('nama_unit') is-invalid @enderror" id="

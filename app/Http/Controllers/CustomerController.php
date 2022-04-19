@@ -88,26 +88,27 @@ class CustomerController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function address(Customer $customer)
     {
         $provinsi = Provinsi::pluck('nama', 'provinsi_id');
-        return view('customer.address',[
+        return view('customer.address', [
             'customer' => $customer,
             'provinsi' => $provinsi,
         ]);
     }
 
-
     public function getCities($id)
     {
-        $kotaKabupaten = KotaKabupaten::where('provinsi_id', $id)->pluck('nama', 'kota_kabupaten_id');
-        return response()->json($kotaKabupaten);
+        $kotaKabupaten = DB::table('kota_kabupatens')
+            ->where('provinsi_id', '=', $id)
+            ->get();
+        $output = '';
+        $output .= '<select class="form-control kota-asal" name="kota_id"><option value="">-- pilih kota asal --</option>';
+        foreach ($kotaKabupaten as $row) {
+            $output .= '<option value="'.$row->kota_kabupaten_id.'"> '.$row->nama.'</option>';
+        }
+        $output .= '</select>';
+        echo $output;
     }
 
 
@@ -163,7 +164,7 @@ class CustomerController extends Controller
             DB::rollback();
             Alert::toast('Data gagal diupdate', 'error');
             return redirect()->route('customer.index');
-        }finally {
+        } finally {
             DB::commit();
         }
     }
