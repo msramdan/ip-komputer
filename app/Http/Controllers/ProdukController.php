@@ -26,7 +26,7 @@ class ProdukController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Produk::with('kategori:id,nama_kategori','unit:id,nama_unit');
+            $query = Produk::with('kategori:id,nama_kategori', 'unit:id,nama_unit');
             return Datatables::of($query)
                 ->addIndexColumn()
                 ->addColumn('kategori', function ($row) {
@@ -54,6 +54,17 @@ class ProdukController extends Controller
             'kategori_id' => $kategori,
             'unit_id' => $unit
         ]);
+    }
+
+    public function getItem(int $produk_id)
+    {
+        abort_if(!request()->ajax(), 403);
+        $produk = DB::table('produk')
+            ->join('units', 'units.id', '=', 'produk.unit_id')
+            ->select('produk.*', 'units.*')
+            ->where('produk.id', '=', $produk_id)
+            ->get();
+        return response()->json(['data' => $produk ], 200);
     }
 
     /**

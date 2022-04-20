@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignId('supplier_id')->constrained('supplier');
             $table->date('tanggal');
             $table->integer('grand_total');
-            $table->integer('diskon');
+            $table->integer('diskon')->default('0');;
             $table->integer('total');
-            $table->string('catatan');
+            $table->string('catatan')->nullable();
             $table->string('status_bayar');
             $table->timestamps();
         });

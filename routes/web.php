@@ -54,6 +54,8 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/unit', UnitController::class)->except('show');
     Route::resource('/kategori', KategoriController::class)->except('show');
     Route::resource('/produk', ProdukController::class)->except('show');
+
+    Route::get('/produk/get-item-by-id/{id}', [ProdukController::class, 'getItem']);
     Route::get('/GetGambarProduk/{id}', [ProdukController::class, 'GetGambarProduk']);
     Route::resource('/customer', CustomerController::class)->except('show');
     Route::get('/address/{id}', [CustomerController::class, 'address'])->name('address');
@@ -68,6 +70,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
 
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::resource('/pembelian', PembelianController::class)->except('show');
+    Route::put('update_status_bayar/{id}', [PembelianController::class, 'update_pembayaran'])->name('update_status_bayar');
     Route::resource('/penjualan', PenjualanController::class)->except('show');
 });
 

@@ -11,18 +11,21 @@ class Pembelian extends Model
     protected $table = 'pembelian';
     protected $fillable = [
         'kode_pembelian',
-        'supplier_id ',
+        'supplier_id',
         'tanggal',
         'grand_total',
-        'diskon',
         'total',
-        'catatan',
         'status_bayar',
     ];
 
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function detail_pembelian()
+    {
+        return $this->hasMany(PembelianDetail::class);
     }
 
 }

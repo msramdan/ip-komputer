@@ -31,7 +31,7 @@ class PembelianController extends Controller
                 ->addColumn('supplier', function ($row) {
                     return $row->supplier->nama;
                 })
-                ->addColumn('action', 'unit._action')
+                ->addColumn('action', 'pembelian._action')
                 ->toJson();
         }
 
@@ -47,7 +47,7 @@ class PembelianController extends Controller
     {
         $supplier = Supplier::all();
         $produk = Produk::all();
-        return view('pembelian.add',[
+        return view('pembelian.add', [
             'supplier' => $supplier,
             'produk' => $produk
         ]);
@@ -61,7 +61,31 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::transaction(function () use ($request) {
+
+            $pembelian = Pembelian::create([
+                'supplier_id' => $request->supplier,
+                'kode_pembelian' => $request->kode,
+                'tanggal' => $request->tanggal,
+                'grand_total' => $request->grand_total,
+                'total' => $request->total,
+                'diskon' => $request->diskon,
+                'catatan' => $request->catatan,
+                'status_bayar' => 'Belum Bayar',
+            ]);
+
+            foreach ($request->produk as $i => $prd) {
+                $detailPurch[] = new PembelianDetail([
+                    'produk_id' => $prd,
+                    'harga' => $request->harga[$i],
+                    'qty' => $request->qty[$i],
+                    'sub_total' => $request->subtotal[$i],
+                ]);
+            }
+
+            $pembelian->detail_pembelian()->saveMany($detailPurch);
+        });
+        return response()->json(['success'], 200);
     }
 
     /**
@@ -106,6 +130,28 @@ class PembelianController extends Controller
      */
     public function destroy(Pembelian $pembelian)
     {
-        //
+        $pembelian = Pembelian::findOrFail($pembelian->id);
+        $pembelian->delete();
+        if ($pembelian) {
+            Alert::toast('Data berhasil dihapus', 'success');
+            return redirect()->route('pembelian.index');
+        } else {
+            Alert::toast('Data gagal dihapus', 'error');
+            return redirect()->route('pembelian.index');
+        }
+    }
+
+    public function update_pembayaran($id){
+        $pembelian = Pembelian::findOrFail($id);
+        $pembelian->update([
+            'status_bayar'   => 'Sudah Bayar',
+        ]);
+        if ($pembelian) {
+            Alert::toast('Pembayaran berhasil divalidasi', 'success');
+            return redirect()->route('pembelian.index');
+        } else {
+            Alert::toast('Pembayaran gagal divalidasi', 'error');
+            return redirect()->route('pembelian.index');
+        }
     }
 }

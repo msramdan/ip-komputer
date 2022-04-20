@@ -67,6 +67,7 @@ return [
             'pembelian_create',
             'pembelian_update',
             'pembelian_delete',
+            'update_pembayaran',
         ],
         'penjualan' =>[
             'penjualan_show',
