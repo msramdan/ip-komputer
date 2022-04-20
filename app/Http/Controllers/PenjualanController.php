@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class PenjualanController extends Controller
@@ -67,7 +68,7 @@ class PenjualanController extends Controller
      */
     public function show(Penjualan $penjualan)
     {
-        return view('penjualan.show', compact('penjualan'));
+        // return view('penjualan.show', compact('penjualan'));
     }
 
     /**
@@ -101,6 +102,14 @@ class PenjualanController extends Controller
      */
     public function destroy(Penjualan $penjualan)
     {
-        //
+        $penjualan = Penjualan::findOrFail($penjualan->id);
+        $penjualan->delete();
+        if ($penjualan) {
+            Alert::toast('Data berhasil dihapus', 'success');
+            return redirect()->route('penjualan.index');
+        } else {
+            Alert::toast('Data gagal dihapus', 'error');
+            return redirect()->route('penjualan.index');
+        }
     }
 }

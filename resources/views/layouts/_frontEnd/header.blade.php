@@ -116,11 +116,11 @@
                                     </li>
 
                                     <li class="dropdown">
-                                        <a href="{{ route('kontak') }}">TENTANG KAMI</a>
+                                        <a href="{{ route('tentang-kami') }}">TENTANG KAMI</a>
                                     </li>
 
                                     <li class="dropdown">
-                                        <a href="{{ route('kontak') }}">CARA BELANJA</a>
+                                        <a href="{{ route('cara-belanja') }}">CARA BELANJA</a>
                                     </li>
                                     <li class="dropdown">
                                         <a href="{{ route('kontak') }}">KONTAK</a>

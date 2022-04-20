@@ -26,5 +26,17 @@ class PenjualanSeeder extends Seeder
             'status_bayar' => 'Belum Bayar',
             'pengiriman' => 'JNE',
         ]);
+
+        Penjualan::create([
+            'kode_penjualan' => 'PNJ002',
+            'customer_id' => 1,
+            'tanggal' => date('y-m-d'),
+            'grand_total' => 2000000,
+            'diskon' => 0,
+            'total' => 2000000,
+            'catatan' => 'Catatan',
+            'status_bayar' => 'Bayar',
+            'pengiriman' => 'J&T',
+        ]);
     }
 }
