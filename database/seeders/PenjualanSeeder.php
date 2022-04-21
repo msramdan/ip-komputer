@@ -17,6 +17,7 @@ class PenjualanSeeder extends Seeder
     {
         Penjualan::create([
             'kode_penjualan' => 'PNJ001',
+            'produk_id' => 1,
             'customer_id' => 1,
             'tanggal' => date('y-m-d'),
             'grand_total' => 1000000,
@@ -25,18 +26,6 @@ class PenjualanSeeder extends Seeder
             'catatan' => 'Catatan',
             'status_bayar' => 'Belum Bayar',
             'pengiriman' => 'JNE',
-        ]);
-
-        Penjualan::create([
-            'kode_penjualan' => 'PNJ002',
-            'customer_id' => 1,
-            'tanggal' => date('y-m-d'),
-            'grand_total' => 2000000,
-            'diskon' => 0,
-            'total' => 2000000,
-            'catatan' => 'Catatan',
-            'status_bayar' => 'Bayar',
-            'pengiriman' => 'J&T',
         ]);
     }
 }

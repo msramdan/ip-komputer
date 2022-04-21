@@ -42,32 +42,6 @@
 @endsection
 
 @push('js')
-    <script type="text/javascript">
-        $(document).on('click', '#view_gambar', function() {
-            var id = $(this).data('id');
-            var nama = $(this).data('nama');
-            $('#largeModal #modal_nama_produk').text(nama);
-            console.log(id)
-
-            $.ajax({
-                url: '/panel/GetGambarProduk/' + id,
-                type: 'GET',
-
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                },
-                data: {
-
-                },
-                success: function(html) {
-                    $("#result").html(html);
-                }
-
-            });
-
-
-        })
-    </script>
     <script>
         const action =
             '{{ auth()->user()->can('pembelian_update') ||auth()->user()->can('pembelian_delete')? 'yes yes yes': '' }}'

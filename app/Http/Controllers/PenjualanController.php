@@ -57,7 +57,15 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $penjualan = Penjualan::create([
+            'alamat_lengkap'   => $request->alamat_lengkap
+        ]);
+        if ($penjualan) {
+            $params = array("success" => true);
+        } else {
+            $params = array("success" => false);
+        }
+        echo json_encode($params);
     }
 
     /**

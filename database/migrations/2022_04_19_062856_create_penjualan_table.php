@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
             $table->string('kode_penjualan',20);
+            $table->foreignId('produk_id')->constrained('produk');
             $table->foreignId('customer_id')->constrained('customer');
             $table->date('tanggal');
             $table->integer('grand_total');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('catatan');
             $table->string('status_bayar');
             $table->string('pengiriman');
+            $table->string('no_resi')->nullable();
             $table->timestamps();
         });
     }
