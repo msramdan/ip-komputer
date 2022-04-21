@@ -107,7 +107,20 @@ class PembelianController extends Controller
      */
     public function edit(Pembelian $pembelian)
     {
-        //
+        $purchase = DB::table('pembelian')
+            ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+            ->select('pembelian.*','pembelian.id as pembelian_id', 'supplier.*')
+            ->where('pembelian.id', '=', $pembelian->id)
+            ->first();
+        $detail_purchase = DB::table('pembelian_detail')
+            ->join('produk', 'produk.id', '=', 'pembelian_detail.produk_id')
+            ->join('units', 'units.id', '=', 'produk.unit_id')
+            ->select('pembelian_detail.*', 'produk.nama as nama_produk','produk.qty as stok','produk.id as produk_id','units.nama_unit')
+            ->where('pembelian_detail.pembelian_id', '=', $pembelian->id)
+            ->get();
+        $supplier = Supplier::all();
+        $produk = Produk::all();
+        return view('pembelian.edit', compact('produk', 'supplier', 'purchase','detail_purchase'));
     }
 
     /**
@@ -119,7 +132,31 @@ class PembelianController extends Controller
      */
     public function update(Request $request, Pembelian $pembelian)
     {
-        //
+        // hapus detail pembelian lama
+        $pembelian->detail_pembelian()->delete();
+        // update data pembelian
+        $pembelian->update([
+            'supplier_id' => $request->supplier,
+            'kode_pembelian' => $request->kode,
+            'tanggal' => $request->tanggal,
+            'grand_total' => $request->grand_total,
+            'total' => $request->total,
+            'diskon' => $request->diskon,
+            'catatan' => $request->catatan,
+            'status_bayar' => 'Belum Bayar',
+        ]);
+
+        foreach ($request->produk as $i => $prd) {
+            $detailPurch[] = new PembelianDetail([
+                'produk_id' => $prd,
+                'harga' => $request->harga[$i],
+                'qty' => $request->qty[$i],
+                'sub_total' => $request->subtotal[$i],
+            ]);
+        }
+        // insert batch
+        $pembelian->detail_pembelian()->saveMany($detailPurch);
+        return response()->json(['success'], 200);
     }
 
     /**
@@ -141,7 +178,8 @@ class PembelianController extends Controller
         }
     }
 
-    public function update_pembayaran($id){
+    public function update_pembayaran($id)
+    {
         $pembelian = Pembelian::findOrFail($id);
         $pembelian->update([
             'status_bayar'   => 'Sudah Bayar',

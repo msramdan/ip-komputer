@@ -158,7 +158,7 @@
                                                     Simpan
                                                 </button>
 
-                                                <a href="https://mjs.intelship.web.id/purchase"
+                                                <a href="{{ route('pembelian.index') }}"
                                                     class="btn btn-secondary d-block w-100" id="btn-cancel"
                                                     disabled="">Cancel</a>
                                             </div>
@@ -494,8 +494,6 @@
 
 
         })
-
-
 
         diskon.on('change keyup', function() {
             hitungDiskon()
