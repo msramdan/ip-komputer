@@ -76,6 +76,10 @@ return [
             'penjualan_delete',
             'penjualan_detail',
         ],
+        'laporan' =>[
+            'laporan_pembelian_show',
+            'laporan_penjualan_show',
+        ],
     ],
 
     'models' => [

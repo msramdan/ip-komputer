@@ -73,7 +73,7 @@
             <span>Pembelian</span></a>
     </li>
     @endcanany
-    
+
     @canany(['penjualan_show'])
     <li class="nav-item {{ set_active('penjualan*') }}">
         <a class="nav-link" href="{{ route('penjualan.index') }}">
@@ -82,30 +82,30 @@
     </li>
     @endcanany
 
-    {{-- @canany(['laporan_show']) --}}
-        <li class="nav-item {{ set_active(['customer*', 'supplier*']) }}">
-            <a class="nav-link {{ request()->routeIs('customer*', 'supplier*') ? '' : 'collapsed' }}" href="#"
+    @canany(['laporan_pembelian_show','laporan_penjualan_show'])
+        <li class="nav-item {{ set_active(['laporan-pembelian*', 'laporan-penjualan*']) }}">
+            <a class="nav-link {{ request()->routeIs('laporan-pembelian*', 'laporan-penjualan*') ? '' : 'collapsed' }}" href="#"
                 data-toggle="collapse" data-target="#laporanToko" aria-expanded="true"
                 aria-controls="laporanToko">
                 <i class="fas fa-book"></i>
                 <span>Laporan</span>
             </a>
             <div id="laporanToko"
-                class="collapse {{ request()->routeIs('customer*', 'supplier*') ? 'show' : '' }}"
+                class="collapse {{ request()->routeIs('laporan-pembelian*', 'laporan-penjualan*') ? 'show' : '' }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    @can('customer_show')
-                        <a class="collapse-item {{ set_active(['customer*']) }}" href="{{ route('customer.index') }}">
+                    @can('laporan_pembelian_show')
+                        <a class="collapse-item {{ set_active(['laporan-pembelian*']) }}" href="{{ route('laporan-pembelian') }}">
                             Laporan Pembelian</a>
                     @endcan
-                    @can('supplier_show')
-                        <a class="collapse-item {{ set_active(['supplier*']) }}" href="{{ route('supplier.index') }}">
-                            Laporan Prnjualan</a>
+                    @can('laporan_penjualan_show')
+                        <a class="collapse-item {{ set_active(['laporan-penjualan*']) }}" href="{{ route('laporan-penjualan') }}">
+                            Laporan Penjualan</a>
                     @endcan
                 </div>
             </div>
         </li>
-    {{-- @endcanany --}}
+    @endcanany
 
 
 

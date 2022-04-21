@@ -26,6 +26,7 @@ use App\Http\Controllers\Frontend\LoginWebController;
 use App\Http\Controllers\Frontend\RegisterWebController;
 use App\Http\Controllers\Frontend\TentangKamiController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PenjualanController;
 
 // Route Front end
@@ -66,7 +67,8 @@ Route::prefix('panel')->middleware('auth')->group(function () {
         Route::get('/setting-toko', 'index')->name('setting-toko.index');
         Route::put('/setting-toko/update/{id}', 'update')->name('setting-toko.update');;
     });
-
+    Route::get('/laporan-pembelian', [LaporanController::class, 'laporan_pembelian'])->name('laporan-pembelian');
+    Route::get('/laporan-penjualan', [LaporanController::class, 'laporan_penjualan'])->name('laporan-penjualan');
 
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::resource('/pembelian', PembelianController::class)->except('show');

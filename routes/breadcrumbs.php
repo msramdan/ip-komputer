@@ -200,3 +200,11 @@ Breadcrumbs::for('user-edit', function (BreadcrumbTrail $trail, $user) {
     $trail->push($user->name, route('user.edit', $user));
 });
 // ============================================================================================================
+Breadcrumbs::for('laporan-pembelian', function (BreadcrumbTrail $trail) {
+    $trail->push('Laporan Pembelian', route('laporan-pembelian'));
+});
+
+Breadcrumbs::for('laporan-penjualan', function (BreadcrumbTrail $trail) {
+    $trail->push('Laporan Penjualan', route('laporan-penjualan'));
+});
+
