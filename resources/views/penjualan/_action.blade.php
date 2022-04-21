@@ -6,11 +6,10 @@
     @endcan
 
     @can('penjualan_update')
-            <a class="btn btn-md btn-outline-primary mb-1 updateData"
+            <a class="btn btn-md btn-primary mb-1 updateData"
             data-id_data="{{ $model->id }}"
             data-no_resi="{{ $model->no_resi }}">
             <i class="fas fa-edit"></i>
-            Update
         </a>
     @endcan
 
@@ -41,7 +40,7 @@ aria-hidden="true">
             <form action="">
                 <div class="form-group">
                     <label for="">No Resi</label>
-                    <input class="form-control @error('no_resi') is-invalid @enderror" id="no_resi" type="text" placeholder="Masukan No. Resi" name="no_resi">                
+                    <input class="form-control @error('no_resi') is-invalid @enderror" id="no_resi" type="text" placeholder="Masukan No. Resi" name="no_resi">
                 </div>
             </form>
         </div>
@@ -106,8 +105,8 @@ aria-hidden="true">
                                 </table>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -127,9 +126,9 @@ aria-hidden="true">
                                     </tbody>
                                 </table>
                             </div>
-                        </div>  
+                        </div>
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

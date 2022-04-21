@@ -16,62 +16,38 @@
         <div class="container">
             <div class="contact-page">
                 <div class="terms-conditions-page">
-                <div class="row">
-					<div class="col-md-12 terms-conditions">
-						<h2 class="heading-title">Tentang Kami</h2>
-						<div class="">
-							<h3>Lorem Ipsum</h3>
-							<ol>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. </li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							</ol>
-							<h3>Lorem Ipsum</h3>
-							<ol>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. </li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis
-									velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem
-									sed ultrices interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							</ol>
-							<h3>Changes to this agreement</h3>
-							<p>We reserve the right, at our sole discretion, to modify or replace these Terms and
-								Conditions by posting the updated terms on the Site. Your continued use of the Site
-								after any such changes constitutes your acceptance of the new Terms and Conditions. </p>
-							<h3>Contact Us</h3>
-							<p>If you have any questions about this Agreement, please contact us filling this <a
-									href="#" class='contact-form'>contact form</a></p>
-						</div>
-					</div>
-				</div>
-                </div> 
+                    <div class="row">
+                        <div class="col-md-12 terms-conditions">
+                            <h2 class="heading-title">Tentang Kami</h2>
+                            <div class="">
+                                <h3>Changes to this agreement</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book. It has
+                                    survived not only five centuries, but also the leap into electronic typesetting,
+                                    remaining essentially unchanged. It was popularised in the 1960s with the release of
+                                    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                                    publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                                <p>
+                                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
+                                    piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard
+                                    McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of
+                                    the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                                    the cites of the word in classical literature, discovered the undoubtable source. Lorem
+                                    Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
+                                    Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
+                                    theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,
+                                    "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div><!-- /.row -->
             <!-- ============================================== BRANDS CAROUSEL ============================================== -->
             <div id="brands-carousel" class="logo-slider wow fadeInUp">
 
-                
+
 
             </div>
         </div>

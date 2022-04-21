@@ -138,6 +138,10 @@
                         <a class="collapse-item {{ set_active(['setting-toko*']) }}"
                             href="{{ route('setting-toko.index') }}"> Setting Toko</a>
                     @endcan
+                    {{-- @can('toko_show') --}}
+                        <a class="collapse-item {{ set_active(['setting-toko*']) }}"
+                            href="{{ route('setting-toko.index') }}"> Cara Belanja</a>
+                    {{-- @endcan --}}
                 </div>
             </div>
         </li>
