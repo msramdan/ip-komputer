@@ -76,6 +76,13 @@ return [
             'penjualan_delete',
             'penjualan_detail',
         ],
+        'cara-belanja' =>[
+            'belanja_show',
+            'belanja_create',
+            'belanja_update',
+            'belanja_delete',
+        ],
+        
         'laporan' =>[
             'laporan_pembelian_show',
             'laporan_penjualan_show',

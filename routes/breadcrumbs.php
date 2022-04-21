@@ -134,6 +134,25 @@ Breadcrumbs::for('pesan-edit', function (BreadcrumbTrail $trail, $pesan) {
 
 
 // ============================================================================================================
+//cara_belanja
+Breadcrumbs::for('belanja_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data Cara Belanja', route('cara-belanja.index'));
+});
+//cara_belanja > Tambah
+Breadcrumbs::for('belanja-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('belanja_index');
+    $trail->push('Tambah Cara Belanja', route('cara-belanja.create'));
+});
+//cara_belanja > Edit
+Breadcrumbs::for('belanja-edit', function (BreadcrumbTrail $trail, $caraBelanja) {
+    $trail->parent('belanja_index');
+    $trail->push('Edit', route('cara-belanja.edit', $caraBelanja));
+    $trail->push($caraBelanja->title , route('cara-belanja.edit', $caraBelanja));
+});
+
+
+
+// ============================================================================================================
 //customer
 Breadcrumbs::for('customer_index', function (BreadcrumbTrail $trail) {
     $trail->push('Data customer', route('customer.index'));

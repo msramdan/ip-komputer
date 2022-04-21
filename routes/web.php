@@ -13,7 +13,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\Frontend\CaraBelanjaController;
+use App\Http\Controllers\CaraBelanjaController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
@@ -32,8 +32,9 @@ use App\Http\Controllers\PenjualanController;
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
-Route::get('/cara-belanja', [CaraBelanjaController::class, 'index'])->name('cara-belanja');
+Route::get('/cara-belanja', [App\Http\Controllers\Frontend\CaraBelanjController::class, 'index'])->name('cara-belanja');
 
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
@@ -74,5 +75,6 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/pembelian', PembelianController::class)->except('show');
     Route::put('update_status_bayar/{id}', [PembelianController::class, 'update_pembayaran'])->name('update_status_bayar');
     Route::resource('/penjualan', PenjualanController::class)->except('show');
+    Route::resource('/cara-belanja', CaraBelanjaController::class)->except('show');
 });
 
