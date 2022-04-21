@@ -24,6 +24,7 @@ use App\Http\Controllers\Frontend\DashboardCrontroller;
 use App\Http\Controllers\Frontend\KontakController;
 use App\Http\Controllers\Frontend\LoginWebController;
 use App\Http\Controllers\Frontend\RegisterWebController;
+use App\Http\Controllers\frontend\SettingAkunController;
 use App\Http\Controllers\Frontend\TentangKamiController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\LaporanController;
@@ -39,6 +40,7 @@ Route::get('/cara-belanja', [App\Http\Controllers\Frontend\CaraBelanjController:
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
+Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
 
 // Route Back end
 Route::get('/localization/{language}', [LocalizationController::class, 'switch'])->name('localization.switch');

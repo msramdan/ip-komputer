@@ -17,9 +17,15 @@
         <div class="container">
             <div class="sign-in-page">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-md-offset-3 create-new-account">
+                    <div class="col-md-6">
+                        <center>
+                            <img src="{{ asset('temp-front-end/assets/images/register.jpg') }}" alt="" width="100%">
+                        </center>
+
+                    </div>
+                    <div class="col-md-6 col-sm-6 create-new-account">
                         <h4 class="checkout-subtitle">
-                            <div class="alert alert-success">
+                            <div class="alert alert-info">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> Create a new account
                             </div>
                         </h4>

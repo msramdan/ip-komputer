@@ -16,7 +16,7 @@
         <div class="container">
             <div class="checkout-box faq-page">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<h2 class="heading-title">Cara Belanja</h2>
 						<div class="panel-group checkout-steps" id="accordion">
 							<!-- checkout-step-01  -->
@@ -43,20 +43,22 @@
 								</div><!-- row -->
 							</div>
 							@endforeach
-							
-							<!-- checkout-step-01  -->
-							
-
-	
-
 						</div><!-- /.checkout-steps -->
 					</div>
+
+                    <div class="col-md-6">
+                        <center>
+                            <img src="{{ asset('temp-front-end/assets/images/how.png') }}" alt="" width="80%">
+                        </center>
+					</div>
+
+
 				</div><!-- /.row -->
 			</div><!-- /.checkout-box -->
             <!-- ============================================== BRANDS CAROUSEL ============================================== -->
             <div id="brands-carousel" class="logo-slider wow fadeInUp">
 
-                
+
 
             </div>
         </div>

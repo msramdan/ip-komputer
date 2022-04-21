@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label class="info-title" for="nama">Nama <span>*</span></label>
                                     <input type="text" class="form-control"
-                                        id="nama" placeholder="Nama . . . " name="nama">
+                                        id="nama" placeholder="" name="nama" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -40,21 +40,21 @@
                                     <label class="info-title" for="email">Email
                                         <span>*</span></label>
                                     <input type="email" class="form-control unicase-form-control text-input"
-                                        id="email" placeholder="Email . . ." name="email">
+                                        id="email" placeholder="" name="email" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="info-title" for="judul">Judul / Subjek <span>*</span></label>
                                     <input type="text" class="form-control unicase-form-control text-input"
-                                        id="judul" placeholder="Judul" name="judul">
+                                        id="judul" placeholder="" name="judul" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="info-title" for="deskripsi">Deskripsi
                                         <span>*</span></label>
-                                    <textarea class="form-control unicase-form-control" id="deskripsi" name="deskripsi"></textarea>
+                                    <textarea required class="form-control unicase-form-control" id="deskripsi" name="deskripsi"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12 outer-bottom-small m-t-20">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="clearfix address">
                             <span class="contact-i"><i class="fa fa-map-marker"></i></span>
-                            <span class="contact-span">{{ $setting_toko->alamat }}</span>
+                            <span class="contact-span" style="text-align: justify">{{ $setting_toko->alamat }}</span>
                         </div>
                         <div class="clearfix phone-no">
                             <span class="contact-i"><i class="fa fa-mobile"></i></span>

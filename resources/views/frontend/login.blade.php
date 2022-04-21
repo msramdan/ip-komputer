@@ -18,28 +18,35 @@
             <div class="sign-in-page">
                 <div class="row">
                     <!-- Sign-in -->
-                    <div class="col-md-6 col-md-offset-3 col-sm-6 sign-in">
+                    <div class="col-md-6">
+                        <center>
+                            <img src="{{ asset('temp-front-end/assets/images/login.jpg') }}" alt="" width="80%">
+                        </center>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-sm-6 sign-in">
                         <h4 class="checkout-subtitle">
-                            <div class="alert alert-success">
+                            <div class="alert alert-info">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i> Login User
                             </div>
                         </h4>
                         <form class="register-form outer-top-xs" role="form">
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-                                <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                    outline-width: 0px;" type="email" class="form-control unicase-form-control text-input"
+                                <input type="email" class="form-control unicase-form-control text-input"
                                     id="exampleInputEmail1">
                             </div>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
-                                <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                        outline-width: 0px;" type="password"
+                                <input type="password"
                                     class="form-control unicase-form-control text-input" id="exampleInputPassword1">
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
                         </form>
                     </div>
+
                     <!-- Sign-in -->
                 </div><!-- /.sigin-in-->
             </div><!-- /.container -->
