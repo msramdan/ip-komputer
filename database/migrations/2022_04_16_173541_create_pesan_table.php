@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('judul');
-            $table->string('telpon');
+            $table->string('telpon')->nullable();
+            $table->string('email');
             $table->text('deskripsi');
             $table->timestamps();
         });

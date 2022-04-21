@@ -26,47 +26,42 @@
                         <div class="col-md-12 contact-title">
                             <h4>Contact Form</h4>
                         </div>
-                        <div class="col-md-4 ">
-                            <form class="register-form" role="form">
+                        <form class="register-form" role="form" method="POST" action="{{ route('kontak.store') }}">
+                            @csrf
+                            <div class="col-md-4 ">
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputName">Your Name <span>*</span></label>
-                                    <input type="email" class="form-control unicase-form-control text-input"
-                                        id="exampleInputName" placeholder="">
+                                    <label class="info-title" for="nama">Nama <span>*</span></label>
+                                    <input type="text" class="form-control"
+                                        id="nama" placeholder="Nama . . . " name="nama">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <form class="register-form" role="form">
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputEmail1">Email Address
+                                    <label class="info-title" for="email">Email
                                         <span>*</span></label>
                                     <input type="email" class="form-control unicase-form-control text-input"
-                                        id="exampleInputEmail1" placeholder="">
+                                        id="email" placeholder="Email . . ." name="email">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <form class="register-form" role="form">
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputTitle">Title <span>*</span></label>
-                                    <input type="email" class="form-control unicase-form-control text-input"
-                                        id="exampleInputTitle" placeholder="Title">
+                                    <label class="info-title" for="judul">Judul / Subjek <span>*</span></label>
+                                    <input type="text" class="form-control unicase-form-control text-input"
+                                        id="judul" placeholder="Judul" name="judul">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-12">
-                            <form class="register-form" role="form">
+                            </div>
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputComments">Your Comments
+                                    <label class="info-title" for="deskripsi">Deskripsi
                                         <span>*</span></label>
-                                    <textarea class="form-control unicase-form-control" id="exampleInputComments"></textarea>
+                                    <textarea class="form-control unicase-form-control" id="deskripsi" name="deskripsi"></textarea>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-12 outer-bottom-small m-t-20">
-                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Send
-                                Message</button>
-                        </div>
+                            </div>
+                            <div class="col-md-12 outer-bottom-small m-t-20">
+                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Kirim
+                                    Pesan</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-md-3 contact-info">
                         <div class="contact-title">
@@ -74,15 +69,15 @@
                         </div>
                         <div class="clearfix address">
                             <span class="contact-i"><i class="fa fa-map-marker"></i></span>
-                            <span class="contact-span">ThemesGround, 789 Main rd, Anytown, CA 12345 USA</span>
+                            <span class="contact-span">{{ $setting_toko->alamat }}</span>
                         </div>
                         <div class="clearfix phone-no">
                             <span class="contact-i"><i class="fa fa-mobile"></i></span>
-                            <span class="contact-span">+(888) 123-4567<br>+(888) 456-7890</span>
+                            <span class="contact-span">{{ $setting_toko->telpon }}</span>
                         </div>
                         <div class="clearfix email">
                             <span class="contact-i"><i class="fa fa-envelope"></i></span>
-                            <span class="contact-span"><a href="#">flipmart@themesground.com</a></span>
+                            <span class="contact-span">{{ $setting_toko->email }}</span>
                         </div>
                     </div>
                 </div><!-- /.contact-page -->

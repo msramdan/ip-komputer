@@ -7,9 +7,9 @@
             <div class="col-md-12">
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                        @can('pesan_create')
+                        {{-- @can('pesan_create')
                             <a href="{{ route('pesan.create') }}" class="btn btn-md btn-success mb-3">TAMBAH</a>
-                        @endcan
+                        @endcan --}}
 
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -18,7 +18,7 @@
                                         <th>#</th>
                                         <th>Nama</th>
                                         <th>Judul/Sub</th>
-                                        <th>Telpon</th>
+                                        <th>Email</th>
                                         <th>Deskripsi</th>
                                         @canany(['pesan_update', 'pesan_delete'])
                                             <th>Action</th>
@@ -56,8 +56,8 @@
                 name: 'judul'
             },
             {
-                data: 'telpon',
-                name: 'telpon'
+                data: 'email',
+                name: 'email'
             },
             {
                 data: 'deskripsi',

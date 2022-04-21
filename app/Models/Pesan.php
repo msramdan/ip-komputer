@@ -10,5 +10,5 @@ class Pesan extends Model
     use HasFactory;
 
     protected $table = 'pesan';
-    protected $fillable = ['nama', 'judul', 'telpon', 'deskripsi'];
+    protected $fillable = ['nama', 'judul', 'telpon', 'deskripsi', 'email'];
 }
