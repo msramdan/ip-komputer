@@ -17,4 +17,9 @@ class PembelianDetail extends Model
         'sub_total'
     ];
 
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class);
+    }
+
 }
