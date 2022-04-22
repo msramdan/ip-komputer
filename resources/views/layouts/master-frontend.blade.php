@@ -18,6 +18,7 @@
     @include('layouts._frontEnd.footer')
     {{-- script --}}
     @include('layouts._frontEnd.script')
+    @include('sweetalert::alert')
 </body>
 
 </html>

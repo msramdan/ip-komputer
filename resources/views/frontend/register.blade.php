@@ -30,37 +30,43 @@
                             </div>
                         </h4>
 
-                        <form class="register-form outer-top-xs" role="form">
+                        <form class="register-form outer-top-xs" role="form" method="POST" action="{{ route('register-user') }}">
+                            @csrf
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
+                                <label class="info-title" for="email">Email<span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail2">
+                                outline-width: 0px;" type="email" name="email" class="form-control unicase-form-control text-input "
+                                    id="email">
+                                    @error('email')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
+                                <label class="info-title" for="nama">Nama Lengkap <span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                outline-width: 0px;" type="text" name="nama" class="form-control unicase-form-control text-input"
+                                    id="nama">
+                                    @error('nama')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
+                                <label class="info-title" for="telpon">Telpon <span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                outline-width: 0px;" type="text" name="telpon" class="form-control unicase-form-control text-input"
+                                    id="telpon">
+                                    @error('telpon')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>
+                                <label class="info-title" for="password">Password <span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
-                            </div>
-                            <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Confirm Password
-                                    <span>*</span></label>
-                                <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="email" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1">
+                                outline-width: 0px;" type="password" name="password" class="form-control unicase-form-control text-input"
+                                    id="password">
+                                    @error('password')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
                         </form>

@@ -5,25 +5,38 @@
 
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('auth-web') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
-                        <li><a href="{{ route('auth-web') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                        <li><a href="{{ route('signin-web') }}"><i class="fa fa-wpforms" aria-hidden="true"></i> Register</a></li>
-                    </ul>
-                </div>
-                <div class="cnt-block">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small">
-                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Muhammad Saeful Ramdan </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ route('setting-akun') }}">Akun Profile</a></li>
-                                <li><a href="#">Pembelian</a></li>
-                                <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
-                            </ul>
-                        </li>
+
+
+
+                        @if (Session::get('login-customer'))
+                            <li><a href="{{ route('signout-user') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    Logout</a></li>
+                        @else
+                            <li><a href="{{ route('auth-web') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    Login</a></li>
+                            <li><a href="{{ route('signin-web') }}"><i class="fa fa-wpforms" aria-hidden="true"></i>
+                                    Register</a></li>
+                        @endif
+
                     </ul>
                 </div>
 
-
+                @if (Session::get('login-customer'))
+                    <div class="cnt-block">
+                        <ul class="list-unstyled list-inline">
+                            <li class="dropdown dropdown-small">
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span
+                                        class="value">{{ Session::get('name-customer') }} </span><b
+                                        class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('setting-akun') }}">Akun Profile</a></li>
+                                    <li><a href="#">Pembelian</a></li>
+                                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -34,7 +47,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <div class="logo">
                         <a href="home.html">
-                            <img src="{{ asset('temp-front-end/assets/images/logo.png') }}" alt="">
+                            <img src="{{ asset('temp-front-end/assets/images/logo.png') }}" alt=""
+                                style="width: 90%;">
                         </a>
                     </div>
                 </div>
@@ -49,61 +63,66 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
-                    <div class="dropdown dropdown-cart">
-                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
-                            <div class="items-cart-inner">
-                                <div class="basket">
-                                    <i class="glyphicon glyphicon-shopping-cart"></i>
-                                </div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket">
-                                    <span class="lbl">cart -</span>
-                                    <span class="total-price">
-                                        <span class="sign">$</span><span class="value">600.00</span>
-                                    </span>
-                                </div>
+                @if (Session::get('login-customer'))
+                    <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
+                        <div class="dropdown dropdown-cart">
+                            <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+                                <div class="items-cart-inner">
+                                    <div class="basket">
+                                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                                    </div>
+                                    <div class="basket-item-count"><span class="count">2</span></div>
+                                    <div class="total-price-basket">
+                                        <span class="lbl">cart -</span>
+                                        <span class="total-price">
+                                            <span class="sign">$</span><span
+                                                class="value">600.00</span>
+                                        </span>
+                                    </div>
 
 
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image">
-                                                <a href="detail.html"><img
-                                                        src="{{ asset('temp-front-end/assets/images/cart.jpg') }}"
-                                                        alt=""></a>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="cart-item product-summary">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="image">
+                                                    <a href="detail.html"><img
+                                                            src="{{ asset('temp-front-end/assets/images/cart.jpg') }}"
+                                                            alt=""></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7">
+
+                                                <h3 class="name"><a href="index.php?page-detail">Simple
+                                                        Product</a></h3>
+                                                <div class="price">$600.00</div>
+                                            </div>
+                                            <div class="col-xs-1 action">
+                                                <a href="#"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </div>
-                                        <div class="col-xs-7">
-
-                                            <h3 class="name"><a href="index.php?page-detail">Simple
-                                                    Product</a></h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <hr>
-                                <div class="clearfix cart-total">
-                                    <div class="pull-right">
-                                        <span class="text">Sub Total :</span><span
-                                            class='price'>$600.00</span>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html"
-                                        class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
-                                </div>
-                            </li>
-                        </ul>
+                                    <hr>
+                                    <div class="clearfix cart-total">
+                                        <div class="pull-right">
+                                            <span class="text">Sub Total :</span><span
+                                                class='price'>$600.00</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <a href="checkout.html"
+                                            class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endif
+
+
             </div>
 
         </div>

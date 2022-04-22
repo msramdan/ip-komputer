@@ -37,11 +37,14 @@ Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
 Route::get('/cara-belanja', [App\Http\Controllers\Frontend\CaraBelanjController::class, 'index'])->name('cara-belanja');
-
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
+
+Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');;
+Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
+Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');;
 
 // Route Back end
 Route::get('/localization/{language}', [LocalizationController::class, 'switch'])->name('localization.switch');
