@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <center>
-                            <img src="{{ asset('temp-front-end/assets/images/register.jpg') }}" alt="" width="100%">
+                            <img src="{{ asset('temp-front-end/assets/images/register.webp') }}" alt="" width="100%">
                         </center>
 
                     </div>

@@ -84,7 +84,6 @@ class CustomerAlamatController extends Controller
     {
 
         $alamat = CustomerAlamat::findOrFail($id);
-
         $alamat->update([
             'customer_id'     => $request->customer_id,
             'provinsi_id'     => $request->provinsi_id,

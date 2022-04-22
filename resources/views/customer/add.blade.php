@@ -35,6 +35,7 @@
                                 <div class="mb-3">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <select class="form-control @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin">
+                                        <option value="">-- Pilih --</option>
                                       <option value="Laki-laki">Laki-laki</option>
                                       <option value="Perempuan">Perempuan</option>
                                     </select>
@@ -43,7 +44,7 @@
                                     @enderror
                                 </div>
 
-                                
+
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1">Email</label>

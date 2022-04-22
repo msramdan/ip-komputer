@@ -41,7 +41,8 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
-
+Route::get('/daftar-alamat', [SettingAkunController::class, 'daftarAlamat'])->name('daftar-alamat');
+Route::put('update-user/{id}', [SettingAkunController::class, 'update'])->name('update-user');
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');;
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
 Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');;
@@ -72,7 +73,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/supplier', SupplierController::class)->except('show');
     Route::controller(SettingTokoController::class)->group(function () {
         Route::get('/setting-toko', 'index')->name('setting-toko.index');
-        Route::put('/setting-toko/update/{id}', 'update')->name('setting-toko.update');;
+        Route::put('/setting-toko/update/{id}', 'update')->name('setting-toko.update');
     });
     Route::get('/laporan-pembelian', [LaporanController::class, 'laporan_pembelian'])->name('laporan-pembelian');
     Route::get('/laporan-penjualan', [LaporanController::class, 'laporan_penjualan'])->name('laporan-penjualan');

@@ -18,14 +18,16 @@
             <div class="row">
                 <div class="col-md-3 sidebar">
                     <div class="side-menu animate-dropdown outer-bottom-xs">
-                        <div class="head" style="background-color: #5A98BF; border:white"><i class="icon fa fa-align-justify fa-fw"></i> <span style="color: white"></span> </div>
+                        <div class="head" style="background-color: #5A98BF; border:white"><i
+                                class="icon fa fa-align-justify fa-fw"></i> <span style="color: white">Data Akun</span>
+                        </div>
                         <nav class="yamm megamenu-horizontal" role="navigation">
                             <ul class="nav">
-                                <li class="dropdown menu-item">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE</a>
+                                <li class="menu-item">
+                                    <a href="{{ route('setting-akun') }}">PROFILE</a>
                                 </li>
-                                <li class="dropdown menu-item">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">DAFTAR ALAMAT</a>
+                                <li class=" menu-item">
+                                    <a href="{{ route('daftar-alamat') }}">DAFTAR ALAMAT</a>
                                 </li>
                             </ul>
                         </nav>
@@ -34,47 +36,68 @@
                 <div class="col-md-9">
                     <div class="search-result-container ">
                         <div id="myTabContent" class="tab-content category-list">
-                            <form>
+                            <form method="POST" action="{{ route('update-user', $customer->id) }}">
+                                @csrf
+                                @method('PUT')
                                 <div class="form-group">
-                                  <label for="exampleFormControlInput1">Email address</label>
-                                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    <label for="nama">Nama Lengkap</label>
+                                    <input type="text" class="form-control @error('bana') is-invalid @enderror" id="nama"
+                                        name="nama" placeholder="Nama Lengkap"
+                                        value="{{ old('nama') ? old('nama') : $customer->nama }}">
+                                    @error('nama')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleFormControlTextarea1">Example textarea</label>
-                                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="telpon">No Telpon</label>
+                                    <input type="text" class="form-control @error('telpon') is-invalid @enderror"
+                                        id="telpon" name="telpon" placeholder="No Telpon"
+                                        value="{{ old('telpon') ? old('telpon') : $customer->telpon }}">
+                                    @error('telpon')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                  </div>
-                              </form>
-                            {{-- <div class="tab-pane active " id="grid-container">
-                                <div class="category-product">
-                                    <div class="panel panel-default checkout-step-02">
-                                        <div class="panel-heading">
-                                          <h4 class="unicase-checkout-title">
-                                            <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseTwo">
-                                              Billing Information
-                                            </a>
-                                          </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse">
-                                          <div class="panel-body">
-                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                          </div>
-                                        </div>
-                                      </div>
-
+                                    <label for="email">Email</label>
+                                    <input class="form-control @error('email') is-invalid @enderror" id="
+                                                                    exampleFormControlInput1" type="email"
+                                        value="{{ old('email') ? old('email') : $customer->email }}" placeholder="Email"
+                                        name="email" autocomplete="off">
+                                    @error('email')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                            </div> --}}
+                                <div class="form-group">
+                                    <label for="tanggal_lahir">Tangal Lahir</label>
+                                    <input class="form-control @error('tanggal_lahir') is-invalid @enderror" id="
+                                            tanggal_lahir" type="date"
+                                        value="{{ old('tanggal_lahir') ? old('tanggal_lahir') : $customer->tanggal_lahir }}"
+                                        placeholder="Tanggal Lahir" name="tanggal_lahir" autocomplete="off">
+                                    @error('tanggal_lahir')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <select class="form-control @error('jenis_kelamin') is-invalid @enderror"
+                                        name="jenis_kelamin">
+                                        <option value="">-- Pilih --</option>
+                                        <option value="Laki Laki" {{ old('jenis_kelamin') == 'Laki Laki' ? 'selected' : '' }} {{ $customer->jenis_kelamin == 'Laki Laki' ? 'selected' : '' }}>Laki Laki</option>
+                                        <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }} {{ $customer->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                    </select>
+                                    @error('jenis_kelamin')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password">
+                                        <span style="color: red">*kosongkan jika tidak ingin merubah password</span>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-success"><i
+                                        class="glyphicon glyphicon-floppy-save"></i> UPDATE</button>
+                            </form>
                         </div>
                         <div class="clearfix">
                         </div>
