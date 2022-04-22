@@ -16,6 +16,6 @@ class ProdukSeeder extends Seeder
      */
     public function run()
     {
-        Produk::factory()->count(3)->create();
+        Produk::factory()->count(50)->create();
     }
 }

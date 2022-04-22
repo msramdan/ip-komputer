@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label class="info-title" for="email">Email<span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="email" name="email" class="form-control unicase-form-control text-input "
+                                outline-width: 0px;" type="email" name="email" autocomplete="off"  value="{{ old('email') }}" class="form-control unicase-form-control text-input "
                                     id="email">
                                     @error('email')
                                         <span style="color: red;">{{ $message }}</span>
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label class="info-title" for="nama">Nama Lengkap <span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="text" name="nama" class="form-control unicase-form-control text-input"
+                                outline-width: 0px;" type="text" name="nama" autocomplete="off"   value="{{ old('nama') }}" class="form-control unicase-form-control text-input"
                                     id="nama">
                                     @error('nama')
                                         <span style="color: red;">{{ $message }}</span>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="info-title" for="telpon">Telpon <span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="text" name="telpon" class="form-control unicase-form-control text-input"
+                                outline-width: 0px;" type="text" name="telpon" autocomplete="off"   value="{{ old('telpon') }}" class="form-control unicase-form-control text-input"
                                     id="telpon">
                                     @error('telpon')
                                         <span style="color: red;">{{ $message }}</span>
@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label class="info-title" for="password">Password <span>*</span></label>
                                 <input style="box-shadow: 0 0 5pt 2pt #D3D3D3;
-                                outline-width: 0px;" type="password" name="password" class="form-control unicase-form-control text-input"
+                                outline-width: 0px;" type="password" name="password" autocomplete="off"  class="form-control unicase-form-control text-input"
                                     id="password">
                                     @error('password')
                                         <span style="color: red;">{{ $message }}</span>

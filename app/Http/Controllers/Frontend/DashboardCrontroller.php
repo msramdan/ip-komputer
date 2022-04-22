@@ -16,7 +16,7 @@ class DashboardCrontroller extends Controller
     {
         $Kategori = Kategori::all();
         // create produk paginate
-        $produk = Produk::latest()->paginate(3);
+        $produk = Produk::latest()->paginate(9);
         // $produk = Produk::;
         return view('frontend.index',[
             'kategori' => $Kategori,

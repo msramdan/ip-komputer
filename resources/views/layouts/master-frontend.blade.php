@@ -7,6 +7,7 @@
     <title>Toko Online</title>
     {{-- style --}}
     @include('layouts._frontEnd.style')
+    @stack('css')
 
 </head>
 
