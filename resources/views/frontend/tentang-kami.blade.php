@@ -6,7 +6,7 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="/">Home</a></li>
-                    <li class='active'>tentang-kami</li>
+                    <li class='active'>Tentang Kami</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
         </div><!-- /.container -->

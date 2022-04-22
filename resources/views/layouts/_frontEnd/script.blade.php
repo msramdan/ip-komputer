@@ -6,6 +6,7 @@
 <script src="{{ asset('temp-front-end/assets/js/jquery.easing-1.3.min.js') }}"></script>
 <script src="{{ asset('temp-front-end/assets/js/bootstrap-slider.min.js') }}"></script>
 <script src="{{ asset('temp-front-end/assets/js/jquery.rateit.min.js') }}"></script>
+<script src="{{ asset('temp-front-end/assets/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('temp-front-end/assets/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('temp-front-end/assets/js/wow.min.js') }}"></script>
 <script src="{{ asset('temp-front-end/assets/js/scripts.js') }}"></script>

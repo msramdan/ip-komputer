@@ -32,6 +32,7 @@ use App\Http\Controllers\PenjualanController;
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
+Route::get('/produk/{id}/{slug}', [DashboardCrontroller::class, 'DetailProduk'])->name('detail-produk');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
