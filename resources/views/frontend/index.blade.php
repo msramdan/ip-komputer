@@ -52,21 +52,21 @@
                                                     <div class="product">
                                                         <div class="product-image">
                                                             <div class="image">
-                                                                <a
-                                                                    href="{{ route('detail-produk',['id' => $row->id,'slug' =>$row->slug ]) }}"><img
-                                                                        src="{{ asset('temp-front-end/assets/images/products/p1.jpg') }}"
-                                                                        alt=""></a>
+                                                                <a href="{{ route('detail-produk',['id' => $row->id,'slug' =>$row->slug ]) }}">
+                                                                    @php
+                                                                        $thumbnail = DB::table('produk_photo')->where('produk_id', $row->id)->first();
+                                                                    @endphp
+                                                                <img src="{{ Storage::url('public/produk/' . $thumbnail->photo) }}" alt=""></a>
                                                             </div>
                                                             <div class="tag new"><span>new</span></div>
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="{{ route('detail-produk',['id' => $row->id,'slug' =>$row->slug ]) }}">{{ $row->nama }}</a>
+                                                                    href="{{ route('detail-produk',['id' => $row->id,'slug' =>$row->slug ]) }}">{{ $row->kode_produk }} - {{ $row->nama }}</a>
                                                             </h3>
-                                                            <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
                                                             <div class="product-price">
-                                                                <span class="price">{{ $row->harga }}</span>
+                                                                <span class="price"> @currency($row->harga)</span>
                                                             </div>
                                                         </div>
                                                         <div class="cart clearfix animate-effect">

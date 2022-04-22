@@ -22,7 +22,7 @@
                                             <div class="media">
                                                 <div class="mr-3"><i class="icofont-briefcase icofont-3x"></i>
                                                 </div>
-                                                <div class="media-body" style="height: 150px; text-align:justify">
+                                                <div class="media-body" style="min-height: 150px; text-align:justify">
                                                     <h6 class="mb-1"> <b>{{ $row->nama_provinsi }} -
                                                             {{ $row->nama_kota }}</b> </h6>
                                                     <p style="text-align: justify">{{ $row->alamat_lengkap }}

@@ -75,6 +75,19 @@ class SettingAkunController extends Controller
         echo json_encode($params);
     }
 
+    public function destroy_alamat($id)
+    {
+        $customerAlamat = CustomerAlamat::findOrFail($id);
+        $customerAlamat->delete();
+        if ($customerAlamat) {
+            Alert::toast('Data berhasil dihapus', 'success');
+            return redirect()->back();
+        } else {
+            Alert::toast('Data gagal dihapus', 'error');
+            return redirect()->back();
+        }
+    }
+
     public function update(Request $request, $id)
     {
         $validator = Validator::make(

@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <div class="logo">
-                        <a href="home.html">
+                        <a href="{{ route('dashboard') }}">
                             <img src="{{ asset('temp-front-end/assets/images/logo.png') }}" alt=""
                                 style="width: 90%;">
                         </a>

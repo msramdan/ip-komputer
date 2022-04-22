@@ -39,13 +39,15 @@
                             <div class="tab-pane active " id="grid-container">
                                 <div class="category-product">
                                     <div class="row">
+                                        <a href="javascript:void(0)" class="btn btn-md btn-primary mb-1" id="createNewCustomer" style="float: left;margin:10px"> <i class="fa fa-plus"></i>
+                                            TAMBAH ALAMAT</a>
 
                                         @foreach ($alamat as $row)
                                             <div class="col-md-6">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading"> <b>{{ $row->nama_provinsi }} -
                                                             {{ $row->nama_kota }}</b> </div>
-                                                    <div class="panel-body" style="height: 100px; text-align:justify">
+                                                    <div class="panel-body" style="min-height: 100px; text-align:justify">
                                                         {{ $row->alamat_lengkap }}</div>
                                                     <div class="panel-footer">
                                                         <a class="btn btn-md btn-primary mb-1 updateData" style="float: left; margin-right:5px"
@@ -57,7 +59,7 @@
                                                                 class="fa fa-edit"></i>
                                                             EDIT</a>
 
-                                                        <form action="{{ route('alamat.destroy', $row->id) }}"
+                                                        <form action="{{ route('destroy-alamat', $row->id) }}"
                                                             method="post" class="d-inline"
                                                             onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                                             @csrf
