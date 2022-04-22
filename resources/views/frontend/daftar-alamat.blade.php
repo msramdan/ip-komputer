@@ -34,7 +34,49 @@
                     </div>
                 </div>
                 <div class="col-md-9">
+                    <div class="search-result-container ">
+                        <div id="myTabContent" class="tab-content category-list">
+                            <div class="tab-pane active " id="grid-container">
+                                <div class="category-product">
+                                    <div class="row">
 
+                                        @foreach ($alamat as $row)
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"> <b>{{ $row->nama_provinsi }} -
+                                                            {{ $row->nama_kota }}</b> </div>
+                                                    <div class="panel-body" style="height: 100px; text-align:justify">
+                                                        {{ $row->alamat_lengkap }}</div>
+                                                    <div class="panel-footer">
+                                                        <a class="btn btn-md btn-primary mb-1 updateData" style="float: left; margin-right:5px"
+                                                            data-id_data="{{ $row->id }}"
+                                                            data-customer_id="{{ $row->customer_id }}"
+                                                            data-alamat_lengkap="{{ $row->alamat_lengkap }}"
+                                                            data-provinsi_id="{{ $row->provinsi_id }}"
+                                                            data-kota_id="{{ $row->kota_id }}"><i
+                                                                class="fa fa-edit"></i>
+                                                            EDIT</a>
+
+                                                        <form action="{{ route('alamat.destroy', $row->id) }}"
+                                                            method="post" class="d-inline"
+                                                            onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger">
+                                                                <i class="fa fa-trash"></i> DELETE
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
