@@ -48,7 +48,7 @@
 
                     <div class="col-md-6">
                         <center>
-                            <img src="{{ asset('temp-front-end/assets/images/how.png') }}" alt="" width="80%">
+                            <img src="{{ asset('temp-front-end/assets/images/how.webp') }}" alt="" width="80%">
                         </center>
 					</div>
 

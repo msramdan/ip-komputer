@@ -20,7 +20,7 @@
                     <!-- Sign-in -->
                     <div class="col-md-6">
                         <center>
-                            <img src="{{ asset('temp-front-end/assets/images/login.jpg') }}" alt="" width="80%">
+                            <img src="{{ asset('temp-front-end/assets/images/login.webp') }}" alt="" width="80%">
                         </center>
                     </div>
                     <div class="col-md-6 col-sm-6 sign-in">

@@ -140,7 +140,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+        // dd($request->all());
         $validator = Validator::make(
+
             $request->all(),
             [
                 'nama' => 'required|string|max:100',
@@ -156,7 +158,7 @@ class CustomerController extends Controller
         }
         DB::beginTransaction();
         try {
-            $custommer = Customer::findOrFail($customer->id);
+            $customer = Customer::findOrFail($customer->id);
             $customer->update([
                 'nama' => $request->nama,
                 'tanggal_lahir' => $request->tanggal_lahir,
@@ -164,7 +166,7 @@ class CustomerController extends Controller
                 'telpon' => $request->telpon,
                 'email' => $request->email,
             ]);
-            if ($custommer) {
+            if ($customer) {
                 Alert::toast('Data berhasil diupdate', 'success');
                 return redirect()->route('customer.index');
             }

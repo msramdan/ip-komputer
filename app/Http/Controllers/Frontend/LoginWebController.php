@@ -66,6 +66,7 @@ class LoginWebController extends Controller
         $data = Customer::where('email', $email)->first();
         if ($data) {
             if (Hash::check($password, $data->password)) {
+                Session::put('id-customer', $data->id);
                 Session::put('name-customer', $data->nama);
                 Session::put('email-customer', $data->email);
                 Session::put('login-customer', TRUE);
@@ -83,6 +84,7 @@ class LoginWebController extends Controller
 
     public function logout(Request $request)
     {
+        $request->session()->forget('id-customer');
         $request->session()->forget('name-customer');
         $request->session()->forget('email-customer');
         $request->session()->forget('login-customer');
