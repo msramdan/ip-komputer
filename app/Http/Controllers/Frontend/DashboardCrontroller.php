@@ -15,7 +15,9 @@ class DashboardCrontroller extends Controller
     public function index(Request $request)
     {
         $Kategori = Kategori::all();
-        $produk = Produk::all();
+        // create produk paginate
+        $produk = Produk::latest()->paginate(3);
+        // $produk = Produk::;
         return view('frontend.index',[
             'kategori' => $Kategori,
             'produk' => $produk

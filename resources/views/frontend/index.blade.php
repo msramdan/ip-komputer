@@ -101,16 +101,25 @@
                             </div>
                             <div class="col col-sm-6 col-md-4 text-right">
                                 <div class="pagination-container">
-                                    <ul class="list-inline list-unstyled">
-                                        <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a>
-                                        </li>
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a>
-                                        </li>
-                                    </ul>
+                                    @if ($produk->hasPages())
+                                        @if ($produk->lastPage() > 1)
+                                            <ul class="list-inline list-unstyled">
+                                                <li class="prev">
+                                                    <a href="{{ $produk->url(1) }}"><i class="fa fa-angle-left"></i></a>
+                                                </li>
+                                                @for ($i = 1; $i <= $produk->lastPage(); $i++)
+                                                    <li class="{{ ($produk->currentPage() == $i) ? ' active' : '' }}">
+                                                        <a href="{{ $produk->url($i) }}">{{ $i }}</a>
+                                                    </li>
+                                                @endfor
+                                                <li class="next">
+                                                    <a href="{{ $produk->url($produk->currentPage()+1) }}">
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -180,16 +189,25 @@
 
                             <div class="text-right">
                                 <div class="pagination-container">
-                                    <ul class="list-inline list-unstyled">
-                                        <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a>
-                                        </li>
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a>
-                                        </li>
-                                    </ul>
+                                    @if ($produk->hasPages())
+                                        @if ($produk->lastPage() > 1)
+                                            <ul class="list-inline list-unstyled">
+                                                <li class="prev">
+                                                    <a href="{{ $produk->url(1) }}"><i class="fa fa-angle-left"></i></a>
+                                                </li>
+                                                @for ($i = 1; $i <= $produk->lastPage(); $i++)
+                                                    <li class="{{ ($produk->currentPage() == $i) ? ' active' : '' }}">
+                                                        <a href="{{ $produk->url($i) }}">{{ $i }}</a>
+                                                    </li>
+                                                @endfor
+                                                <li class="next">
+                                                    <a href="{{ $produk->url($produk->currentPage()+1) }}">
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                         </div>

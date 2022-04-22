@@ -39,11 +39,7 @@ class KontakController extends Controller
             'deskripsi'   => $request->deskripsi,
         ]);
         if ($pesan) {
-            Alert::toast('Pesan berhasil dikirim', 'success');
-            return redirect()->route('kontak');
-        } else {
-            Alert::toast('Pesan gagal dikirim', 'error');
-            return redirect()->route('kontak');
+            return redirect()->route('kontak')->with('success', 'Terima kasih telah menghubungi kami. Kami akan segera menghubungi anda.');
         }
     }
 }
