@@ -41,8 +41,13 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
+<<<<<<< HEAD
+Route::get('/pembelian', [App\Http\Controllers\Frontend\PembelianController::class, 'index'])->name('pembelian');
+
+=======
 Route::get('/daftar-alamat', [SettingAkunController::class, 'daftarAlamat'])->name('daftar-alamat');
 Route::put('update-user/{id}', [SettingAkunController::class, 'update'])->name('update-user');
+>>>>>>> 9aa0ddadcf54dcdf85e174e5fe8c024c79987ea8
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');;
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
 Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');;
