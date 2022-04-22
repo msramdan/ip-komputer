@@ -41,6 +41,7 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
+Route::get('/pembelian', [App\Http\Controllers\Frontend\PembelianController::class, 'index'])->name('pembelian');
 
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');;
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;

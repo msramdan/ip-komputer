@@ -30,7 +30,7 @@
                                         class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('setting-akun') }}">Akun Profile</a></li>
-                                    <li><a href="#">Pembelian</a></li>
+                                    <li><a href="{{ route('pembelian') }}">Pembelian</a></li>
                                     <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
                                 </ul>
                             </li>
