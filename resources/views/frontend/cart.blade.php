@@ -88,7 +88,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                                        <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                                                     </div>
                                                 </form>
                                             </td>

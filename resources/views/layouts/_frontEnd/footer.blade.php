@@ -7,6 +7,10 @@
                         <h4 class="module-title">Contact Us</h4>
                     </div>
 
+                    @php
+                        $setting_toko = DB::table('setting_toko')->first()
+                    @endphp
+
                     <div class="module-body">
                         <ul class="toggle-footer" style="">
                             <li class="media">
@@ -16,7 +20,7 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
+                                    <p style="text-align: justify">{{ $setting_toko->alamat }}</p>
                                 </div>
                             </li>
 
@@ -27,7 +31,7 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <p>+(888) 123-4567<br>+(888) 456-7890</p>
+                                    <p>{{ $setting_toko->telpon }}</p>
                                 </div>
                             </li>
 
@@ -38,7 +42,7 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <span><a href="#">flipmart@themesground.com</a></span>
+                                    <span><a href="#">{{ $setting_toko->email }}</a></span>
                                 </div>
                             </li>
 
@@ -53,10 +57,11 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="Contact us">Sale</a></li>
-                            <li><a href="#" title="About us">About Us</a></li>
-                            <li><a href="#" title="faq">Kontak</a></li>
-                            <li><a href="#" title="Popular Searches">Cara Belanja</a></li>
+                            <li class="first"><a href="{{ route('dashboard') }}" title="Contact us">Sale</a>
+                            </li>
+                            <li><a href="{{ route('tentang-kami') }}" title="About us">About Us</a></li>
+                            <li><a href="{{ route('cara-belanja') }}" title="Popular Searches">Cara Belanja</a></li>
+                            <li><a href="{{ route('kontak') }}" title="faq">Kontak</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,8 +72,10 @@
                     </div>
 
                     <div class="module-body">
-                        <p><b style="color: white">Senin - Jumat : <span class="badge badge-secondary"> 07:00 - 21:00 </span> </b></p>
-                        <p><b style="color: white">Sabtu - Minggu :  <span class="badge badge-secondary">Menyesuaikan</span> </b></p>
+                        <p><b style="color: white">Senin - Jumat : <span class="badge badge-secondary"> 07:00 - 21:00
+                                </span> </b></p>
+                        <p><b style="color: white">Sabtu - Minggu : <span
+                                    class="badge badge-secondary">Menyesuaikan</span> </b></p>
                     </div>
                 </div>
 

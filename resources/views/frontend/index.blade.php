@@ -90,7 +90,7 @@
                                                                         </li>
                                                                         <li class="lnk wishlist">
                                                                             <a class="add-to-cart"
-                                                                                href="{{ route('detail-produk', ['id' => $row->id, 'slug' => $row->slug]) }}"
+                                                                                href="{{ route('wishlist-store',$row->id) }}"
                                                                                 title="Wishlist">
                                                                                 <i class="icon fa fa-heart"></i>
                                                                             </a>

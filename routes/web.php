@@ -45,7 +45,11 @@ Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tentang-kami');
 Route::get('/cara-belanja', [App\Http\Controllers\Frontend\CaraBelanjController::class, 'index'])->name('cara-belanja');
-Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+
+
+Route::resource('/wishlist', WishlistController::class)->except('show','create','edit','update','store');
+Route::get('/wishlist-store/{produk_id}', [WishlistController::class, 'store'])->name('wishlist-store');
+
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 

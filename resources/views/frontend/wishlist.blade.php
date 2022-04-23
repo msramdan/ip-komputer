@@ -26,58 +26,59 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="col-md-2"><img
-                                                src="{{ asset('temp-front-end/assets/images/products/p1.jpg') }}"
-                                                alt="imga"></td>
-                                        <td class="col-md-7">
-                                            <div class="product-name"><a href="#">Floral Print Buttoned</a></div>
-                                            <div class="rating">
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star non-rate"></i>
-                                                <span class="review">( 06 Reviews )</span>
-                                            </div>
-                                            <div class="price">
-                                                $400.00
-                                                <span>$900.00</span>
-                                            </div>
-                                        </td>
-                                        <td class="col-md-2">
-                                            <a href="#" class="btn-upper btn btn-primary">Add to cart</a>
-                                        </td>
-                                        <td class="col-md-1 close-btn">
-                                            <a href="#" class=""><i class="fa fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-2"><img
-                                                src="{{ asset('temp-front-end/assets/images/products/p1.jpg') }}"
-                                                alt="imga"></td>
-                                        <td class="col-md-7">
-                                            <div class="product-name"><a href="#">Floral Print Buttoned</a></div>
-                                            <div class="rating">
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star non-rate"></i>
-                                                <span class="review">( 06 Reviews )</span>
-                                            </div>
-                                            <div class="price">
-                                                $400.00
-                                                <span>$900.00</span>
-                                            </div>
-                                        </td>
-                                        <td class="col-md-2">
-                                            <a href="#" class="btn-upper btn btn-primary">Add to cart</a>
-                                        </td>
-                                        <td class="col-md-1 close-btn">
-                                            <a href="#" class=""><i class="fa fa-times"></i></a>
-                                        </td>
-                                    </tr>
+
+                                    @foreach ($data as $row)
+                                        <tr>
+                                            @php
+                                                $thumbnail = DB::table('produk_photo')
+                                                    ->where('produk_id', $row->produk_id)
+                                                    ->first();
+                                            @endphp
+                                            <td class="col-md-2"><a
+                                                    href="{{ route('detail-produk', ['id' => $row->id, 'slug' => $row->slug]) }}"><img
+                                                        src="{{ Storage::url('public/produk/' . $thumbnail->photo) }}"
+                                                        alt="imga"></a></td>
+                                            <td class="col-md-7">
+                                                <div class="product-name"><a
+                                                        href="{{ route('detail-produk', ['id' => $row->id, 'slug' => $row->slug]) }}">{{ $row->kode_produk }}
+                                                        - {{ $row->nama }}</a></div>
+                                                <div class="price">
+                                                    @currency($row->harga)
+                                                </div>
+                                            </td>
+                                            <td class="col-md-2">
+                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+
+                                                    <input type="hidden" value="1" name="quantity">
+
+                                                    <input type="hidden" value="{{ $row->produk_id }}" name="id">
+                                                    <input type="hidden" value="{{ $row->nama }}" name="nama">
+                                                    <input type="hidden" value="{{ $row->harga }}" name="harga">
+                                                    <input type="hidden" value="{{ $thumbnail->photo }}" name="photo">
+                                                    <button class="btn btn-primary icon"><i class="fa fa-shopping-cart"></i> Add to cart
+                                                    </button>
+
+                                                </form>
+                                            </td>
+                                            <td class="col-md-1 close-btn">
+                                                {{-- <a href="#" class=""><i class="fa fa-times"></i></a> --}}
+
+                                                <form action="{{ route('wishlist.destroy', $row->id) }}" method="post" class="d-inline"
+                                                    onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>

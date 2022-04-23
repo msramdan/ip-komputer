@@ -28,7 +28,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('setting-akun') }}">Akun Profile</a></li>
                                     <li><a href="{{ route('pembelian') }}">Pembelian</a></li>
-                                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -129,6 +129,11 @@
                                         <div class="clearfix"></div>
                                         <a href="{{ route('cart.list') }}"
                                             class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                                        <form action="{{ route('cart.clear') }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-upper btn-danger btn-block m-t-10">Hapus Semua
+                                                Cart</button>
+                                        </form>
                                     </div>
                                 </li>
                             </ul>

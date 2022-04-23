@@ -78,7 +78,12 @@
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="stock-box">
-                                                    <span class="value">In Stock</span>
+                                                    @if ($data->qty > 0)
+                                                        <span class="value">In Stock</span>
+                                                    @else
+                                                    <span class="value">Out of Stock</span>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>
@@ -144,9 +149,10 @@
                                             <div class="col-sm-6">
                                                 <div class="favorite-button m-t-10">
                                                     <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
-                                                        title="Wishlist" href="#">
+                                                        title="Wishlist" href="{{ route('wishlist-store', $data->id) }}">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
+
                                                 </div>
                                             </div>
 
@@ -258,7 +264,8 @@
 
                                                             </li>
                                                             <li class="lnk wishlist">
-                                                                <a class="add-to-cart" href="detail.html"
+                                                                <a class="add-to-cart"
+                                                                    href="{{ route('wishlist-store', $row->id) }}"
                                                                     title="Wishlist">
                                                                     <i class="icon fa fa-heart"></i>
                                                                 </a>
