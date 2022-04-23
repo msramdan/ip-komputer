@@ -29,6 +29,8 @@ use App\Http\Controllers\Frontend\TentangKamiController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\frontend\CartController;
+
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
@@ -52,13 +54,23 @@ Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('sett
 Route::put('update-user/{id}', [SettingAkunController::class, 'update'])->name('update-user');
 
 Route::get('/daftar-alamat', [SettingAkunController::class, 'daftarAlamat'])->name('daftar-alamat');
-Route::delete('hapus-alamat/{id}', [SettingAkunController::class, 'destroy_alamat'])->name('destroy-alamat');;
+Route::delete('hapus-alamat/{id}', [SettingAkunController::class, 'destroy_alamat'])->name('destroy-alamat');
+Route::post('create-alamat', [SettingAkunController::class, 'store_alamat'])->name('create-alamat');
+Route::put('update-alamat/{id}', [SettingAkunController::class, 'update_alamat'])->name('update-alamat');
 
 
 Route::get('/pembelian', [App\Http\Controllers\Frontend\PembelianController::class, 'index'])->name('pembelian');
-Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');;
+Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
-Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');;
+Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');
+
+// cart
+Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+
 
 // Route Back end
 Route::get('/localization/{language}', [LocalizationController::class, 'switch'])->name('localization.switch');

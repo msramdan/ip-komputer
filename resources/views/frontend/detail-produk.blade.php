@@ -49,7 +49,8 @@
                                             @foreach ($photo as $rows)
                                                 <div class="item">
                                                     <a class="horizontal-thumb @if ($loop->iteration == 1) active @endif"
-                                                        data-target="#owl-single-product" data-slide="{{ $loop->iteration- 1 }}"
+                                                        data-target="#owl-single-product"
+                                                        data-slide="{{ $loop->iteration - 1 }}"
                                                         href="#slide{{ $rows->id }}">
                                                         <img style="display: block" width="85" height="100" alt=""
                                                             src="{{ asset('temp-front-end/assets/images/blank.gif') }} "
@@ -158,25 +159,42 @@
                                             <div class="col-sm-2">
                                                 <span class="label">Qty :</span>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <div class="cart-quantity">
-                                                    <div class="quant-input">
-                                                        <div class="arrows">
-                                                            <div class="arrow plus gradient"><span class="ir"><i
-                                                                        class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient"><span
-                                                                    class="ir"><i
-                                                                        class="icon fa fa-sort-desc"></i></span></div>
+                                            <form action="{{ route('cart.store') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="col-sm-2">
+                                                    <div class="cart-quantity">
+                                                        <div class="quant-input">
+                                                            <div class="arrows">
+                                                                <div class="arrow plus gradient"><span
+                                                                        class="ir"><i
+                                                                            class="icon fa fa-sort-asc"></i></span></div>
+                                                                <div class="arrow minus gradient"><span
+                                                                        class="ir"><i
+                                                                            class="icon fa fa-sort-desc"></i></span></div>
+                                                            </div>
+                                                            <input type="text" value="1" name="quantity">
                                                         </div>
-                                                        <input type="text" value="1">
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i
-                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
-                                            </div>
+                                                <div class="col-sm-7">
+                                                    <input type="hidden" value="{{ $data->id }}" name="id">
+                                                    <input type="hidden" value="{{ $data->nama }}" name="nama">
+                                                    <input type="hidden" value="{{ $data->harga }}" name="harga">
+                                                    @php
+                                                        $thumbnail = DB::table('produk_photo')
+                                                            ->where('produk_id', $data->id)
+                                                            ->first();
+                                                    @endphp
+
+                                                    <input type="hidden" value="{{ $thumbnail->photo }}" name="photo">
+                                                    <button class="btn btn-primary"><i
+                                                            class="fa fa-shopping-cart inner-right-vs"></i> ADD TO
+                                                        CART </button>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -187,64 +205,72 @@
                         <h3 class="section-title">Produk Terkait</h3>
                         <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
                             @foreach ($relate as $row)
-                                <div class="item item-carousel">
-                                    <div class="products">
-                                        <div class="product">
-                                            <div class="product-image">
-                                                <div class="image">
-                                                    <a href="{{ route('detail-produk',['id' => $row->id,'slug' =>$row->slug ]) }}">
-                                                        @php
-                                                            $thumbnail = DB::table('produk_photo')
-                                                                ->where('produk_id', $row->id)
-                                                                ->first();
-                                                        @endphp
-                                                        <img src="{{ Storage::url('public/produk/' . $thumbnail->photo) }}"
-                                                            alt=""></a>
+                                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="item item-carousel">
+                                        <div class="products">
+                                            <div class="product">
+                                                <div class="product-image">
+                                                    <div class="image">
+                                                        <a
+                                                            href="{{ route('detail-produk', ['id' => $row->id, 'slug' => $row->slug]) }}">
+                                                            @php
+                                                                $thumbnail = DB::table('produk_photo')
+                                                                    ->where('produk_id', $row->id)
+                                                                    ->first();
+                                                            @endphp
+                                                            <img style="height: 250px"
+                                                                src="{{ Storage::url('public/produk/' . $thumbnail->photo) }}"
+                                                                alt=""></a>
+                                                    </div>
+
+                                                    <div class="tag new"><span>new</span></div>
                                                 </div>
+                                                <div class="product-info text-left">
+                                                    <h3 class="name"><a
+                                                            href="{{ route('detail-produk', ['id' => $row->id, 'slug' => $row->slug]) }}">{{ $row->kode_produk }}
+                                                            - {{ $row->nama }}</a>
+                                                    </h3>
+                                                    <div class="description"></div>
 
-                                                <div class="tag new"><span>new</span></div>
-                                            </div>
-                                            <div class="product-info text-left">
-                                                <h3 class="name"><a href="{{ route('detail-produk',['id' => $row->id,'slug' =>$row->slug ]) }}">{{ $row->kode_produk }}
-                                                        - {{ $row->nama }}</a>
-                                                </h3>
-                                                <div class="description"></div>
+                                                    <div class="product-price">
+                                                        <span class="price">
+                                                            @currency($row->harga)</span>
+                                                    </div>
 
-                                                <div class="product-price">
-                                                    <span class="price">
-                                                        @currency($row->harga)</span>
                                                 </div>
+                                                <div class="cart clearfix animate-effect">
+                                                    <div class="action">
+                                                        <ul class="list-unstyled">
+                                                            <li class="add-cart-button btn-group">
+                                                                <input type="hidden" value="1" name="quantity">
 
-                                            </div>
-                                            <div class="cart clearfix animate-effect">
-                                                <div class="action">
-                                                    <ul class="list-unstyled">
-                                                        <li class="add-cart-button btn-group">
-                                                            <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                                type="button">
-                                                                <i class="fa fa-shopping-cart"></i>
-                                                            </button>
-                                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                                cart</button>
+                                                                <input type="hidden" value="{{ $row->id }}" name="id">
+                                                                <input type="hidden" value="{{ $row->nama }}"
+                                                                    name="nama">
+                                                                <input type="hidden" value="{{ $row->harga }}"
+                                                                    name="harga">
+                                                                <input type="hidden" value="{{ $thumbnail->photo }}"
+                                                                    name="photo">
+                                                                <button class="btn btn-primary icon"><i
+                                                                        class="fa fa-shopping-cart"></i>
+                                                                </button>
 
-                                                        </li>
-                                                        <li class="lnk wishlist">
-                                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                                <i class="icon fa fa-heart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                            </li>
+                                                            <li class="lnk wishlist">
+                                                                <a class="add-to-cart" href="detail.html"
+                                                                    title="Wishlist">
+                                                                    <i class="icon fa fa-heart"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                     </div>
-
-                                </div>
+                                </form>
                             @endforeach
-
                         </div>
                     </section>
                 </div>

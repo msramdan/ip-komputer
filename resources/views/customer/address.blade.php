@@ -140,10 +140,7 @@
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">Kota / Kabupaten</label>
-                            {{-- <select name="kota_id" id="kota_id_edit"
-                                class="form-control  @error('kota_id') is-invalid @enderror" id="exampleFormControlSelect1">
-                                <option value="">-- Pilih --</option>
-                            </select> --}}
+
                             <span id="result_edit"></span>
                             <div id="result_tunggu_edit"></div>
                         </div>
@@ -164,7 +161,6 @@
     @push('js')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
         <script type="text/javascript">
             $(function() {
                 $.ajaxSetup({
@@ -377,88 +373,84 @@
             });
         </script>
 
-<script>
-    $("#update_data").click(function() {
-        toastr.options = {
-            tapToDismiss: true,
-            toastClass: 'toast',
-            containerId: 'toast-container',
-            debug: false,
-            fadeIn: 300,
-            fadeOut: 1000,
-            extendedTimeOut: 1000,
-            iconClass: 'toast-info',
-            positionClass: 'toast-top-right',
-            timeOut: 5000,
-            titleClass: 'toast-title',
-            messageClass: 'toast-message'
-        };
-        var id = $('#id_data').val();
-        var customer_id_edit = $('#customer_id_edit').val();
-        var provinsi_id = $('#provinsi-asal-edit').val();
-        var kota_id_cek = $('#kota_id').val();
-        var alamat_lengkap = $('#alamat_lengkap_edit').val();
-        if (!provinsi_id) {
-            toastr.error('Provinsi belum di pilih');
-            $('#provinsi-asal-edit').focus();
-        } else if (!kota_id_cek) {
-            toastr.error('Kota /  Kabupaten belum di pilih');
-            $('#kota_id').focus();
-        } else if (!alamat_lengkap) {
-            toastr.error('Alamat lengkap belum di isi');
-            $('#alamat_lengkap_edit').focus();
-        } else {
-            swal.fire({
-                title: "",
-                icon: 'question',
-                text: "Yakin Simpan Data ?",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Yes, save it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: !0
-            }).then(function(e) {
+        <script>
+            $("#update_data").click(function() {
+                toastr.options = {
+                    tapToDismiss: true,
+                    toastClass: 'toast',
+                    containerId: 'toast-container',
+                    debug: false,
+                    fadeIn: 300,
+                    fadeOut: 1000,
+                    extendedTimeOut: 1000,
+                    iconClass: 'toast-info',
+                    positionClass: 'toast-top-right',
+                    timeOut: 5000,
+                    titleClass: 'toast-title',
+                    messageClass: 'toast-message'
+                };
+                var id = $('#id_data').val();
+                var customer_id_edit = $('#customer_id_edit').val();
+                var provinsi_id = $('#provinsi-asal-edit').val();
+                var kota_id_cek = $('#kota_id').val();
+                var alamat_lengkap = $('#alamat_lengkap_edit').val();
+                if (!provinsi_id) {
+                    toastr.error('Provinsi belum di pilih');
+                    $('#provinsi-asal-edit').focus();
+                } else if (!kota_id_cek) {
+                    toastr.error('Kota /  Kabupaten belum di pilih');
+                    $('#kota_id').focus();
+                } else if (!alamat_lengkap) {
+                    toastr.error('Alamat lengkap belum di isi');
+                    $('#alamat_lengkap_edit').focus();
+                } else {
+                    swal.fire({
+                        title: "",
+                        icon: 'question',
+                        text: "Yakin Simpan Data ?",
+                        type: "warning",
+                        showCancelButton: !0,
+                        confirmButtonText: "Yes, save it!",
+                        cancelButtonText: "No, cancel!",
+                        reverseButtons: !0
+                    }).then(function(e) {
 
-                if (e.value === true) {
-                    $.ajax({
-                        type: "PUT",
-                        url: '/panel/alamat/' + id,
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        data: {
-                            'customer_id': customer_id_edit,
-                            'provinsi_id': provinsi_id,
-                            'kota_id': kota_id_cek,
-                            'alamat_lengkap': alamat_lengkap
-                        },
-                        dataType: "json",
-                        success: function(result) {
-                            if (result.success == true) {
-                                swal.fire("Data berhasil di update", result.message,
-                                    "success");
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
+                        if (e.value === true) {
+                            $.ajax({
+                                type: "PUT",
+                                url: '/panel/alamat/' + id,
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                },
+                                data: {
+                                    'customer_id': customer_id_edit,
+                                    'provinsi_id': provinsi_id,
+                                    'kota_id': kota_id_cek,
+                                    'alamat_lengkap': alamat_lengkap
+                                },
+                                dataType: "json",
+                                success: function(result) {
+                                    if (result.success == true) {
+                                        swal.fire("Data berhasil di update", result.message,
+                                            "success");
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 1000);
 
 
-                            } else {
-                                swal.fire("Error!", 'Sumething went wrong.', "error");
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 1000);
-                            }
+                                    } else {
+                                        swal.fire("Error!", 'Sumething went wrong.', "error");
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 1000);
+                                    }
+                                }
+                            });
                         }
-                    });
+                    })
                 }
-            })
-        }
 
-    });
-</script>
+            });
+        </script>
     @endpush
-
-
-
-
 @endsection

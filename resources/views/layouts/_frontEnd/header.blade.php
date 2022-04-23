@@ -5,9 +5,6 @@
 
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-
-
-
                         @if (Session::get('login-customer'))
                             <li><a href="{{ route('signout-user') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
                                     Logout</a></li>
@@ -56,7 +53,9 @@
                     <div class="search-area">
                         <form action="{{ route('pencarian-produk') }}" method="GET">
                             <div class="control-group">
-                                <input required class="search-field typeahead" name="search" id="search" autocomplete="off" placeholder="Cari Produk" <?php if (isset($_GET['search'])) { ?> value="<?= $_GET['search'] ?>" <?php } ?> />
+                                <input required class="search-field typeahead" name="search" id="search"
+                                    autocomplete="off" placeholder="Cari Produk" <?php if (isset($_GET['search'])) { ?>
+                                    value="<?= $_GET['search'] ?>" <?php } ?> />
                                 <button type="submit" class="search-button">
                                 </button>
                             </div>
@@ -72,12 +71,14 @@
                                     <div class="basket">
                                         <i class="glyphicon glyphicon-shopping-cart"></i>
                                     </div>
-                                    <div class="basket-item-count"><span class="count">2</span></div>
+                                    @php
+                                        $cartItems = \Cart::getContent();
+                                    @endphp
+                                    <div class="basket-item-count"><span
+                                            class="count">{{ Cart::getTotalQuantity() }}</span></div>
                                     <div class="total-price-basket">
-                                        <span class="lbl">cart -</span>
                                         <span class="total-price">
-                                            <span class="sign">$</span><span
-                                                class="value">600.00</span>
+                                            <span class="value"> @currency(Cart::getTotal())</span>
                                         </span>
                                     </div>
 
@@ -87,34 +88,46 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="cart-item product-summary">
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <div class="image">
-                                                    <a href="detail.html"><img
-                                                            src="{{ asset('temp-front-end/assets/images/cart.jpg') }}"
-                                                            alt=""></a>
+
+                                        {{-- mulai --}}
+                                        @foreach ($cartItems as $item)
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <div class="image">
+                                                        @php
+                                                            $thumbnail = DB::table('produk_photo')
+                                                                ->where('produk_id', $item->id)
+                                                                ->first();
+                                                            $slug = DB::table('produk')
+                                                                ->where('id', $item->id)
+                                                                ->first();
+                                                        @endphp
+                                                        <a
+                                                            href="{{ route('detail-produk', ['id' => $item->id, 'slug' => $slug->slug]) }}"><img
+                                                                src="{{ Storage::url('public/produk/' . $thumbnail->photo) }}"
+                                                                alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-7">
+
+                                                    <h3 class="name"><a
+                                                            href="{{ route('detail-produk', ['id' => $item->id, 'slug' => $slug->slug]) }}">{{ $item->name }}
+                                                            -
+                                                            {{ $item->quantity }}</a></h3>
+                                                    <div class="price">@currency($item->price)</div>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-7">
-
-                                                <h3 class="name"><a href="index.php?page-detail">Simple
-                                                        Product</a></h3>
-                                                <div class="price">$600.00</div>
-                                            </div>
-                                            <div class="col-xs-1 action">
-                                                <a href="#"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr>
                                     <div class="clearfix cart-total">
                                         <div class="pull-right">
                                             <span class="text">Sub Total :</span><span
-                                                class='price'>$600.00</span>
+                                                class='price'>@currency(Cart::getTotal())</span>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <a href="checkout.html"
+                                        <a href="{{ route('cart.list') }}"
                                             class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
                                     </div>
                                 </li>

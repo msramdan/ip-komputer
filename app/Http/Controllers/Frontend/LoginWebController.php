@@ -20,7 +20,6 @@ class LoginWebController extends Controller
 
     public function register(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make(
             $request->all(),
             [
@@ -51,6 +50,7 @@ class LoginWebController extends Controller
 
     public function login(Request $request)
     {
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -84,6 +84,7 @@ class LoginWebController extends Controller
 
     public function logout(Request $request)
     {
+        \Cart::clear();
         $request->session()->forget('id-customer');
         $request->session()->forget('name-customer');
         $request->session()->forget('email-customer');

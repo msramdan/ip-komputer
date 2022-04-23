@@ -19,6 +19,7 @@
     @include('layouts._frontEnd.footer')
     {{-- script --}}
     @include('layouts._frontEnd.script')
+    @stack('js')
     @include('sweetalert::alert')
 </body>
 

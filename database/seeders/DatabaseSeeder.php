@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
             ProdukSeeder::class,
             SettingTokoSeeder::class,
             SupplierSeeder::class,
-            // LocationsSeeder::class,
+            LocationsSeeder::class,
             CustomerSeeder::class,
             PembelianSeeder::class,
-            // CustomerAlamatSeeder::class,
+            CustomerAlamatSeeder::class,
             PenjualanSeeder::class,
         ]);
     }
