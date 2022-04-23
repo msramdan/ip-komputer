@@ -54,10 +54,11 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
                     <div class="search-area">
-                        <form>
+                        <form action="{{ route('pencarian-produk') }}" method="GET">
                             <div class="control-group">
-                                <input class="search-field" placeholder="Search here..." />
-                                <a class="search-button" href="#"></a>
+                                <input required class="search-field typeahead" name="search" id="search" autocomplete="off" placeholder="Cari Produk" <?php if (isset($_GET['search'])) { ?> value="<?= $_GET['search'] ?>" <?php } ?> />
+                                <button type="submit" class="search-button">
+                                </button>
                             </div>
                         </form>
                     </div>

@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomerAlamatController;
 use Illuminate\Support\Facades\Route;
-
 // Back end
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\HomeController;
@@ -19,6 +18,7 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
 use App\Http\Controllers\PembelianController;
 
+
 // Front End
 use App\Http\Controllers\Frontend\DashboardCrontroller;
 use App\Http\Controllers\Frontend\KontakController;
@@ -32,6 +32,12 @@ use App\Http\Controllers\PenjualanController;
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
+Route::get('/kategori/{id}/{name}', [DashboardCrontroller::class, 'kategori'])->name('kategori-produk');
+Route::get('/pencarian', [DashboardCrontroller::class, 'pencarian'])->name('pencarian-produk');
+Route::get('/kategori/{id}/{name}', [DashboardCrontroller::class, 'kategori'])->name('kategori-produk');
+Route::get('/autocomplete-search-query', [DashboardCrontroller::class, 'query'])->name('autocomplete.search.query');
+
+
 Route::get('/produk/{id}/{slug}', [DashboardCrontroller::class, 'DetailProduk'])->name('detail-produk');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
@@ -41,6 +47,7 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 Route::get('/signin-web', [RegisterWebController::class, 'index'])->name('signin-web');
 Route::get('/auth-web', [LoginWebController::class, 'index'])->name('auth-web');
 
+Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
 Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('setting-akun');
 Route::put('update-user/{id}', [SettingAkunController::class, 'update'])->name('update-user');
 

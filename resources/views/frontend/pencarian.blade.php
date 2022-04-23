@@ -1,5 +1,5 @@
 @extends('layouts.master-frontend')
-@section('title', 'Toko Online')
+@section('title', 'Pencarian Produk')
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -17,11 +17,11 @@
                 {{-- sidebar --}}
                 @include('frontend._include-sidebar')
                 <div class='col-md-9'>
-                    <div id="category" class="category-carousel hidden-xs">
-                        <div class="item">
-                            <div class="image">
-                                <img src=" {{ asset('temp-front-end/assets/images/banners/banner.jpg') }}" alt=""
-                                    class="img-responsive">
+                    <div class="clearfix filters-container m-t-10">
+                        <div class="row">
+                            <div class="col col-sm-12 col-md-12">
+                                <p>Menampilkan {{ $jumlah }} produk pencarian <b>{{ $nama_search }}</b></p>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,6 @@
                             <div class="tab-pane active " id="grid-container">
                                 <div class="category-product">
                                     <div class="row">
-
                                         @foreach ($produk as $row)
                                             <div class="col-sm-6 col-md-4 wow fadeInUp">
                                                 <div class="products">

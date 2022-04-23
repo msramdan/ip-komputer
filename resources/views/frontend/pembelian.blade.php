@@ -23,8 +23,7 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#pembayaran" aria-controls="pembayaran" role="tab" data-toggle="tab">Menunggu Pembayaran</a></li>
                                 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Transaksi Sukses</a></li>
-                                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Wishlist</a></li>
-                              </ul>
+
                         </nav>
                     </div>
                 </div>
@@ -56,7 +55,7 @@
                                     </div>
                                  <div class="card-body">
                                     <div class="row list-group-item">
-                                       
+
                                         <div class="col-md-4">
                                             <h4>Metode Pembayaran</h4>
                                             <p>Bank Transfer</p>
@@ -96,7 +95,7 @@
                                     </div>
                                  <div class="card-body">
                                     <div class="row list-group-item">
-                                       
+
                                         <div class="col-md-4">
                                             <h4>Metode Pembayaran</h4>
                                             <p>Bank Transfer</p>
@@ -116,7 +115,7 @@
                             <div role="tabpanel" class="tab-pane" id="profile">TIdak</div>
                             <div role="tabpanel" class="tab-pane" id="messages">...</div>
                           </div>
-                        
+
                         <div class="clearfix">
                         </div>
                     </div>
