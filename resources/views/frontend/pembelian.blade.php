@@ -22,7 +22,7 @@
                         <nav class="yamm megamenu-horizontal" role="navigation">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#pembayaran" aria-controls="pembayaran" role="tab" data-toggle="tab">Menunggu Pembayaran</a></li>
-                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Transaksi Sukses</a></li>
+                                <li role="presentation"><a href="#transaksi" aria-controls="transaksi" role="tab" data-toggle="tab">Transaksi Sukses</a></li>
 
                         </nav>
                     </div>
@@ -112,8 +112,43 @@
                                   </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">TIdak</div>
-                            <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                            <div role="tabpanel" class="tab-pane" id="transaksi">
+                                <h4>Transaksi Sukses</h4>
+
+                                <div class="card card-default">
+                                    <div class="card-header">
+                                        
+                                    </div>
+                                 <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Order Id</th>
+                                                <th class="text-center">Customer</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Total</th>
+                                                <th class="text-center">Tanggal Pesanan</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2220510</td>
+                                                <td>Heru Dwi Cahya</td>
+                                                <td>2</td>
+                                                <td>Lunas</td>
+                                                <td>100.000</td>
+                                                <td>24/04/2022</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary"> <i class="fa fa-eye"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                  </div>
+                                </div>
+                            </div>
                           </div>
 
                         <div class="clearfix">
