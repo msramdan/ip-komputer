@@ -65,6 +65,7 @@ Route::put('update-alamat/{id}', [SettingAkunController::class, 'update_alamat']
 
 
 Route::get('/pembelian', [App\Http\Controllers\Frontend\PembelianController::class, 'index'])->name('pembelian');
+Route::post('/cek-ongkir', [App\Http\Controllers\Frontend\PembelianController::class, 'check_ongkir'])->name('check_ongkir');
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
 Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');

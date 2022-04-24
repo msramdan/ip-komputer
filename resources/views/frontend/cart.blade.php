@@ -19,7 +19,7 @@
                 <div class="shopping-cart">
                     <div class="shopping-cart-table ">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="table-cart">
                                 <thead>
                                     <tr>
                                         <th class="cart-romove item">Hapus</th>
@@ -31,20 +31,6 @@
                                         <th class="cart-total last-item">Subtotal</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-
-                                    <tr>
-                                        <td colspan="7">
-                                            <div class="shopping-cart-btn">
-                                                <span class="">
-                                                    <a href="{{ route('dashboard') }}"
-                                                        class="btn btn-upper btn-primary outer-left-xs">Continue
-                                                        Shopping</a>
-                                                </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
                                 <tbody>
                                     @foreach ($cartItems as $item)
                                         <tr>
@@ -93,26 +79,26 @@
                                                     </div>
                                                 </form>
                                             </td>
-                                            <td class="cart-product-sub-total"><span
-                                                    class="cart-sub-total-price">{{ ($slug->berat * $item->quantity) / 1000 }}
-                                                    kg</span>
+                                            <td class="cart-product-sub-total">
+                                                {{ ($slug->berat * $item->quantity) / 1000 }} Kg
                                             </td>
 
 
-                                            <td class="cart-product-sub-total"><span
-                                                    class="cart-sub-total-price">@currency($item->price)</span>
+                                            <td class="cart-product-sub-total">@currency($item->price)
                                             </td>
-                                            <td class="cart-product-grand-total"><span
-                                                    class="cart-grand-total-price">@currency($item->price *
-                                                    $item->quantity)</span></td>
+                                            <td class="cart-product-grand-total">@currency($item->price * $item->quantity)
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
 
-                    <div>
+                    <div class="col-md-12">
+                        <a href="{{ route('dashboard') }}" class="btn btn-upper btn-primary outer-left-xs">Continue
+                            Shopping</a>
 
                     </div>
                     <div class="col-md-6 col-sm-12 estimate-ship-tax">
@@ -143,6 +129,7 @@
                                                     class="form-control unicase-form-control text-input" placeholder="">
                                             </div>
                                         </div>
+                                        <input type="hidden" name="kota_id_asal" id="kota_id_asal" value="419">
                                         <div class="col-md-12" style="margin-bottom: 15px">
                                             <label class="">Alamat Pengiriman <span
                                                     style="color: red">*</span></label>
@@ -163,27 +150,48 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="nama_provinsi" class="form-control unicase-form-control text-input"
-                                                    id="nama_provinsi" readonly placeholder="Provinsi" name="nama_provinsi" required="">
-                                                    <input type="hidden" id="provinsi_id_des">
+                                                <input type="nama_provinsi"
+                                                    class="form-control unicase-form-control text-input" id="nama_provinsi"
+                                                    readonly placeholder="Provinsi" name="nama_provinsi" required="">
+                                                <input type="hidden" id="provinsi_id_des">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="nama_kota" class="form-control unicase-form-control text-input"
-                                                    id="nama_kota" readonly placeholder="Alamat" name="nama_kota" required="">
-                                                    <input type="hidden" id="kota_id_des">
+                                                    id="nama_kota" readonly placeholder="Alamat" name="nama_kota"
+                                                    required="">
+                                                <input type="hidden" id="kota_id_des">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea required="" id="alamat_lengkap" class="form-control unicase-form-control" id="deskripsi" readonly placeholder="Alamat Lengkap"
-                                                    name="deskripsi"></textarea>
+                                                <textarea required="" id="alamat_lengkap_des" class="form-control unicase-form-control" id="deskripsi" readonly
+                                                    placeholder="Alamat Lengkap" name="deskripsi"></textarea>
                                             </div>
                                         </div>
 
-
-
+                                        <div class="col-md-12">
+                                            <label class="">Kurir <span style="color: red">*</span></label>
+                                            <div class="form-group">
+                                                <select id="courier" class="form-control" name="courier">
+                                                    <option value="0">-- Pilih --</option>
+                                                    <option value="jne">JNE</option>
+                                                    <option value="pos">POS</option>
+                                                    <option value="tiki">TIKI</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Service</label>
+                                                <select name="ongkir" id="ongkir" class="form-control"
+                                                    id="exampleFormControlSelect1">
+                                                    <option value="">-- Pilih --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="" id="berat_total">
                                     </td>
                                 </tr>
                             </tbody>
@@ -197,6 +205,9 @@
                                     <th>
                                         <div class="cart-sub-total">
                                             Subtotal<span class="inner-left-md"> @currency(Cart::getTotal())</span>
+                                        </div>
+                                        <div class="cart-sub-total">
+                                            Ongkir<span class="inner-left-md"> @currency(Cart::getTotal())</span>
                                         </div>
                                         <div class="cart-grand-total">
                                             Grand Total<span class="inner-left-md">$600.00</span>
@@ -271,6 +282,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script>
+        var table = document.getElementById("table-cart"),
+            sumHsl = 0;
+        for (var t = 1; t < table.rows.length; t++) {
+            sumHsl = sumHsl + parseFloat(table.rows[t].cells[4].innerHTML);
+        }
+        document.getElementById("berat_total").value = sumHsl * 1000;
+    </script>
     <script>
         $("#provinsi-asal").change(function() {
             var selectedValue = $(this).val();
@@ -389,12 +408,107 @@
                     // console.log(data.alamat_lengkap)
                     $('#nama_provinsi').val(data.nama_provinsi);
                     $('#nama_kota').val(data.nama_kota);
-                    $('#alamat_lengkap').val(data.alamat_lengkap);
+                    $('#alamat_lengkap_des').val(data.alamat_lengkap);
                     $('#provinsi_id_des').val(data.provinsi_id);
                     $('#kota_id_des').val(data.kota_id);
+
+                    let isProcessing = false;
+                    let city_origin = $('#kota_id_asal').val();
+                    let city_destination = $('#kota_id_des').val();
+                    let courier = $('select[name=courier]').val();
+                    let weight = $('#berat_total').val();
+
+                    if (courier !=0) {
+                        if (isProcessing) {
+                            return;
+                        }
+
+                        isProcessing = true;
+                        jQuery.ajax({
+                            url: "/cek-ongkir",
+                            data: {
+                                city_origin: city_origin,
+                                city_destination: city_destination,
+                                courier: courier,
+                                weight: weight,
+                                "_token": "{{ csrf_token() }}",
+                            },
+                            type: "post",
+                            success: function(response) {
+                                isProcessing = false;
+                                if (response) {
+                                    $('#ongkir').empty();
+                                    // $('#ongkir').append('<option value="">-- Pilih --</option>')
+                                    $.each(response[0]['costs'], function(key, value) {
+                                        $('#ongkir').append('<option value="' +
+                                            value
+                                            .cost[0].value + '">' + response[0]
+                                            .code
+                                            .toUpperCase() + ' : <strong>' +
+                                            value
+                                            .service + '</strong> - Rp. ' +
+                                            value
+                                            .cost[0].value + ' (' + value.cost[
+                                                0]
+                                            .etd + ' hari)</option>')
+                                    });
+
+                                }
+                            }
+                        });
+
+                    }
+
+
                 }
             });
-        })
 
+
+
+
+
+        })
+    </script>
+
+    <script>
+        let isProcessing = false;
+        $('#courier').change(function() {
+            // let token            = $("meta[name='csrf-token']").attr("content");
+            let city_origin = $('#kota_id_asal').val();
+            let city_destination = $('#kota_id_des').val();
+            let courier = $('select[name=courier]').val();
+            let weight = $('#berat_total').val();
+
+            if (isProcessing) {
+                return;
+            }
+
+            isProcessing = true;
+            jQuery.ajax({
+                url: "/cek-ongkir",
+                data: {
+                    city_origin: city_origin,
+                    city_destination: city_destination,
+                    courier: courier,
+                    weight: weight,
+                    "_token": "{{ csrf_token() }}",
+                },
+                type: "post",
+                success: function(response) {
+                    isProcessing = false;
+                    if (response) {
+                        $('#ongkir').empty();
+                        // $('#ongkir').append('<option value="">-- Pilih --</option>')
+                        $.each(response[0]['costs'], function(key, value) {
+                            $('#ongkir').append('<option value="' + value.cost[0].value + '">' +
+                                response[0].code.toUpperCase() + ' : <strong>' + value
+                                .service + '</strong> - Rp. ' + value.cost[0].value + ' (' +
+                                value.cost[0].etd + ' hari)</option>')
+                        });
+
+                    }
+                }
+            });
+        });
     </script>
 @endpush
