@@ -89,7 +89,7 @@
                                             <th>Nama produk</th>
                                             <th>Kategori Produk</th>
                                             <th>Unit</th>
-                                            <th>Deskripsi</th>
+                                            <th>Berat</th>
                                             <th>Harga</th>
                                             <th>QTY</th>
                                             @canany(['produk_update', 'produk_delete'])
@@ -162,8 +162,8 @@
                     name: 'unit'
                 },
                 {
-                    data: 'deskripsi',
-                    name: 'deskripsi'
+                    data: 'berat',
+                    name: 'berat'
                 },
                 {
                     data: 'harga',

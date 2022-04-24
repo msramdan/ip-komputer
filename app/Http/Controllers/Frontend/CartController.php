@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -14,7 +16,20 @@ class CartController extends Controller
         if (Session::get('login-customer')) {
             $cartItems = \Cart::getContent();
             // dd($cartItems);
-            return view('frontend.cart', compact('cartItems'));
+            $provinsi = Provinsi::pluck('nama', 'provinsi_id');
+            $customer_id =Session::get('id-customer');
+            $alamat = DB::table('customer_alamat')
+            ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+            ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+            ->select('customer_alamat.*', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota')
+            ->where('customer_alamat.customer_id', '=', $customer_id)
+            ->get();
+
+            return view('frontend.cart', [
+                'cartItems' => $cartItems,
+                'provinsi' => $provinsi,
+                'alamat' => $alamat
+            ]);
         } else {
             Alert::error('Failed', 'Silahkan login terlebih dahulu');
             return redirect()->back();
@@ -77,7 +92,7 @@ class CartController extends Controller
     {
         if (Session::get('login-customer')) {
             \Cart::clear();
-            return redirect()->route('cart.list');
+            return redirect()->back();
         } else {
             Alert::error('Failed', 'Silahkan login terlebih dahulu');
             return redirect()->back();

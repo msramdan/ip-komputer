@@ -32,7 +32,7 @@ class WishlistController extends Controller
     {
         $customer_id = \Session::get('id-customer');
         $wishlist = Wishlist::where('customer_id', $customer_id)
-                    ->where('produk_id', $id)->first();
+            ->where('produk_id', $id)->first();
 
         if ($wishlist) {
             Alert::toast('Produk sudah ada dalam wishlist', 'info');

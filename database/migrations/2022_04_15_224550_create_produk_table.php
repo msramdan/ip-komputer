@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('slug');
             $table->foreignId('unit_id')->constrained('units');
             $table->foreignId('kategori_id')->constrained('kategori');
+            $table->integer('berat');
             $table->longText('deskripsi')->nullable();
             $table->integer('harga');
             $table->integer('qty');

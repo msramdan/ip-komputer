@@ -86,7 +86,8 @@ class ProdukController extends Controller
                 'harga' => "required|string",
                 'kategori_id' => 'required|exists:kategori,id',
                 'unit_id' => 'required|exists:units,id',
-                'photo' => "required"
+                'photo' => "required",
+                'berat' => "required"
             ],
             [],
         );
@@ -102,6 +103,7 @@ class ProdukController extends Controller
             'harga'   => $request->harga,
             'kategori_id'   => $request->kategori_id,
             'unit_id'   => $request->unit_id,
+            'berat'   => $request->berat,
             'qty'   => 0
         ]);
         // upload photo
@@ -175,6 +177,7 @@ class ProdukController extends Controller
                 'harga' => "required|string",
                 'kategori_id' => 'required|exists:kategori,id',
                 'unit_id' => 'required|exists:units,id',
+                'berat' => 'required',
             ],
             [],
         );
@@ -213,6 +216,7 @@ class ProdukController extends Controller
                 'slug'   => $slug,
                 'deskripsi'   => $request->deskripsi,
                 'harga'   => $request->harga,
+                'berat'   => $request->berat,
                 'kategori_id'   => $request->kategori_id,
                 'unit_id'   => $request->unit_id,
             ]);

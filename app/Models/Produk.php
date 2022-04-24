@@ -16,6 +16,7 @@ class Produk extends Model
         'unit_id',
         'nama',
         'slug',
+        'berat',
         'qty',
         'deskripsi',
         'harga',

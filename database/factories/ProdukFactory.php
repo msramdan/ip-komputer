@@ -22,6 +22,7 @@ class ProdukFactory extends Factory
             'kategori_id' => 1,
             'unit_id' => 1,
             'slug' => ucfirst($this->faker->word()),
+            'berat' => 1000,
             'deskripsi' => ucfirst($this->faker->word()),
             'harga' => $this->faker->numerify(),
             'qty' => $this->faker->numerify(),

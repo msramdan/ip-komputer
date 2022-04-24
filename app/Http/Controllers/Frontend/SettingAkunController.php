@@ -88,6 +88,17 @@ class SettingAkunController extends Controller
         }
     }
 
+    public function getAlamat($id){
+        $alamat = DB::table('customer_alamat')
+        ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+        ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+        ->select('customer_alamat.*', 'provinsis.nama as nama_provinsi','provinsis.id as provinsi_id', 'kota_kabupatens.nama as nama_kota','kota_kabupatens.id as kota_id')
+        ->where('customer_alamat.id', '=', $id)
+        ->first();
+        echo json_encode($alamat);
+
+    }
+
     public function update(Request $request, $id)
     {
         $validator = Validator::make(

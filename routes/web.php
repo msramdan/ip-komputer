@@ -58,6 +58,7 @@ Route::get('/setting-akun', [SettingAkunController::class, 'index'])->name('sett
 Route::put('update-user/{id}', [SettingAkunController::class, 'update'])->name('update-user');
 
 Route::get('/daftar-alamat', [SettingAkunController::class, 'daftarAlamat'])->name('daftar-alamat');
+Route::get('/ambil-alamat/{id}', [SettingAkunController::class, 'getAlamat'])->name('get-alamat');
 Route::delete('hapus-alamat/{id}', [SettingAkunController::class, 'destroy_alamat'])->name('destroy-alamat');
 Route::post('create-alamat', [SettingAkunController::class, 'store_alamat'])->name('create-alamat');
 Route::put('update-alamat/{id}', [SettingAkunController::class, 'update_alamat'])->name('update-alamat');

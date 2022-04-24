@@ -130,6 +130,16 @@
                                         @enderror
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label for="berat">Berat (Satuan Gram)</label>
+                                        <input class="form-control @error('berat') is-invalid @enderror" id="
+                                        berat" type="number" value="{{ old('berat') ? old('berat') : $produk->berat }}"
+                                            placeholder="Berat" name="berat" autocomplete="off">
+                                        @error('berat')
+                                            <span style="color: red;">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
                                     <div class="mb-1">
                                         <label for="harga">Harga Produk</label>
                                         <input class="form-control @error('harga') is-invalid @enderror" id="
