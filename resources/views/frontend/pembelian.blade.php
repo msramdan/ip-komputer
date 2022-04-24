@@ -167,7 +167,7 @@
 </div>
 
 
-<div class="modal fade" id="tesModal">
+<div class="modal fade modal-wide" id="tesModal">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -269,4 +269,13 @@
         </div>
     </div>
 </div>
+
+<style>
+    .modal.modal-wide .modal-dialog {
+        width: 90%;
+    }
+    .modal-wide .modal-body {
+        overflow-y: auto;
+    }
+</style>
 @endsection
