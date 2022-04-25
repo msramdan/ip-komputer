@@ -127,6 +127,7 @@ class CartController extends Controller
 
             $penjualan = Penjualan::create($orderParam);
 
+
             $cartItems = \Cart::getContent();
             if ($penjualan) {
                 foreach ($cartItems as $data) {
@@ -142,6 +143,7 @@ class CartController extends Controller
                 }
                 \Cart::clear();
             }
+            // dd($cartItems);
 
             $this->initPaymentGateway();
             $dataCustomer = Customer::findOrFail($penjualan->customer_id);
@@ -164,6 +166,8 @@ class CartController extends Controller
                 ]
             ];
             $snap = \Midtrans\Snap::createTransaction($param);
+            // dd($snap);
+
             if ($snap->token) {
                 $penjualan->payment_token = $snap->token;
                 $penjualan->payment_url = $snap->redirect_url;
