@@ -18,6 +18,7 @@ class Pembelian extends Model
         'status_bayar',
     ];
 
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             PembelianSeeder::class,
             CustomerAlamatSeeder::class,
-            PenjualanSeeder::class,
+            // PenjualanSeeder::class,
         ]);
     }
 }

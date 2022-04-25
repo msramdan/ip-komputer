@@ -21,13 +21,9 @@ class PembelianController extends Controller
             'courier'       => $request->courier // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
         ])->get();
         return response()->json($cost);
-        // $output = '';
-        // $output .= '<select class="form-control kota-asal" id="kota_id" name="kota_id"><option value="">-- Pilih --</option>';
-        // foreach ($cost[0] as $row) {
-        //     $output .= '<option value=""> ' . $row['costs']->name . '</option>';
-        // }
-        // $output .= '</select>';
+    }
 
-        // echo $output;
+    public function doCheckOut(){
+
     }
 }

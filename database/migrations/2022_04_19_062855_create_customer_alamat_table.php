@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('customer_alamat', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customer');
+            $table->foreignId('customer_id')->constrained('customer')->cascadeOnDelete();
             $table->foreignId('provinsi_id')->constrained('provinsis');
             $table->foreignId('kota_id')->constrained('kota_kabupatens');
             $table->text('alamat_lengkap');

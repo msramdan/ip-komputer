@@ -200,27 +200,36 @@
 
                     <div class="col-md-6 col-sm-12 cart-shopping-total">
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <div class="cart-sub-total">
-                                            Subtotal<span class="inner-left-md"> @currency(Cart::getTotal())</span>
-                                        </div>
-                                        <div class="cart-sub-total">
-                                            Ongkir<span class="inner-left-md"> @currency(Cart::getTotal())</span>
-                                        </div>
-                                        <div class="cart-grand-total">
-                                            Grand Total<span class="inner-left-md">$600.00</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
+
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div class="cart-checkout-btn pull-right">
-                                            <button type="submit" class="btn btn-primary checkout-btn">PROCCED TO
-                                                CHEKOUT</button>
+                                        <div class="col-md-12" style="margin-bottom: 20px">
+                                            <div class="input-group" style="width: 100%">
+                                                <span class="input-group-addon" style="width: 40%"> <b>Sub Total</b> </span>
+                                                <input type="" class="form-control" id="sub_total_belanja" readonly style="text-align: right" value="{{ Cart::getTotal() }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom: 20px">
+                                            <div class="input-group" style="width: 100%">
+                                                <span style="width: 40%" class="input-group-addon"> <b>Ongkos Kirim</b> </span>
+                                                <input type="" class="form-control" id="ongkir_fix" readonly style="text-align: right" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12"  style="margin-bottom: 20px">
+                                            <div class="input-group" style="width:100%">
+                                                <span style="width: 40%" class="input-group-addon"> <b>Grand Total</b> </span>
+                                                <input type="" class="form-control" id="total_seluruh" readonly style="text-align: right">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-group" style="float: right">
+                                                <div class="cart-checkout-btn pull-right">
+                                                    <button  type="submit" id="proses_transaksi"
+                                                        class="btn btn-primary checkout-btn">PROCCED TO
+                                                        CHEKOUT</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -289,6 +298,13 @@
             sumHsl = sumHsl + parseFloat(table.rows[t].cells[4].innerHTML);
         }
         document.getElementById("berat_total").value = sumHsl * 1000;
+    </script>
+    <script>
+        $("#ongkir").change(function() {
+            let ongkir_fix = $('select[name=ongkir]').val();
+            $("#ongkir_fix").val(ongkir_fix);
+
+        })
     </script>
     <script>
         $("#provinsi-asal").change(function() {
@@ -418,7 +434,7 @@
                     let courier = $('select[name=courier]').val();
                     let weight = $('#berat_total').val();
 
-                    if (courier !=0) {
+                    if (courier != 0) {
                         if (isProcessing) {
                             return;
                         }
@@ -437,6 +453,7 @@
                             success: function(response) {
                                 isProcessing = false;
                                 if (response) {
+
                                     $('#ongkir').empty();
                                     // $('#ongkir').append('<option value="">-- Pilih --</option>')
                                     $.each(response[0]['costs'], function(key, value) {
@@ -452,6 +469,8 @@
                                                 0]
                                             .etd + ' hari)</option>')
                                     });
+                                    let ongkir_fix = $('select[name=ongkir]').val();
+                                    $("#ongkir_fix").val(ongkir_fix);
 
                                 }
                             }
@@ -462,18 +481,12 @@
 
                 }
             });
-
-
-
-
-
         })
     </script>
 
     <script>
         let isProcessing = false;
         $('#courier').change(function() {
-            // let token            = $("meta[name='csrf-token']").attr("content");
             let city_origin = $('#kota_id_asal').val();
             let city_destination = $('#kota_id_des').val();
             let courier = $('select[name=courier]').val();
@@ -497,6 +510,7 @@
                 success: function(response) {
                     isProcessing = false;
                     if (response) {
+
                         $('#ongkir').empty();
                         // $('#ongkir').append('<option value="">-- Pilih --</option>')
                         $.each(response[0]['costs'], function(key, value) {
@@ -505,10 +519,50 @@
                                 .service + '</strong> - Rp. ' + value.cost[0].value + ' (' +
                                 value.cost[0].etd + ' hari)</option>')
                         });
-
+                        let ongkir_fix = $('select[name=ongkir]').val();
+                        $("#ongkir_fix").val(ongkir_fix);
+                        let sub_total_belanja = $('#sub_total_belanja').val();
+                        let grand_total_sb = parseFloat(sub_total_belanja) + parseFloat(ongkir_fix)
+                        let grand_total = grand_total_sb.toFixed(0);
+                        $('#total_seluruh').val(grand_total)
                     }
                 }
             });
         });
+    </script>
+
+    <script>
+        function hitungTotal() {
+            let sub_total_belanja = $('#sub_total_belanja').val();
+            let ongkir_barang = $('#ongkir_fix').val();
+            if (ongkir_barang) {
+                ongkir_barang = $('#ongkir_fix').val();
+            } else {
+                ongkir_barang = 0;
+            }
+
+            let grand_total_sb = parseFloat(sub_total_belanja) + parseFloat(ongkir_barang)
+            let grand_total = grand_total_sb.toFixed(0);
+            $('#total_seluruh').val(grand_total)
+
+        }
+
+        $(document).on('change', '#alat-customer,#ongkir', function() {
+            hitungTotal()
+        });
+
+        function formatRibuan(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
+    </script>
+
+    <script>
+        $('#proses_transaksi').click(function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Kode pembelian tidak boleh kosong'
+            })
+        })
     </script>
 @endpush

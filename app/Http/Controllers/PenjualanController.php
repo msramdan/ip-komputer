@@ -14,8 +14,7 @@ class PenjualanController extends Controller
     public function __construct()
     {
         $this->middleware('permission:penjualan_show')->only('index');
-        $this->middleware('permission:penjualan_create')->only('create', 'store');
-        $this->middleware('permission:penjualan_update')->only('edit', 'update');
+        $this->middleware('permission:penjualan_detail')->only('create');
         $this->middleware('permission:penjualan_delete')->only('delete');
     }
     /**
@@ -45,8 +44,8 @@ class PenjualanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        
+    {
+
     }
 
     /**

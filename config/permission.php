@@ -71,8 +71,6 @@ return [
         ],
         'penjualan' =>[
             'penjualan_show',
-            'penjualan_create',
-            'penjualan_update',
             'penjualan_delete',
             'penjualan_detail',
         ],
@@ -82,7 +80,7 @@ return [
             'belanja_update',
             'belanja_delete',
         ],
-        
+
         'laporan' =>[
             'laporan_pembelian_show',
             'laporan_penjualan_show',

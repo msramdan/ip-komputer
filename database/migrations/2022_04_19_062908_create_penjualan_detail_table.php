@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('penjualan_id')->constrained('penjualan')->cascadeOnDelete();
             $table->foreignId('produk_id')->constrained('produk');
-            $table->timestamps();
             $table->integer('harga');
             $table->integer('qty');
             $table->integer('sub_total');
+            $table->timestamps();
         });
     }
 

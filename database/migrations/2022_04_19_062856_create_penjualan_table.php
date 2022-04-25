@@ -15,17 +15,20 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_penjualan',20);
-            $table->foreignId('produk_id')->constrained('produk');
+            $table->string('invoice',50);
             $table->foreignId('customer_id')->constrained('customer');
-            $table->date('tanggal');
+            $table->foreignId('customer_alamat_id')->constrained('customer_alamat');
+            $table->date('tanggal_pembelian');
+            $table->integer('sub_total');
+            $table->integer('ongkir');
+            $table->integer('diskon')->nullable();
             $table->integer('grand_total');
-            $table->integer('diskon');
-            $table->integer('total');
             $table->string('catatan');
-            $table->string('status_bayar');
-            $table->string('pengiriman');
-            $table->string('no_resi')->nullable();
+            $table->string('status',30);
+            $table->string('status_bayar',30);
+            $table->string('jasa_kirim',30);
+            $table->string('nama_service',30);
+            $table->string('no_resi',50);
             $table->timestamps();
         });
     }
