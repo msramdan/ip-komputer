@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             UnitSeeder::class,
             KategoriSeeder::class,
-            ProdukSeeder::class,
+            // ProdukSeeder::class,
             SettingTokoSeeder::class,
             SupplierSeeder::class,
             LocationsSeeder::class,

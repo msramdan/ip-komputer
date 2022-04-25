@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Penjualan;
+use App\Models\PenjualanDetail;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends Controller
 {
     public function __construct()
     {
         $this->middleware('permission:penjualan_show')->only('index');
-        $this->middleware('permission:penjualan_detail')->only('create');
         $this->middleware('permission:penjualan_delete')->only('delete');
     }
     /**
@@ -25,11 +26,14 @@ class PenjualanController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Penjualan::with('customer:id,nama');
+            $query = Penjualan::with('customer:id,nama', 'customer_alamat:id,alamat_lengkap');
             return Datatables::of($query)
                 ->addIndexColumn()
                 ->addColumn('customer', function ($row) {
                     return $row->customer->nama;
+                })
+                ->addColumn('customer_alamat', function ($row) {
+                    return $row->customer_alamat->alamat_lengkap;
                 })
                 ->addColumn('action', 'penjualan._action')
                 ->toJson();
@@ -45,7 +49,6 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -56,15 +59,6 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $penjualan = Penjualan::create([
-            'alamat_lengkap'   => $request->alamat_lengkap
-        ]);
-        if ($penjualan) {
-            $params = array("success" => true);
-        } else {
-            $params = array("success" => false);
-        }
-        echo json_encode($params);
     }
 
     /**
@@ -98,7 +92,11 @@ class PenjualanController extends Controller
      */
     public function update(Request $request, Penjualan $penjualan)
     {
-        //
+        DB::table('penjualan')
+            ->where('id', $penjualan->id)
+            ->update(['no_resi' => $request->no_resi]);
+        Alert::toast('No Resi berhasil di input', 'success');
+        return redirect()->back();
     }
 
     /**

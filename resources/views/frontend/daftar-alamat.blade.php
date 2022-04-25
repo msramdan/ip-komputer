@@ -191,7 +191,7 @@
             $("#provinsi-asal-edit").val(provinsi_id);
             $("#provinsi-asal").val('');
             $.ajax({
-                url: '/panel/cities/' + provinsi_id,
+                url: '/data-kota/' + provinsi_id,
                 type: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -219,7 +219,7 @@
         $("#provinsi-asal").change(function() {
             var selectedValue = $(this).val();
             $.ajax({
-                url: '/panel/cities/' + selectedValue,
+                url: '/data-kota/' + selectedValue,
                 type: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -242,7 +242,7 @@
         $("#provinsi-asal-edit").change(function() {
             var selectedValue = $(this).val();
             $.ajax({
-                url: '/panel/cities/' + selectedValue,
+                url: '/data-kota/' + selectedValue,
                 type: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',

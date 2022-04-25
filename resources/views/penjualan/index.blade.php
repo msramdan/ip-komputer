@@ -19,7 +19,7 @@
                                         <th>Ongkir</th>
                                         <th>Grand Total</th>
                                         <th>Pengiriman</th>
-                                        <th>Service Pengiriman</th>
+                                        <th>Berat Total</th>
                                         <th>Status Pembayaran</th>
                                         @canany(['penjualan_update', 'penjualan_delete', 'penjualan_detail'])
                                             <th>Action</th>
@@ -62,22 +62,32 @@
             },
             {
                 data: 'sub_total',
-                name: 'sub_total'
+                name: 'sub_total',
+                render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             },
             {
                 data: 'ongkir',
-                name: 'onglir'
+                name: 'onglir',
+                render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             },
             {
                 data: 'grand_total',
-                name: 'grand_total'
-            },            {
+                name: 'grand_total',
+                render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+            },
+            {
                 data: 'jasa_kirim',
                 name: 'jasa_kirim'
             },
             {
-                data: 'nama_service',
-                name: 'nama-service'
+                data: 'berat_total',
+                name: 'berat_total'
             },
             {
                 data: 'status_bayar',

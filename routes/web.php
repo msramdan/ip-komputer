@@ -69,6 +69,8 @@ Route::post('/cek-ongkir', [App\Http\Controllers\Frontend\PembelianController::c
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
 Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');
+// get kota
+Route::get('/data-kota/{provinsi_id}', [CustomerController::class, 'getCities']);
 
 // cart
 Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
@@ -76,6 +78,7 @@ Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+Route::post('doCheckout', [CartController::class, 'doCheckout'])->name('doCheckout');
 
 
 // Route Back end
@@ -112,7 +115,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::resource('/pembelian', PembelianController::class)->except('show');
     Route::put('update_status_bayar/{id}', [PembelianController::class, 'update_pembayaran'])->name('update_status_bayar');
-    Route::resource('/penjualan', PenjualanController::class)->except('show');
+    Route::resource('/penjualan', PenjualanController::class)->except('show','create');
     Route::resource('/cara-belanja', CaraBelanjaController::class)->except('show');
 });
 

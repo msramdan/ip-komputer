@@ -64,15 +64,24 @@
             },
             {
                 data: 'grand_total',
-                name: 'grand_total'
+                name: 'grand_total',
+                render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             },
             {
                 data: 'diskon',
-                name: 'diskon'
+                name: 'diskon',
+                render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             },
             {
                 data: 'total',
-                name: 'total'
+                name: 'total',
+                render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
             },
             {
                 data: 'status_bayar',

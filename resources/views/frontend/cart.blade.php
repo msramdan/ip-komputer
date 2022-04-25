@@ -114,11 +114,21 @@
                                     <td>
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <label class="info-title control-label"> <b style="color: black">Tanggal
+                                                        <span>*</span></b> </label>
+                                                <input type="date" value="<?php echo date('Y-m-d'); ?>" readonly class="form-control unicase-form-control text-input" placeholder="" id="tanggal_pembelian">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label class="info-title control-label"> <b style="color: black">Nama
                                                         Lengkap
                                                         <span>*</span></b> </label>
                                                 <input type="text" value="{{ $customer->nama }}"
-                                                    class="form-control unicase-form-control text-input" placeholder="">
+                                                    class="form-control unicase-form-control text-input" placeholder=""
+                                                    readonly>
+                                                <input type="hidden" value="{{ $customer->id }}" id="customer_id_pesan">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -126,7 +136,8 @@
                                                 <label class="info-title control-label"><b style="color: black">No Telpon
                                                         <span>*</span></b> </label>
                                                 <input type="text" value="{{ $customer->telpon }}"
-                                                    class="form-control unicase-form-control text-input" placeholder="">
+                                                    class="form-control unicase-form-control text-input" placeholder=""
+                                                    readonly>
                                             </div>
                                         </div>
                                         <input type="hidden" name="kota_id_asal" id="kota_id_asal" value="419">
@@ -191,6 +202,12 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Catatan</label>
+                                                <Textarea class="form-control" id="catatan" name="catatan"></Textarea>
+                                            </div>
+                                        </div>
                                         <input type="hidden" name="" id="berat_total">
                                     </td>
                                 </tr>
@@ -207,25 +224,30 @@
                                         <div class="col-md-12" style="margin-bottom: 20px">
                                             <div class="input-group" style="width: 100%">
                                                 <span class="input-group-addon" style="width: 40%"> <b>Sub Total</b> </span>
-                                                <input type="" class="form-control" id="sub_total_belanja" readonly style="text-align: right" value="{{ Cart::getTotal() }}">
+                                                <input type="" class="form-control" id="sub_total_belanja" readonly
+                                                    style="text-align: right" value="{{ Cart::getTotal() }}">
                                             </div>
                                         </div>
                                         <div class="col-md-12" style="margin-bottom: 20px">
                                             <div class="input-group" style="width: 100%">
-                                                <span style="width: 40%" class="input-group-addon"> <b>Ongkos Kirim</b> </span>
-                                                <input type="" class="form-control" id="ongkir_fix" readonly style="text-align: right" value="">
+                                                <span style="width: 40%" class="input-group-addon"> <b>Ongkos Kirim</b>
+                                                </span>
+                                                <input type="" class="form-control" id="ongkir_fix" readonly
+                                                    style="text-align: right" value="">
                                             </div>
                                         </div>
-                                        <div class="col-md-12"  style="margin-bottom: 20px">
+                                        <div class="col-md-12" style="margin-bottom: 20px">
                                             <div class="input-group" style="width:100%">
-                                                <span style="width: 40%" class="input-group-addon"> <b>Grand Total</b> </span>
-                                                <input type="" class="form-control" id="total_seluruh" readonly style="text-align: right">
+                                                <span style="width: 40%" class="input-group-addon"> <b>Grand Total</b>
+                                                </span>
+                                                <input type="" class="form-control" id="total_seluruh" readonly
+                                                    style="text-align: right">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="input-group" style="float: right">
                                                 <div class="cart-checkout-btn pull-right">
-                                                    <button  type="submit" id="proses_transaksi"
+                                                    <button type="submit" id="proses_transaksi"
                                                         class="btn btn-primary checkout-btn">PROCCED TO
                                                         CHEKOUT</button>
                                                 </div>
@@ -310,7 +332,7 @@
         $("#provinsi-asal").change(function() {
             var selectedValue = $(this).val();
             $.ajax({
-                url: '/panel/cities/' + selectedValue,
+                url: '/data-kota/' + selectedValue,
                 type: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -557,12 +579,93 @@
     </script>
 
     <script>
-        $('#proses_transaksi').click(function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Kode pembelian tidak boleh kosong'
-            })
+        $('#proses_transaksi').click(function(e) {
+            const customer_id_pesan = $('#customer_id_pesan').val();
+            const alamat_customer = $('#alat-customer').val();
+            const sub_total = $('#sub_total_belanja').val();
+            const ongkir = $('#ongkir_fix').val();
+            const diskon = 0;
+            const grand_total = $('#total_seluruh').val();
+            const jasa_kirim = $('#courier').val();
+            const catatan = $('#catatan').val();
+            const berat_total = $('#berat_total').val();
+            const tanggal_pembelian = $('#tanggal_pembelian').val();
+            // console.log(jasa_kirim);
+
+
+            let penjualan = {
+                customer_id_pesan: customer_id_pesan,
+                alamat_customer: alamat_customer,
+                sub_total: sub_total,
+                ongkir: ongkir,
+                diskon: diskon,
+                grand_total: grand_total,
+                jasa_kirim: jasa_kirim,
+                berat_total: berat_total,
+                catatan: catatan,
+                tanggal_pembelian: tanggal_pembelian,
+            }
+
+            if (alamat_customer==null) {
+                $("#alat-customer").focus();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Alamat belum di pilih'
+                })
+
+            }else if (jasa_kirim==0) {
+                $("#courier").focus();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Kurir belum dipilih'
+                })
+
+            }else if (!sub_total) {
+                $("#sub_total_belanja").focus();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Sub total tidak boleh kosong'
+                })
+
+            } else if (!ongkir) {
+                $("#ongkir_fix").focus();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ongkir tidak boleh kosong'
+                })
+
+            } else if (!grand_total) {
+                $("#total_seluruh").focus();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Grand Total tidak boleh kosong'
+
+                })
+            }else {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('doCheckout') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    data: penjualan,
+                    success: function(res) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Checkout Pesanan Berhasil',
+                            text: 'Berhasil'
+                        }).then(function() {
+                            window.open(res, '_blank');
+                        })
+                    },
+                })
+
+            }
         })
     </script>
 @endpush

@@ -23,12 +23,12 @@ return new class extends Migration
             $table->integer('ongkir');
             $table->integer('diskon')->nullable();
             $table->integer('grand_total');
-            $table->string('catatan');
+            $table->string('catatan')->nullable();
             $table->string('status',30);
             $table->string('status_bayar',30);
             $table->string('jasa_kirim',30);
-            $table->string('nama_service',30);
-            $table->string('no_resi',50);
+            $table->integer('berat_total');
+            $table->string('no_resi',50)->nullable();
             $table->timestamps();
         });
     }

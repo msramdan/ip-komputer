@@ -73,6 +73,7 @@ return [
             'penjualan_show',
             'penjualan_delete',
             'penjualan_detail',
+            'update_invoice',
         ],
         'cara-belanja' =>[
             'belanja_show',

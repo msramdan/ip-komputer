@@ -9,11 +9,16 @@ class Penjualan extends Model
 {
     use HasFactory;
     protected $table = 'penjualan';
-    protected $fillable = ['invoice','produk_id', 'customer_id', 'tanggal', 'grand_total', 'diskon', 'total', 'catatan', 'status_bayar', 'pengiriman','no_resi'];
+    protected $fillable = ['invoice', 'customer_id', 'customer_alamat_id', 'tanggal_pembelian', 'sub_total', 'ongkir','diskon', 'grand_total','status','status_bayar','jasa_kirim','berat_total'];
 
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function customer_alamat()
+    {
+        return $this->belongsTo(CustomerAlamat::class);
     }
 
     public const CREATED ="created";

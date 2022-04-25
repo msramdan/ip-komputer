@@ -22,8 +22,4 @@ class PembelianController extends Controller
         ])->get();
         return response()->json($cost);
     }
-
-    public function doCheckOut(){
-
-    }
 }
