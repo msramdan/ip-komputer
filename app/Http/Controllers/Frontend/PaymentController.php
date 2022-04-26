@@ -79,9 +79,25 @@ class PaymentController extends Controller
             $paymentStatus = PAYMENT::CANCEL;
         }
 
+        $table = "payments";
+        $primary = "number";
+        $prefix = "PAY-";
+        $date = date('dmy');
+        $q = DB::table($table)->select(DB::raw('MAX(RIGHT(' . $primary . ',5)) as kd_max'));
+        $prx = $prefix . $date;
+        if ($q->count() > 0) {
+            foreach ($q->get() as $k) {
+                $tmp = ((int)$k->kd_max) + 1;
+                $kd = $prx.'-'. sprintf("%06s", $tmp);
+            }
+        } else {
+            $kd = $prx . '-' . "000001";
+        }
+
+
         $paymentParams = [
             'penjualan_id' => $order->id,
-            'number' => 'Pay001',
+            'number' => $kd,
             'amount' => $paymentNotification->gross_amount,
             'method' => 'midtrans',
             'status' => $paymentStatus,
@@ -103,18 +119,20 @@ class PaymentController extends Controller
                         $order->status_bayar = Penjualan::PAID;
                         $order->status = Penjualan::CONFIRMED;
                         $order->save();
+                        // update stok
+                        $penjualan_id = $order->id;
+                        $detailItem = DB::table('penjualan_detail')
+                            ->where('penjualan_id', '=', $penjualan_id)
+                            ->get();
+                        foreach ($detailItem as $row) {
+                            $product = Produk::find($row->produk_id);
+                            $product->decrement('qty', $row->qty);
+                        }
                     }
                 }
             );
 
-            $penjualan_id = $order->id;
-            $detailItem = DB::table('penjualan_detail')
-                ->where('penjualan_id', '=', $penjualan_id)
-                ->get();
-            foreach ($detailItem as $row) {
-                $product = Produk::find($row->produk_id);
-                $product->decrement('qty', $row->qty);
-            }
+
         }
 
         $message = 'Payment status is : ' . $paymentStatus;
