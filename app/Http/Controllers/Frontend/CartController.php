@@ -109,7 +109,7 @@ class CartController extends Controller
         }
         DB::transaction(function () use ($request) {
             $orderParam = [
-                'invoice' => 'INV0001',
+                'invoice' => 'INV0090',
                 'customer_id' => $request->customer_id_pesan,
                 'customer_alamat_id' => $request->alamat_customer,
                 'tanggal_pembelian' => $request->tanggal_pembelian,
