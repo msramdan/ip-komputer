@@ -33,6 +33,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Models\Payment;
 
+
+
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
 Route::get('/kategori/{id}/{name}', [DashboardCrontroller::class, 'kategori'])->name('kategori-produk');
@@ -62,6 +64,7 @@ Route::post('create-alamat', [SettingAkunController::class, 'store_alamat'])->na
 Route::put('update-alamat/{id}', [SettingAkunController::class, 'update_alamat'])->name('update-alamat');
 // pembelian
 Route::get('/pembelian', [App\Http\Controllers\Frontend\PembelianController::class, 'index'])->name('pembelian');
+Route::get('/invoice/{id}', [App\Http\Controllers\Frontend\PembelianController::class, 'export'])->name('invoice');
 // cek ongkir
 Route::post('/cek-ongkir', [App\Http\Controllers\Frontend\PembelianController::class, 'check_ongkir'])->name('check_ongkir');
 // auth web

@@ -77,6 +77,18 @@
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="password">Password</label>
+                                    <input class="form-control @error('password') is-invalid @enderror" id="
+                                    password" type="password"
+                                        value=""
+                                        placeholder="Password" name="password" autocomplete="off">
+                                        <p style="color: red">Kosongkan jika tidak ingin meru ah password</p>
+                                    @error('password')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-sm btn-primary">SIMPAN</button>
                                 </div>

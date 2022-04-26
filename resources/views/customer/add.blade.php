@@ -56,21 +56,22 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1">Password</label>
-                                    <input class="form-control @error('password') is-invalid @enderror" id="
-                                                            exampleFormControlInput1" type="password"
-                                        value="{{ old('password') }}" placeholder="Password" name="password">
-                                    @error('password')
-                                        <span style="color: red;">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
 
                                 <div class="mb-3">
                                     <label for="telpon">No Telpon</label>
                                     <input class="form-control @error('telpon') is-invalid @enderror" id="
                                     telpon" type="text" value="{{ old('telpon') }}" placeholder="No Telpon" name="telpon" autocomplete="off">
                                     @error('telpon')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1">Password</label>
+                                    <input class="form-control @error('password') is-invalid @enderror" id="
+                                                            exampleFormControlInput1" type="password"
+                                        value="{{ old('password') }}" placeholder="Password" name="password">
+                                    @error('password')
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -159,13 +159,28 @@ class CustomerController extends Controller
         DB::beginTransaction();
         try {
             $customer = Customer::findOrFail($customer->id);
-            $customer->update([
-                'nama' => $request->nama,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'telpon' => $request->telpon,
-                'email' => $request->email,
-            ]);
+
+            if ($request->password == "" || $request->password == null) {
+                $customer->update([
+                    'nama' => $request->nama,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'telpon' => $request->telpon,
+                    'email' => $request->email,
+                ]);
+            } else {
+                $customer->update([
+                    'nama' => $request->nama,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'telpon' => $request->telpon,
+                    'email' => $request->email,
+                    'password'   => bcrypt($request->password),
+                ]);
+            }
+
+
+
             if ($customer) {
                 Alert::toast('Data berhasil diupdate', 'success');
                 return redirect()->route('customer.index');

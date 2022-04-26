@@ -42,11 +42,11 @@
                                                 <th>Invoce</th>
                                                 <th>Customer</th>
                                                 <th>Tanggal Pembelian</th>
-                                                <th>Subtotal</th>
-                                                <th>Ongkir</th>
+                                                {{-- <th>Subtotal</th>
+                                                <th>Ongkir</th> --}}
                                                 <th>Grand Total</th>
                                                 <th>Pengiriman</th>
-                                                <th>Berat Total</th>
+                                                {{-- <th>Berat Total</th> --}}
                                                 <th>Status Pembayaran</th>
                                                 <th>Action</th>
                                             </tr>
@@ -65,19 +65,19 @@
                                                     <td>{{ $row->invoice }}</td>
                                                     <td>{{ $row->nama_customer }}</td>
                                                     <td>{{ $row->tanggal_pembelian }}</td>
-                                                    <td>{{ $row->sub_total }}</td>
-                                                    <td>{{ $row->ongkir }}</td>
-                                                    <td>{{ $row->grand_total }}</td>
+                                                    {{-- <td>{{ $row->sub_total }}</td>
+                                                    <td>{{ $row->ongkir }}</td> --}}
+                                                    <td>@currency($row->grand_total)</td>
                                                     <td>{{ $row->jasa_kirim }}</td>
-                                                    <td>{{ $row->berat_total }}</td>
+                                                    {{-- <td>{{ $row->berat_total }}</td> --}}
                                                     <td>{{ $row->status_bayar }}</td>
                                                     <td>
-                                                        <a href="{{$row->payment_url }}" target="_blank" class="btn btn-sm btn-success mb-1">
+                                                        <a href="{{$row->payment_url }}" target="_blank" class="btn btn-sm btn-success">
                                                             <i class="fa fa-dollar" aria-hidden="true"></i> Bayar
                                                         </a>
-                                                        <button style="float: right" class="btn btn-danger mb-1 btn-sm">
-                                                            <i class="fa fa-print" aria-hidden="true"></i> Cetak
-                                                        </button>
+                                                        <a href="{{ route('invoice', $row->id) }}" class="btn btn-danger btn-sm">
+                                                            <i class="fa fa-print" aria-hidden="true"></i> Invoice
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -97,11 +97,11 @@
                                                     <th>Invoce</th>
                                                     <th>Customer</th>
                                                     <th>Tanggal Pembelian</th>
-                                                    <th>Subtotal</th>
-                                                    <th>Ongkir</th>
+                                                    {{-- <th>Subtotal</th>
+                                                    <th>Ongkir</th> --}}
                                                     <th>Grand Total</th>
                                                     <th>Pengiriman</th>
-                                                    <th>Berat Total</th>
+                                                    {{-- <th>Berat Total</th> --}}
                                                     <th>Status Pembayaran</th>
                                                     <th>No Resi</th>
                                                     <th>Action</th>
@@ -121,17 +121,17 @@
                                                         <td>{{ $row->invoice }}</td>
                                                         <td>{{ $row->nama_customer }}</td>
                                                         <td>{{ $row->tanggal_pembelian }}</td>
-                                                        <td>{{ $row->sub_total }}</td>
-                                                        <td>{{ $row->ongkir }}</td>
-                                                        <td>{{ $row->grand_total }}</td>
+                                                        {{-- <td>{{ $row->sub_total }}</td>
+                                                        <td>{{ $row->ongkir }}</td> --}}
+                                                        <td>@currency($row->grand_total) </td>
                                                         <td>{{ $row->jasa_kirim }}</td>
-                                                        <td>{{ $row->berat_total }}</td>
+                                                        {{-- <td>{{ $row->berat_total }}</td> --}}
                                                         <td>{{ $row->status_bayar }}</td>
                                                         <td>{{ $row->no_resi }}</td>
                                                         <td>
-                                                            <button class="btn btn-md btn-primary mb-1">
-                                                                <i class="fa fa-wpforms" aria-hidden="true"></i> Invoice
-                                                            </button>
+                                                            <a href="{{ route('invoice', $row->id) }}" class="btn btn-danger btn-sm" style="float:left;display:inline">
+                                                                <i class="fa fa-print" aria-hidden="true"></i> Invoice
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
