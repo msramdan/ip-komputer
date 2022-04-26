@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\Penjualan;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,25 +17,27 @@ class PaymentController extends Controller
 
         $payload = $request->getContent();
         $notification = json_decode($payload);
-        dd($payload);
 
-        $validSignatureKey = hash("sha512", $notification->order_id . $notification->status_code . $notification->gross_amount . env('MIDTRANS_SERVER_KEY'));
-
-        if ($notification->signature_key != $validSignatureKey) {
-            return response(['message' => 'Invalid signature'], 403);
-        }
+        // $validSignatureKey = hash("sha512", $notification->order_id . $notification->status_code . $notification->gross_amount . env('MIDTRANS_SERVER_KEY'));
+        // if ($notification->signature_key != $validSignatureKey) {
+        //     return response(['message' => 'Invalid signature'], 403);
+        // }
 
         $this->initPaymentGateway();
         $statusCode = null;
 
         $paymentNotification = new \Midtrans\Notification();
         $order = Penjualan::where('invoice', $paymentNotification->order_id)->firstOrFail();
+        $cek_status = $order->status_bayar;
+        // ambil id penjualan
 
-        if ($order->isPaid()) {
+
+        if($cek_status=='paid'){
             return response(['message' => 'The order has been paid before'], 422);
         }
 
         $transaction = $paymentNotification->transaction_status;
+
         $type = $paymentNotification->payment_type;
         $orderId = $paymentNotification->order_id;
         $fraud = $paymentNotification->fraud_status;
@@ -97,12 +100,21 @@ class PaymentController extends Controller
             DB::transaction(
                 function () use ($order, $payment) {
                     if (in_array($payment->status, [Payment::SUCCESS, Payment::SETTLEMENT])) {
-                        $order->payment_status = Penjualan::PAID;
+                        $order->status_bayar = Penjualan::PAID;
                         $order->status = Penjualan::CONFIRMED;
                         $order->save();
                     }
                 }
             );
+
+            $penjualan_id = $order->id;
+            $detailItem = DB::table('penjualan_detail')
+                ->where('penjualan_id', '=', $penjualan_id)
+                ->get();
+            foreach ($detailItem as $row) {
+                $product = Produk::find($row->produk_id);
+                $product->decrement('qty', $row->qty);
+            }
         }
 
         $message = 'Payment status is : ' . $paymentStatus;

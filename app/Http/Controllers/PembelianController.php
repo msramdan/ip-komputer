@@ -109,18 +109,18 @@ class PembelianController extends Controller
     {
         $purchase = DB::table('pembelian')
             ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
-            ->select('pembelian.*','pembelian.id as pembelian_id', 'supplier.*')
+            ->select('pembelian.*', 'pembelian.id as pembelian_id', 'supplier.*')
             ->where('pembelian.id', '=', $pembelian->id)
             ->first();
         $detail_purchase = DB::table('pembelian_detail')
             ->join('produk', 'produk.id', '=', 'pembelian_detail.produk_id')
             ->join('units', 'units.id', '=', 'produk.unit_id')
-            ->select('pembelian_detail.*', 'produk.nama as nama_produk','produk.qty as stok','produk.id as produk_id','units.nama_unit')
+            ->select('pembelian_detail.*', 'produk.nama as nama_produk', 'produk.qty as stok', 'produk.id as produk_id', 'units.nama_unit')
             ->where('pembelian_detail.pembelian_id', '=', $pembelian->id)
             ->get();
         $supplier = Supplier::all();
         $produk = Produk::all();
-        return view('pembelian.edit', compact('produk', 'supplier', 'purchase','detail_purchase'));
+        return view('pembelian.edit', compact('produk', 'supplier', 'purchase', 'detail_purchase'));
     }
 
     /**
@@ -184,7 +184,15 @@ class PembelianController extends Controller
         $pembelian->update([
             'status_bayar'   => 'Sudah Bayar',
         ]);
+
         if ($pembelian) {
+            $detailItem = DB::table('pembelian_detail')
+                ->where('pembelian_id', '=', $id)
+                ->get();
+            foreach ($detailItem as $row) {
+                $product = Produk::find($row->produk_id);
+                $product->increment('qty', $row->qty);
+            }
             Alert::toast('Pembayaran berhasil divalidasi', 'success');
             return redirect()->route('pembelian.index');
         } else {

@@ -100,16 +100,34 @@ class CartController extends Controller
         }
     }
 
+
     public function doCheckout(Request $request)
     {
-
         if (\Cart::isEmpty()) {
             Alert::error('Failed', 'Cart belanja masih kosong');
             return redirect()->route('dashboard');
         }
+
+
+
         DB::transaction(function () use ($request) {
+            $table = "penjualan";
+            $primary = "invoice";
+            $prefix = "INV-";
+            $date = date('dmy');
+            $q = DB::table($table)->select(DB::raw('MAX(RIGHT(' . $primary . ',5)) as kd_max'));
+            $prx = $prefix . $date;
+            if ($q->count() > 0) {
+                foreach ($q->get() as $k) {
+                    $tmp = ((int)$k->kd_max) + 1;
+                    $kd = $prx.'-'. sprintf("%06s", $tmp);
+                }
+            } else {
+                $kd = $prx . '-' . "000001";
+            }
+
             $orderParam = [
-                'invoice' => 'INV0090',
+                'invoice' => $kd,
                 'customer_id' => $request->customer_id_pesan,
                 'customer_alamat_id' => $request->alamat_customer,
                 'tanggal_pembelian' => $request->tanggal_pembelian,

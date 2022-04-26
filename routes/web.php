@@ -24,13 +24,13 @@ use App\Http\Controllers\Frontend\DashboardCrontroller;
 use App\Http\Controllers\Frontend\KontakController;
 use App\Http\Controllers\Frontend\LoginWebController;
 use App\Http\Controllers\Frontend\RegisterWebController;
-use App\Http\Controllers\frontend\SettingAkunController;
+use App\Http\Controllers\Frontend\SettingAkunController;
 use App\Http\Controllers\Frontend\TentangKamiController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PenjualanController;
-use App\Http\Controllers\frontend\CartController;
-use App\Http\Controllers\frontend\PaymentController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Models\Payment;
 
 // Route Front end

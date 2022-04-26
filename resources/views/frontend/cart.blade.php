@@ -660,7 +660,8 @@
                             title: 'Checkout Pesanan Berhasil',
                             text: 'Berhasil'
                         }).then(function() {
-                            window.open(res, '_blank');
+                            // window.open(res, '_blank');
+                            window.open(res);
                         })
                     },
                 })
