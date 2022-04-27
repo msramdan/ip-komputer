@@ -120,6 +120,41 @@ class CustomerController extends Controller
     }
 
 
+    public function getDetailItem($id)
+    {
+        $data = DB::table('penjualan_detail')
+        ->join('produk', 'produk.id', '=', 'penjualan_detail.produk_id')
+        ->select('penjualan_detail.*', 'produk.kode_produk','produk.nama')
+            ->where('penjualan_id', '=', $id)
+            ->get();
+        $output = '';
+        $output .= '<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Qty</th>
+                <th>Harga</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>';
+        foreach ($data as $row) {
+            // $output .= '<option value="' . $row->id . '"> ' . $row->nama . '</option>';
+            $output .= '<tr>
+            <td>'.$row->kode_produk.'</td>
+            <td>'.$row->nama.'</td>
+            <td>'.$row->qty.'</td>
+            <td>'.$row->harga.'</td>
+            <td>'.$row->sub_total.'</td>
+        </tr>';
+        }
+        $output .= '</tbody>
+        </table>';
+        echo $output;
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *

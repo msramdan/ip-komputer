@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use App\Models\Penjualan;
-use App\Models\PenjualanDetail;
-use App\Models\Produk;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
@@ -26,7 +23,7 @@ class PenjualanController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Penjualan::with('customer:id,nama', 'customer_alamat:id,alamat_lengkap');
+            $query = Penjualan::with('customer:id,nama,telpon', 'customer_alamat:id,alamat_lengkap');
             return Datatables::of($query)
                 ->addIndexColumn()
                 ->addColumn('customer', function ($row) {
@@ -34,6 +31,9 @@ class PenjualanController extends Controller
                 })
                 ->addColumn('customer_alamat', function ($row) {
                     return $row->customer_alamat->alamat_lengkap;
+                })
+                ->addColumn('telpon', function ($row) {
+                    return $row->customer->telpon;
                 })
                 ->addColumn('action', 'penjualan._action')
                 ->toJson();
@@ -117,4 +117,8 @@ class PenjualanController extends Controller
             return redirect()->route('penjualan.index');
         }
     }
+
+
+
+
 }

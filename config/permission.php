@@ -82,10 +82,6 @@ return [
             'belanja_delete',
         ],
 
-        'laporan' =>[
-            'laporan_pembelian_show',
-            'laporan_penjualan_show',
-        ],
     ],
 
     'models' => [

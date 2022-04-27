@@ -58,6 +58,7 @@
                                                     ->where('customer_id', '=', Session::get('id-customer'))
                                                     ->where('status_bayar', '=', 'unpaid')
                                                     ->select('penjualan.*', 'customer.nama as nama_customer')
+                                                    ->orderBy('penjualan.id', 'desc')
                                                     ->get();
                                             @endphp
                                             @foreach ($penjualan_sukses as $row)
@@ -114,6 +115,7 @@
                                                         ->where('customer_id', '=', Session::get('id-customer'))
                                                         ->where('status_bayar', '=', 'paid')
                                                         ->select('penjualan.*', 'customer.nama as nama_customer')
+                                                        ->orderBy('penjualan.id', 'desc')
                                                         ->get();
                                                 @endphp
                                                 @foreach ($penjualan_sukses as $row)

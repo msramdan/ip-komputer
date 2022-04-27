@@ -167,7 +167,10 @@
                 },
                 {
                     data: 'harga',
-                    name: 'harga'
+                    name: 'harga',
+                    render: function(data, type, full, meta) {
+                    return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
                 },
                 {
                     data: 'qty',
