@@ -214,31 +214,39 @@
             <div class="modal-body">
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                        <form>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Cetak Semua Transaksi ?</label>
+                        <form method="POST" action="{{ route('laporan_transaksi') }}">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Customer</label>
+                                <select name="customer" class="form-control">
+                                    <option value="semua">-- Semua Customer --</option>
+                                    @php
+                                        $cus = DB::table('customer')
+                                            ->select('*')
+                                            ->get();
+                                    @endphp
+                                    @foreach ($cus as $rows)
+                                        <option value="{{ $rows->id }}">{{ $rows->nama }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <br> <br>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Dari Tanggal</label>
                                 <input type="date" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp" placeholder="Enter email">
+                                    aria-describedby="emailHelp" name="dari" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Sampai Tanggal</label>
-                                <input type="date" class="form-control" id="exampleInputPassword1"
-                                    placeholder="Password">
+                                <input type="date" class="form-control" name="ke" required>
                             </div>
-                        </form>
+                            <button type="submit" class="btn btn-danger">Cetak</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                     </div>
                 </div>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cetak</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

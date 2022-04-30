@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use PDF; //library pdf
 
 class PembelianController extends Controller
 {
@@ -199,6 +200,45 @@ class PembelianController extends Controller
             Alert::toast('Pembayaran gagal divalidasi', 'error');
             return redirect()->route('pembelian.index');
         }
+    }
+
+    public function laporan_pembelian(Request $request)
+    {
+
+        $supplier = $request->supplier;
+        $dari = $request->dari;
+        $ke = $request->ke;
+
+        if($supplier =='semua'){
+            $pembelian = DB::table('pembelian')
+            ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+            ->select('pembelian.*','supplier.*')
+            ->whereDate('pembelian.tanggal','>=',$dari)
+            ->whereDate('pembelian.tanggal','<=',$ke)
+            ->get();
+        }else{
+            $pembelian = DB::table('pembelian')
+            ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+            ->select('pembelian.*','supplier.*')
+            ->whereDate('pembelian.tanggal','>=',$dari)
+            ->whereDate('pembelian.tanggal','<=',$ke)
+            ->where('pembelian.supplier_id', $supplier)
+            ->get();
+        }
+        // dd($pembelian);
+
+        $toko = DB::table('setting_toko')
+                ->first();
+
+        $data = PDF::loadview('pembelian.laporan_pembelian', [
+            'data' => $pembelian,
+            'toko' => $toko
+        ]);
+        return $data->download('Laporan_pembelian.pdf');
+        // return view('pembelian.laporan_pembelian', [
+        //     'data' => $pembelian,
+        //     'toko' => $toko
+        // ]);
     }
 
 

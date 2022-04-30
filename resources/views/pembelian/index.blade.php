@@ -10,7 +10,7 @@
                         @can('pembelian_create')
                             <a href="{{ route('pembelian.create') }}" class="btn btn-md btn-success mb-3">TAMBAH</a>
                         @endcan
-
+                        <a href="" class="btn btn-md btn-danger mb-3" data-toggle="modal" data-target="#ajaxModel2">Cetak Laporan</a>
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                 <thead>

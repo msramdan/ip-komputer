@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                        <a href="{{ route('supplier.create') }}" class="btn btn-md btn-danger mb-3" data-toggle="modal" data-target="#ajaxModel2">Cetak Laporan</a>
+                        <a href="" class="btn btn-md btn-danger mb-3" data-toggle="modal" data-target="#ajaxModel2">Cetak Laporan</a>
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                 <thead>

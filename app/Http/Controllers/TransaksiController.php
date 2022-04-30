@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Transaksi;
+use PDF; //library pdf
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
@@ -116,6 +118,51 @@ class TransaksiController extends Controller
             Alert::toast('Data gagal dihapus', 'error');
             return redirect()->route('transaksi.index');
         }
+    }
+
+    public function laporan_transaksi(Request $request)
+    {
+
+        $customer = $request->customer;
+        $dari = $request->dari;
+        $ke = $request->ke;
+
+        if($customer =='semua'){
+            $transaksi = DB::table('transaksi')
+            ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
+            ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
+            ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+            ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+            ->select('transaksi.*', 'customer.nama as nama_customer','customer.email as email_customer','customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
+            ->whereDate('transaksi.tanggal_pembelian','>=',$dari)
+            ->whereDate('transaksi.tanggal_pembelian','<=',$ke)
+            ->get();
+        }else{
+            $transaksi = DB::table('transaksi')
+            ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
+            ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
+            ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+            ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+            ->select('transaksi.*', 'customer.nama as nama_customer','customer.email as email_customer','customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
+            ->whereDate('transaksi.tanggal_pembelian','>=',$dari)
+            ->whereDate('transaksi.tanggal_pembelian','<=',$ke)
+            ->where('transaksi.customer_id', $customer)
+            ->get();
+        }
+        // dd($transaksi);
+
+        $toko = DB::table('setting_toko')
+                ->first();
+
+        $data = PDF::loadview('transaksi.laporan_transaksi', [
+            'data' => $transaksi,
+            'toko' => $toko
+        ]);
+        return $data->download('Laporan_Transaksi.pdf');
+        // return view('transaksi.laporan_transaksi', [
+        //     'data' => $transaksi,
+        //     'toko' => $toko
+        // ]);
     }
 
 

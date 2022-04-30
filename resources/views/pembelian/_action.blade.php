@@ -1,6 +1,4 @@
 <td>
-
-
     @if ($model->status_bayar == 'Sudah Bayar')
         <a href="" class="btn btn-success btn-xs mb-1 disabled" title="Edit">
             <i class="fa fa-check" aria-hidden="true"></i>
@@ -49,3 +47,53 @@
         @endcan
     @endif
 </td>
+
+<div class="modal fade" id="ajaxModel2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-xs" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan Pembelian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('laporan_pembelian') }}">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Supplier</label>
+                                <select name="supplier" class="form-control">
+                                    <option value="semua">-- Semua Supplier --</option>
+                                    @php
+                                        $cus = DB::table('supplier')
+                                            ->select('*')
+                                            ->get();
+                                    @endphp
+                                    @foreach ($cus as $rows)
+                                        <option value="{{ $rows->id }}">{{ $rows->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Dari Tanggal</label>
+                                <input type="date" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" name="dari" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Sampai Tanggal</label>
+                                <input type="date" class="form-control" name="ke" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger">Cetak</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

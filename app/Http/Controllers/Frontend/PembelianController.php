@@ -25,8 +25,8 @@ class PembelianController extends Controller
             ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
             ->select('transaksi.*', 'customer.nama as nama_customer','customer.email as email_customer','customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
             ->where('transaksi.id', $id)->first();
-        $toko = DB::table('setting_toko')
-                ->first();
+        // $toko = DB::table('setting_toko')
+        //         ->first();
         $detail = DB::table('transaksi_detail')
         ->join('produk', 'produk.id', '=', 'transaksi_detail.produk_id')
         ->select('transaksi_detail.*', 'produk.kode_produk' ,'produk.nama as nama_produk')
@@ -34,7 +34,7 @@ class PembelianController extends Controller
 
         $data = PDF::loadview('Frontend.invoice', [
             'data' => $transaksi,
-            'toko' => $toko,
+            // 'toko' => $toko,
             'detailItem' =>$detail
         ]);
         return $data->download('invoice-'.$transaksi->invoice.'.pdf');

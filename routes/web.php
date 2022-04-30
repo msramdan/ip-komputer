@@ -119,7 +119,9 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::put('update_status_bayar/{id}', [PembelianController::class, 'update_pembayaran'])->name('update_status_bayar');
     Route::resource('/transaksi', TransaksiController::class)->except('show','create');
+    Route::post('/laporan_transaksi',  [TransaksiController::class, 'laporan_transaksi'])->name('laporan_transaksi');
     Route::resource('/cara-belanja', CaraBelanjaController::class)->except('show');
     Route::resource('/pembelian', PembelianController::class)->except('show');
+    Route::post('/laporan_pembelian',  [PembelianController::class, 'laporan_pembelian'])->name('laporan_pembelian');
 });
 
