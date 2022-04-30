@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Laporan Penjualan')
+@section('title', 'Laporan Transaksi')
 @section('content')
     <div class="container-fluid">
         {{ Breadcrumbs::render('laporan-penjualan') }}

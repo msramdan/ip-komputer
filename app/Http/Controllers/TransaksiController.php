@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penjualan;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 
-class PenjualanController extends Controller
+class TransaksiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:penjualan_show')->only('index');
-        $this->middleware('permission:penjualan_delete')->only('delete');
+        $this->middleware('permission:transaksi_show')->only('index');
+        $this->middleware('permission:transaksi_delete')->only('delete');
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class PenjualanController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Penjualan::with('customer:id,nama,telpon', 'customer_alamat:id,alamat_lengkap');
+            $query = Transaksi::with('customer:id,nama,telpon', 'customer_alamat:id,alamat_lengkap');
             return Datatables::of($query)
                 ->addIndexColumn()
                 ->addColumn('customer', function ($row) {
@@ -35,11 +35,11 @@ class PenjualanController extends Controller
                 ->addColumn('telpon', function ($row) {
                     return $row->customer->telpon;
                 })
-                ->addColumn('action', 'penjualan._action')
+                ->addColumn('action', 'transaksi._action')
                 ->toJson();
         }
 
-        return view('penjualan.index');
+        return view('transaksi.index');
     }
 
     /**
@@ -64,21 +64,21 @@ class PenjualanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Penjualan  $penjualan
+     * @param  \App\Models\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function show(Penjualan $penjualan)
+    public function show(transaksi $transaksi)
     {
-        // return view('penjualan.show', compact('penjualan'));
+        // return view('transaksi.show', compact('transaksi'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Penjualan  $penjualan
+     * @param  \App\Models\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Penjualan $penjualan)
+    public function edit(Transaksi $transaksi)
     {
         //
     }
@@ -87,13 +87,13 @@ class PenjualanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penjualan  $penjualan
+     * @param  \App\Models\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Penjualan $penjualan)
+    public function update(Request $request, Transaksi $transaksi)
     {
-        DB::table('penjualan')
-            ->where('id', $penjualan->id)
+        DB::table('transaksi')
+            ->where('id', $transaksi->id)
             ->update(['no_resi' => $request->no_resi]);
         Alert::toast('No Resi berhasil di input', 'success');
         return redirect()->back();
@@ -102,19 +102,19 @@ class PenjualanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Penjualan  $penjualan
+     * @param  \App\Models\transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penjualan $penjualan)
+    public function destroy(Transaksi $transaksi)
     {
-        $penjualan = Penjualan::findOrFail($penjualan->id);
-        $penjualan->delete();
-        if ($penjualan) {
+        $transaksi = Transaksi::findOrFail($transaksi->id);
+        $transaksi->delete();
+        if ($transaksi) {
             Alert::toast('Data berhasil dihapus', 'success');
-            return redirect()->route('penjualan.index');
+            return redirect()->route('transaksi.index');
         } else {
             Alert::toast('Data gagal dihapus', 'error');
-            return redirect()->route('penjualan.index');
+            return redirect()->route('transaksi.index');
         }
     }
 

@@ -53,15 +53,15 @@
                                         </thead>
                                         <tbody>
                                             @php
-                                                $penjualan_sukses = DB::table('penjualan')
-                                                    ->join('customer', 'customer.id', '=', 'penjualan.customer_id')
+                                                $transaksi_sukses = DB::table('transaksi')
+                                                    ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
                                                     ->where('customer_id', '=', Session::get('id-customer'))
                                                     ->where('status_bayar', '=', 'unpaid')
-                                                    ->select('penjualan.*', 'customer.nama as nama_customer')
-                                                    ->orderBy('penjualan.id', 'desc')
+                                                    ->select('transaksi.*', 'customer.nama as nama_customer')
+                                                    ->orderBy('transaksi.id', 'desc')
                                                     ->get();
                                             @endphp
-                                            @foreach ($penjualan_sukses as $row)
+                                            @foreach ($transaksi_sukses as $row)
                                                 <tr>
                                                     <td>{{ $row->invoice }}</td>
                                                     <td>{{ $row->nama_customer }}</td>
@@ -110,15 +110,15 @@
                                             </thead>
                                             <tbody>
                                                 @php
-                                                    $penjualan_sukses = DB::table('penjualan')
-                                                        ->join('customer', 'customer.id', '=', 'penjualan.customer_id')
+                                                    $transaksi_sukses = DB::table('transaksi')
+                                                        ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
                                                         ->where('customer_id', '=', Session::get('id-customer'))
                                                         ->where('status_bayar', '=', 'paid')
-                                                        ->select('penjualan.*', 'customer.nama as nama_customer')
-                                                        ->orderBy('penjualan.id', 'desc')
+                                                        ->select('transaksi.*', 'customer.nama as nama_customer')
+                                                        ->orderBy('transaksi.id', 'desc')
                                                         ->get();
                                                 @endphp
-                                                @foreach ($penjualan_sukses as $row)
+                                                @foreach ($transaksi_sukses as $row)
                                                     <tr>
                                                         <td>{{ $row->invoice }}</td>
                                                         <td>{{ $row->nama_customer }}</td>

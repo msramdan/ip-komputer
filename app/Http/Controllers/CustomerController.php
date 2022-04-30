@@ -122,10 +122,10 @@ class CustomerController extends Controller
 
     public function getDetailItem($id)
     {
-        $data = DB::table('penjualan_detail')
-        ->join('produk', 'produk.id', '=', 'penjualan_detail.produk_id')
-        ->select('penjualan_detail.*', 'produk.kode_produk','produk.nama')
-            ->where('penjualan_id', '=', $id)
+        $data = DB::table('transaksi_detail')
+        ->join('produk', 'produk.id', '=', 'transaksi_detail.produk_id')
+        ->select('transaksi_detail.*', 'produk.kode_produk','produk.nama')
+            ->where('transaksi_id', '=', $id)
             ->get();
         $output = '';
         $output .= '<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

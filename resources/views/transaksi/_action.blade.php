@@ -1,5 +1,5 @@
 <td>
-    @can('penjualan_detail')
+    @can('transaksi_detail')
         <a href="#" class="btn btn-success btn-xs mb-1" title="Detail" data-toggle="modal" data-target="#ajaxModel"
             data-id="{{ $model->id }}" data-invoice="{{ $model->invoice }}"
             data-modal-customer="{{ $model->customer->nama }}" data-modal-telpon="{{ $model->customer->telpon }}"
@@ -8,7 +8,7 @@
             data-modal-sub-total="{{ $model->sub_total }}" data-modal-ongkir="{{ $model->ongkir }}"
             data-modal-grand-total="{{ $model->grand_total }}" data-modal-jasa-kirim="{{ $model->jasa_kirim }}"
             data-modal-berat-total="{{ $model->berat_total }}" data-modal-status-bayar="{{ $model->status_bayar }}"
-            data-modal-catatan="{{ $model->catatan }}" id="detailPenjualan">
+            data-modal-catatan="{{ $model->catatan }}" id="detailtransaksi">
             <i class="fas fa-eye"></i>
         </a>
     @endcan
@@ -20,8 +20,8 @@
         </a>
     @endcan
 
-    @can('penjualan_delete')
-        <form action="{{ route('penjualan.destroy', $model->id) }}" method="post" class="d-inline"
+    @can('transaksi_delete')
+        <form action="{{ route('transaksi.destroy', $model->id) }}" method="post" class="d-inline"
             onsubmit="return confirm('Yakin ingin menghapus data ini?')">
             @csrf
             @method('delete')
@@ -43,7 +43,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('penjualan.update', $model->id) }}">
+            <form method="POST" action="{{ route('transaksi.update', $model->id) }}">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -66,7 +66,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 <script type="text/javascript">
-    $(document).on('click', '#detailPenjualan', function() {
+    $(document).on('click', '#detailtransaksi', function() {
         var id = $(this).data('id');
         var invoice = $(this).data('invoice');
         var modal_customer = $(this).data('modal-customer');
@@ -121,7 +121,7 @@
     <div class="modal-dialog  modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Penjualan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail transaksi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

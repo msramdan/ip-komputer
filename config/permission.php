@@ -69,10 +69,10 @@ return [
             'pembelian_delete',
             'update_pembayaran',
         ],
-        'penjualan' =>[
-            'penjualan_show',
-            'penjualan_delete',
-            'penjualan_detail',
+        'transaksi' =>[
+            'transaksi_show',
+            'transaksi_delete',
+            'transaksi_detail',
             'update_invoice',
         ],
         'cara-belanja' =>[

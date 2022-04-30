@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title', 'Data Penjualan')
+@section('title', 'Data transaksi')
 @section('content')
     <div class="container-fluid">
-        {{ Breadcrumbs::render('penjualan_index') }}
+        {{ Breadcrumbs::render('transaksi_index') }}
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow mb-4">
@@ -21,7 +21,7 @@
                                         <th>Pengiriman</th>
                                         <th>Berat Total</th>
                                         <th>Status Pembayaran</th>
-                                        @canany(['penjualan_update', 'penjualan_delete', 'penjualan_detail'])
+                                        @canany(['transaksi_update', 'transaksi_delete', 'transaksi_detail'])
                                             <th>Action</th>
                                         @endcanany
                                     </tr>
@@ -107,7 +107,7 @@
         $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('penjualan.index') }}",
+            ajax: "{{ route('transaksi.index') }}",
             columns: columns
         });
     </script>

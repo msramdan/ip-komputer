@@ -28,7 +28,7 @@ use App\Http\Controllers\Frontend\SettingAkunController;
 use App\Http\Controllers\Frontend\TentangKamiController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Models\Payment;
@@ -118,7 +118,8 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::get('/laporan-penjualan', [LaporanController::class, 'laporan_penjualan'])->name('laporan-penjualan');
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);
     Route::put('update_status_bayar/{id}', [PembelianController::class, 'update_pembayaran'])->name('update_status_bayar');
-    Route::resource('/penjualan', PenjualanController::class)->except('show','create');
+    Route::resource('/transaksi', TransaksiController::class)->except('show','create');
     Route::resource('/cara-belanja', CaraBelanjaController::class)->except('show');
+    Route::resource('/pembelian', PembelianController::class)->except('show');
 });
 

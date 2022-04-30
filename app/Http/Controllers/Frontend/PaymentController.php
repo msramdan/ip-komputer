@@ -4,7 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
-use App\Models\Penjualan;
+use App\Models\Transaksi;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,9 +27,9 @@ class PaymentController extends Controller
         $statusCode = null;
 
         $paymentNotification = new \Midtrans\Notification();
-        $order = Penjualan::where('invoice', $paymentNotification->order_id)->firstOrFail();
+        $order = Transaksi::where('invoice', $paymentNotification->order_id)->firstOrFail();
         $cek_status = $order->status_bayar;
-        // ambil id penjualan
+        // ambil id Transaksi
 
 
         if($cek_status=='paid'){
@@ -96,7 +96,7 @@ class PaymentController extends Controller
 
 
         $paymentParams = [
-            'penjualan_id' => $order->id,
+            'transaksi_id' => $order->id,
             'number' => $kd,
             'amount' => $paymentNotification->gross_amount,
             'method' => 'midtrans',
@@ -116,13 +116,13 @@ class PaymentController extends Controller
             DB::transaction(
                 function () use ($order, $payment) {
                     if (in_array($payment->status, [Payment::SUCCESS, Payment::SETTLEMENT])) {
-                        $order->status_bayar = Penjualan::PAID;
-                        $order->status = Penjualan::CONFIRMED;
+                        $order->status_bayar = Transaksi::PAID;
+                        $order->status = Transaksi::CONFIRMED;
                         $order->save();
                         // update stok
-                        $penjualan_id = $order->id;
-                        $detailItem = DB::table('penjualan_detail')
-                            ->where('penjualan_id', '=', $penjualan_id)
+                        $transaksi_id = $order->id;
+                        $detailItem = DB::table('transaksi_detail')
+                            ->where('transaksi_id', '=', $transaksi_id)
                             ->get();
                         foreach ($detailItem as $row) {
                             $product = Produk::find($row->produk_id);
@@ -148,31 +148,30 @@ class PaymentController extends Controller
     public function completed(Request $request)
 	{
 		$code = $request->query('order_id');
-		$order = Penjualan::where('invoice', $code)->firstOrFail();
+		$order = Transaksi::where('invoice', $code)->firstOrFail();
 
-		if ($order->payment_status == Penjualan::UNPAID) {
+		if ($order->payment_status == Transaksi::UNPAID) {
 			return redirect('payments/failed?order_id='. $code);
 		}
         Alert::success('Success', 'Thank you for completing the payment process!');
-		// return redirect('orders/received/'. $order->id);
+		return redirect('dashboard');
 	}
 
 
     public function unfinish(Request $request)
 	{
 		$code = $request->query('order_id');
-		$order = Penjualan::where('invoice', $code)->firstOrFail();
+		$order = Transaksi::where('invoice', $code)->firstOrFail();
         Alert::error('Failed', 'Sorry, we couldnt process your payment.');
 
-		// return redirect('orders/received/'. $order->id);
+		return redirect('dashboard');
 	}
 
     public function failed(Request $request)
 	{
 		$code = $request->query('order_id');
-		$order = Penjualan::where('invoice', $code)->firstOrFail();
+		$order = Transaksi::where('invoice', $code)->firstOrFail();
         Alert::error('Failed', 'Sorry, we couldnt process your payment.');
-
-		// return redirect('orders/received/'. $order->id);
+		return redirect('dashboard');
 	}
 }

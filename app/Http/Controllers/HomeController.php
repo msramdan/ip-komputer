@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Charts\PembelianChart;
 use App\Charts\PenjualanChart;
 use App\Models\Pembelian;
-use App\Models\Penjualan;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,7 +36,7 @@ class HomeController extends Controller
             ->count();
         $jml_role = DB::table("roles")
             ->count();
-        $penjualan = Penjualan::where('status_bayar', 'paid')
+        $penjualan = Transaksi::where('status_bayar', 'paid')
             ->sum('grand_total');
 
         $pembelian = Pembelian::where('status_bayar', 'Sudah Bayar')->sum('grand_total');
@@ -58,7 +58,7 @@ class HomeController extends Controller
 
 
         // data cart penjualan
-        $dataCartPenjualan = Penjualan::Where('status_bayar','paid')
+        $dataCartPenjualan = Transaksi::Where('status_bayar','paid')
         ->selectRaw("SUM(grand_total) as grand_total")
         ->selectRaw("tanggal_pembelian")
         ->groupBy('tanggal_pembelian')

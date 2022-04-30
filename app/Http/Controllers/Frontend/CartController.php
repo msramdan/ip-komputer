@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
-use App\Models\Penjualan;
-use App\Models\PenjualanDetail;
+use App\Models\Transaksi;
+use App\Models\TransaksiDetail;
 
 class CartController extends Controller
 {
@@ -111,7 +111,7 @@ class CartController extends Controller
 
 
         DB::transaction(function () use ($request) {
-            $table = "penjualan";
+            $table = "transaksi";
             $primary = "invoice";
             $prefix = "INV-";
             $date = date('dmy');
@@ -136,28 +136,28 @@ class CartController extends Controller
                 'diskon' => 0,
                 'grand_total' => $request->grand_total,
                 'catatan' => $request->catatan,
-                'status' => Penjualan::CREATED,
-                'status_bayar' => Penjualan::UNPAID,
+                'status' => Transaksi::CREATED,
+                'status_bayar' => Transaksi::UNPAID,
                 'jasa_kirim' => $request->jasa_kirim,
                 'berat_total' => $request->berat_total,
 
             ];
 
-            $penjualan = Penjualan::create($orderParam);
+            $penjualan = Transaksi::create($orderParam);
 
 
             $cartItems = \Cart::getContent();
             if ($penjualan) {
                 foreach ($cartItems as $data) {
                     $detailItem = [
-                        'penjualan_id' => $penjualan->id,
+                        'transaksi_id' => $penjualan->id,
                         'produk_id' => $data->id,
                         'harga' => $data->price,
                         'qty' => $data->quantity,
                         'sub_total' => $data->price * $data->quantity,
                     ];
                     // tambah detail
-                    $detailPenjualan = PenjualanDetail::create($detailItem);
+                    $detailPenjualan = TransaksiDetail::create($detailItem);
                 }
                 \Cart::clear();
             }

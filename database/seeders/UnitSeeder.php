@@ -16,6 +16,14 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-        Unit::factory()->count(5)->create();
+        Unit::create([
+            'nama_unit' => 'PCS'
+        ]);
+        Unit::create([
+            'nama_unit' => 'Roll'
+        ]);
+        Unit::create([
+            'nama_unit' => 'Meter'
+        ]);
     }
 }

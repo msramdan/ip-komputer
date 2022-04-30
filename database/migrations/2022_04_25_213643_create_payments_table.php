@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('penjualan_id');
+            $table->unsignedBigInteger('transaksi_id');
             $table->string('number')->unique();
             $table->decimal('amount', 16, 2)->default(0);
             $table->string('method');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('bill_key')->nullable();
             $table->timestamps();
 
-            $table->foreign('penjualan_id')->references('id')->on('penjualan');
+            $table->foreign('transaksi_id')->references('id')->on('transaksi');
             $table->index('number');
             $table->index('method');
             $table->index('token');

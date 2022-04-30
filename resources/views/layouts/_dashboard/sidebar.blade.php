@@ -74,11 +74,11 @@
     </li>
     @endcanany
 
-    @canany(['penjualan_show'])
-    <li class="nav-item {{ set_active('penjualan*') }}">
-        <a class="nav-link" href="{{ route('penjualan.index') }}">
+    @canany(['transaksi_show'])
+    <li class="nav-item {{ set_active('transaksi*') }}">
+        <a class="nav-link" href="{{ route('transaksi.index') }}">
             <i class="fas fa-shopping-cart"></i>
-            <span>Penjualan</span></a>
+            <span>Transaksi</span></a>
     </li>
     @endcanany
     @canany(['pesan_show'])

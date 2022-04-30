@@ -1,36 +1,36 @@
 @extends('layouts.master')
-@section('title', 'Tambah penjualan')
+@section('title', 'Tambah transaksi')
 @section('content')
     <div class="container-fluid">
-        {{-- {{ Breadcrumbs::render('penjualan-tambah') }} --}}
+        {{-- {{ Breadcrumbs::render('transaksi-tambah') }} --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow mb-4">
                     <div class="card-body">
 
-                        <form method="POST" action="{{ route('penjualan.store') }}">
+                        <form method="POST" action="{{ route('transaksi.store') }}">
 
 
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="{{ route('penjualan.index') }}" class="btn btn-warning"
+                                    <a href="{{ route('transaksi.index') }}" class="btn btn-warning"
                                         style="float: right"><i class="fa fa-arrow-left"></i> Back</a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="kode_penjualan">Kode penjualan</label>
-                                        <input class="form-control @error('kode_penjualan') is-invalid @enderror" id="
-                                                                                        kode_penjualan" type="text"
-                                            value="{{ old('kode_penjualan') }}" placeholder="Kode penjualan"
-                                            name="kode_penjualan" autocomplete="off">
-                                        @error('kode_penjualan')
+                                        <label for="kode_transaksi">Kode transaksi</label>
+                                        <input class="form-control @error('kode_transaksi') is-invalid @enderror" id="
+                                                                                        kode_transaksi" type="text"
+                                            value="{{ old('kode_transaksi') }}" placeholder="Kode transaksi"
+                                            name="kode_transaksi" autocomplete="off">
+                                        @error('kode_transaksi')
                                             <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tanggal">Tanggal penjualan</label>
+                                        <label for="tanggal">Tanggal transaksi</label>
                                         <input class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" type="date"
                                             value="{{ old('tanggal') }}" placeholder="Tanggal"
                                             name="tanggal" autocomplete="off">
@@ -69,12 +69,12 @@
                                 </div>
                                 <div class="col-md-3 offset-md-6">
                                     <div class="mb-3">
-                                        <label for="kode_penjualan">Harga</label>
-                                        <input class="form-control @error('kode_penjualan') is-invalid @enderror" id="
-                                                                                        kode_penjualan" type="text"
-                                            value="{{ old('kode_penjualan') }}" placeholder="Harga"
-                                            name="kode_penjualan" autocomplete="off">
-                                        @error('kode_penjualan')
+                                        <label for="kode_transaksi">Harga</label>
+                                        <input class="form-control @error('kode_transaksi') is-invalid @enderror" id="
+                                                                                        kode_transaksi" type="text"
+                                            value="{{ old('kode_transaksi') }}" placeholder="Harga"
+                                            name="kode_transaksi" autocomplete="off">
+                                        @error('kode_transaksi')
                                             <span style="color: red;">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -82,13 +82,13 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="kode_penjualan">QTY</label>
+                                        <label for="kode_transaksi">QTY</label>
                                         <div class="input-group mb-3">
 
-                                            <input class="form-control @error('kode_penjualan') is-invalid @enderror"
-                                                id="kode_penjualan" type="number" value="{{ old('kode_penjualan') }}"
-                                                placeholder="QTY" name="kode_penjualan" autocomplete="off">
-                                            @error('kode_penjualan')
+                                            <input class="form-control @error('kode_transaksi') is-invalid @enderror"
+                                                id="kode_transaksi" type="number" value="{{ old('kode_transaksi') }}"
+                                                placeholder="QTY" name="kode_transaksi" autocomplete="off">
+                                            @error('kode_transaksi')
                                                 <span style="color: red;">{{ $message }}</span>
                                             @enderror
                                             <div class="input-group-prepend">

@@ -63,20 +63,20 @@ Breadcrumbs::for('pembelian-edit', function (BreadcrumbTrail $trail, $pembelian)
 
 
 // ============================================================================================================
-//Penjualan
-Breadcrumbs::for('penjualan_index', function (BreadcrumbTrail $trail) {
-    $trail->push('Data Penjualan', route('penjualan.index'));
+//transaksi
+Breadcrumbs::for('transaksi_index', function (BreadcrumbTrail $trail) {
+    $trail->push('Data transaksi', route('transaksi.index'));
 });
-//Penjualan > Tambah
-Breadcrumbs::for('penjualan-tambah', function (BreadcrumbTrail $trail) {
-    $trail->parent('penjualan_index');
-    $trail->push('Tambah Penjualan', route('penjualan.create'));
+//transaksi > Tambah
+Breadcrumbs::for('transaksi-tambah', function (BreadcrumbTrail $trail) {
+    $trail->parent('transaksi_index');
+    $trail->push('Tambah transaksi', route('transaksi.create'));
 });
-//Penjualan > Edit
-Breadcrumbs::for('penjualan-edit', function (BreadcrumbTrail $trail, $penjualan) {
-    $trail->parent('penjualan_index');
-    $trail->push('Edit', route('penjualan.edit', $penjualan));
-    $trail->push($penjualan->kode_penjualan, route('penjualan.edit', $penjualan));
+//transaksi > Edit
+Breadcrumbs::for('transaksi-edit', function (BreadcrumbTrail $trail, $transaksi) {
+    $trail->parent('transaksi_index');
+    $trail->push('Edit', route('transaksi.edit', $transaksi));
+    $trail->push($transaksi->kode_transaksi, route('transaksi.edit', $transaksi));
 });
 
 // ============================================================================================================
@@ -223,7 +223,7 @@ Breadcrumbs::for('laporan-pembelian', function (BreadcrumbTrail $trail) {
     $trail->push('Laporan Pembelian', route('laporan-pembelian'));
 });
 
-Breadcrumbs::for('laporan-penjualan', function (BreadcrumbTrail $trail) {
-    $trail->push('Laporan Penjualan', route('laporan-penjualan'));
+Breadcrumbs::for('laporan-transaksi', function (BreadcrumbTrail $trail) {
+    $trail->push('Laporan transaksi', route('laporan-transaksi'));
 });
 

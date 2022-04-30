@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('penjualan', function (Blueprint $table) {
+        Schema::table('transaksi', function (Blueprint $table) {
             $table->string('payment_token')->after('status_bayar')->nullable();
             $table->string('payment_url')->after('payment_token')->nullable();
             $table->index('payment_token');
@@ -28,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('penjualan', function (Blueprint $table) {
+        Schema::table('transaksi', function (Blueprint $table) {
             $table->dropColumn('payment_token');
             $table->dropColumn('payment_url');
         });
