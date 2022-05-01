@@ -33,19 +33,22 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="info-title" for="email">Email<span>*</span></label>
-                                <input type="email" name="email" value="{{ old('email') }}" class="form-control unicase-form-control text-input"
-                                    id="email">
-                                    @error('password')
-                                        <span style="color: red;">{{ $message }}</span>
-                                    @enderror
+                                <input type="email" name="email" value="{{ old('email') }}"
+                                    class="form-control unicase-form-control text-input" id="email">
+                                @error('password')
+                                    <span style="color: red;">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="info-title" for="password">Password <span>*</span></label>
-                                <input type="password" class="form-control unicase-form-control text-input" name="password" id="password">
+                                <input type="password" class="form-control unicase-form-control text-input" name="password"
+                                    id="password">
                                 @error('password')
-                                        <span style="color: red;">{{ $message }}</span>
-                                    @enderror
+                                    <span style="color: red;">{{ $message }}</span>
+                                @enderror
                             </div>
+                            <p style="float: right"><a href="" data-toggle="modal" data-target="#tesModal">Forgot Password
+                                    ?</a></p>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
                         </form>
                     </div>
@@ -55,3 +58,28 @@
             </div><!-- /.container -->
         </div><!-- /.body-content -->
     @endsection
+
+    {{-- modal add --}}
+    <div class="modal fade" id="tesModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <label for="">Masukan Email Terdaftar</label>
+                            <input type="email" class="form-control" id="alamat_lengkap"
+                                placeholder="Masukan Email Terdaftar">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="simpan_data" type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
