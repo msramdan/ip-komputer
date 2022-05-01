@@ -13,10 +13,12 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CaraBelanjaController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
 use App\Http\Controllers\PembelianController;
+
 
 
 // Front End
@@ -71,6 +73,10 @@ Route::post('/cek-ongkir', [App\Http\Controllers\Frontend\PembelianController::c
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
 Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');
+Route::post('/sendReset', [MailController::class, 'index'])->name('sendReset');
+Route::get('/password/reset/{token}/{email}', [MailController::class, 'hal_reset']);
+Route::post('/update-password-customer', [MailController::class, 'update_password_customer'])->name('update-password-customer');
+
 // get kota
 Route::get('/data-kota/{provinsi_id}', [CustomerController::class, 'getCities']);
 Route::get('/getDetailItem/{id}', [CustomerController::class, 'getDetailItem']);

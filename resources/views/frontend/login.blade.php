@@ -68,18 +68,21 @@
                     <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form method="POST" action="{{ route('sendReset') }}">
+                        @csrf
                         <div class="form-group">
                             <label for="">Masukan Email Terdaftar</label>
-                            <input type="email" class="form-control" id="alamat_lengkap"
+                            <input required type="email" name="email" value="{{ old('email') }}" class="form-control" id="alamat_lengkap"
                                 placeholder="Masukan Email Terdaftar">
                         </div>
-                    </form>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="simpan_data" type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">SEND PASSWORD RESET LINK</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
