@@ -71,6 +71,9 @@ Route::get('/invoice/{id}', [App\Http\Controllers\Frontend\PembelianController::
 Route::post('/cek-ongkir', [App\Http\Controllers\Frontend\PembelianController::class, 'check_ongkir'])->name('check_ongkir');
 // auth web
 Route::post('/register', [LoginWebController::class, 'register'])->name('register-user');
+// reload captch
+Route::get('/reload-captcha', [LoginWebController::class, 'reloadCaptcha'])->name('reloadCaptcha');
+
 Route::post('/login-web', [LoginWebController::class, 'login'])->name('auth-user');;
 Route::get('/logout-web', [LoginWebController::class, 'logout'])->name('signout-user');
 Route::post('/sendReset', [MailController::class, 'index'])->name('sendReset');
@@ -115,6 +118,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::get('/address/{id}', [CustomerController::class, 'address'])->name('address');
     Route::resource('/alamat', CustomerAlamatController::class)->except('show');
     Route::resource('/pesan', PesanController::class)->except('show');
+    Route::put('updateStatus/{id}', [PesanController::class, 'updateStatus'])->name('updateStatus');
     Route::resource('/supplier', SupplierController::class)->except('show');
     Route::controller(SettingTokoController::class)->group(function () {
         Route::get('/setting-toko', 'index')->name('setting-toko.index');

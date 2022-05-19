@@ -209,37 +209,48 @@ class PembelianController extends Controller
         $dari = $request->dari;
         $ke = $request->ke;
 
-        if($supplier =='semua'){
+        if ($supplier == 'semua') {
             $pembelian = DB::table('pembelian')
-            ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
-            ->select('pembelian.*','supplier.*')
-            ->whereDate('pembelian.tanggal','>=',$dari)
-            ->whereDate('pembelian.tanggal','<=',$ke)
-            ->get();
-        }else{
-            $pembelian = DB::table('pembelian')
-            ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
-            ->select('pembelian.*','supplier.*')
-            ->whereDate('pembelian.tanggal','>=',$dari)
-            ->whereDate('pembelian.tanggal','<=',$ke)
-            ->where('pembelian.supplier_id', $supplier)
-            ->get();
-        }
-        // dd($pembelian);
+                ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+                ->select('pembelian.*', 'supplier.*')
+                ->whereDate('pembelian.tanggal', '>=', $dari)
+                ->whereDate('pembelian.tanggal', '<=', $ke)
+                ->get();
 
+            $totalPembelian = DB::table('pembelian')
+                ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+                ->whereDate('pembelian.tanggal', '>=', $dari)
+                ->whereDate('pembelian.tanggal', '<=', $ke)
+                ->sum('pembelian.grand_total');
+        } else {
+            $pembelian = DB::table('pembelian')
+                ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+                ->select('pembelian.*', 'supplier.*')
+                ->whereDate('pembelian.tanggal', '>=', $dari)
+                ->whereDate('pembelian.tanggal', '<=', $ke)
+                ->where('pembelian.supplier_id', $supplier)
+                ->get();
+
+            $totalPembelian = DB::table('pembelian')
+                ->join('supplier', 'supplier.id', '=', 'pembelian.supplier_id')
+                ->whereDate('pembelian.tanggal', '>=', $dari)
+                ->whereDate('pembelian.tanggal', '<=', $ke)
+                ->where('pembelian.supplier_id', $supplier)
+                ->sum('pembelian.grand_total');
+        }
         $toko = DB::table('setting_toko')
-                ->first();
+            ->first();
 
         $data = PDF::loadview('pembelian.laporan_pembelian', [
             'data' => $pembelian,
-            'toko' => $toko
+            'toko' => $toko,
+            'totalPembelian' => $totalPembelian
         ]);
         return $data->download('Laporan_pembelian.pdf');
         // return view('pembelian.laporan_pembelian', [
         //     'data' => $pembelian,
-        //     'toko' => $toko
+        //     'toko' => $toko,
+        //     'totalPembelian' => $totalPembelian
         // ]);
     }
-
-
 }

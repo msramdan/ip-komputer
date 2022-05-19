@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('telpon')->nullable();
             $table->string('email');
             $table->text('deskripsi');
+            $table->tinyInteger('is_read')->default('0');
             $table->timestamps();
         });
     }

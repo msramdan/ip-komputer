@@ -127,45 +127,64 @@ class TransaksiController extends Controller
         $dari = $request->dari;
         $ke = $request->ke;
 
-        if($customer =='semua'){
+        if ($customer == 'semua') {
             $transaksi = DB::table('transaksi')
-            ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
-            ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
-            ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
-            ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
-            ->select('transaksi.*', 'customer.nama as nama_customer','customer.email as email_customer','customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
-            ->whereDate('transaksi.tanggal_pembelian','>=',$dari)
-            ->whereDate('transaksi.tanggal_pembelian','<=',$ke)
-            ->get();
-        }else{
+                ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
+                ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
+                ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+                ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+                ->select('transaksi.*', 'customer.nama as nama_customer', 'customer.email as email_customer', 'customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
+                ->whereDate('transaksi.tanggal_pembelian', '>=', $dari)
+                ->whereDate('transaksi.tanggal_pembelian', '<=', $ke)
+                ->get();
+
+            $totalTransaksi = DB::table('transaksi')
+                ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
+                ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
+                ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+                ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+                ->select('transaksi.*', 'customer.nama as nama_customer', 'customer.email as email_customer', 'customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
+                ->whereDate('transaksi.tanggal_pembelian', '>=', $dari)
+                ->whereDate('transaksi.tanggal_pembelian', '<=', $ke)
+                ->sum('transaksi.grand_total');
+        } else {
             $transaksi = DB::table('transaksi')
-            ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
-            ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
-            ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
-            ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
-            ->select('transaksi.*', 'customer.nama as nama_customer','customer.email as email_customer','customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
-            ->whereDate('transaksi.tanggal_pembelian','>=',$dari)
-            ->whereDate('transaksi.tanggal_pembelian','<=',$ke)
-            ->where('transaksi.customer_id', $customer)
-            ->get();
+                ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
+                ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
+                ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+                ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+                ->select('transaksi.*', 'customer.nama as nama_customer', 'customer.email as email_customer', 'customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
+                ->whereDate('transaksi.tanggal_pembelian', '>=', $dari)
+                ->whereDate('transaksi.tanggal_pembelian', '<=', $ke)
+                ->where('transaksi.customer_id', $customer)
+                ->get();
+
+            $totalTransaksi = DB::table('transaksi')
+                ->join('customer', 'customer.id', '=', 'transaksi.customer_id')
+                ->join('customer_alamat', 'customer_alamat.id', '=', 'transaksi.customer_alamat_id')
+                ->join('provinsis', 'provinsis.id', '=', 'customer_alamat.provinsi_id')
+                ->join('kota_kabupatens', 'kota_kabupatens.id', '=', 'customer_alamat.kota_id')
+                ->select('transaksi.*', 'customer.nama as nama_customer', 'customer.email as email_customer', 'customer.telpon as telpon_customer', 'provinsis.nama as nama_provinsi', 'kota_kabupatens.nama as nama_kota', 'customer_alamat.alamat_lengkap')
+                ->whereDate('transaksi.tanggal_pembelian', '>=', $dari)
+                ->whereDate('transaksi.tanggal_pembelian', '<=', $ke)
+                ->where('transaksi.customer_id', $customer)
+                ->sum('transaksi.grand_total');
         }
         // dd($transaksi);
 
         $toko = DB::table('setting_toko')
-                ->first();
+            ->first();
 
         $data = PDF::loadview('transaksi.laporan_transaksi', [
             'data' => $transaksi,
-            'toko' => $toko
+            'toko' => $toko,
+            'totalTransaksi' => $totalTransaksi
         ]);
         return $data->download('Laporan_Transaksi.pdf');
         // return view('transaksi.laporan_transaksi', [
         //     'data' => $transaksi,
-        //     'toko' => $toko
+        //     'toko' => $toko,
+        //     'totalTransaksi' => $totalTransaksi
         // ]);
     }
-
-
-
-
 }

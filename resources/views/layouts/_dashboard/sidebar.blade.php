@@ -67,25 +67,35 @@
     @endcanany
 
     @canany(['pembelian_show'])
-    <li class="nav-item {{ set_active('pembelian*') }}">
-        <a class="nav-link" href="{{ route('pembelian.index') }}">
-            <i class="fas fa-fw fa-money-bill"></i>
-            <span>Pembelian</span></a>
-    </li>
+        <li class="nav-item {{ set_active('pembelian*') }}">
+            <a class="nav-link" href="{{ route('pembelian.index') }}">
+                <i class="fas fa-fw fa-money-bill"></i>
+                <span>Pembelian</span></a>
+        </li>
     @endcanany
 
     @canany(['transaksi_show'])
-    <li class="nav-item {{ set_active('transaksi*') }}">
-        <a class="nav-link" href="{{ route('transaksi.index') }}">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Transaksi</span></a>
-    </li>
+        <li class="nav-item {{ set_active('transaksi*') }}">
+            <a class="nav-link" href="{{ route('transaksi.index') }}">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Transaksi</span></a>
+        </li>
     @endcanany
     @canany(['pesan_show'])
         <li class="nav-item {{ set_active('pesan*') }}">
             <a class="nav-link" href="{{ route('pesan.index') }}">
                 <i class="fas fa-fw fa-envelope"></i>
-                <span>Pesan</span></a>
+                <span>Pesan</span>
+                @php
+                    $jml = DB::table('pesan')
+                        ->where('is_read', '=', 0)
+                        ->count();
+                @endphp
+                @if ($jml > 0)
+                    <span class="badge bg-danger-soft text-danger ms-auto">1 New</span>
+                @endif
+            </a>
+
         </li>
     @endcanany
 

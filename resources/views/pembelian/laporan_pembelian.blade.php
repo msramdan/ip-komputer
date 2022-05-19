@@ -13,7 +13,6 @@
         table tr th {
             font-size: 9pt;
         }
-
     </style>
     <center>
         <h3>IP-KOMPUTER</h3>
@@ -34,25 +33,42 @@
                 <th>Kode Pembelian</th>
                 <th>Supplier</th>
                 <th>Tanggal</th>
+                <th>Status Bayar</th>
                 <th>Sub Total</th>
                 <th>Diskon</th>
                 <th>Grand Total</th>
-                <th>Status Bayar</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach ($data as $row)
-                <tr>
-                    <td>{{ $row->kode_pembelian }}</td>
-                    <td>{{ $row->nama }}</td>
-                    <td>{{ $row->tanggal }}</td>
-                    <td> @currency($row->grand_total)</td>
-                    <td> @currency($row->diskon)</td>
-                    <td> @currency($row->total)</td>
-                    <td>{{ $row->status_bayar }}</td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>{{ $row->kode_pembelian }}</td>
+                <td>{{ $row->nama }}</td>
+                <td>{{ $row->tanggal }}</td>
+                <td>{{ $row->status_bayar }}</td>
+                <td> @currency($row->grand_total)</td>
+                <td> @currency($row->diskon)</td>
+                <td> @currency($row->total)</td>
 
+            </tr>
+            @endforeach
+            <tr>
+                <td colspan="6"> <b style="float: right">Total Pembelian</b> </td>
+                <td>@currency($totalPembelian)</td>
+
+            </tr>
         </tbody>
+    </table>
+    <span style="font-size: 10px; float: right;margin-right:10px">Sleman, {{ date('d-m-Y') }}</span>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <span style="font-size: 10px;float: right;margin-right:10px">{{ Auth::user()->name }}</span>
+
+
+
 
 </html>

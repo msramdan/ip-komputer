@@ -179,12 +179,15 @@
             </tr>
         </table>
 
-
-
-
-
-
         </table>
+        <br>
+        <table>
+            <tr class="heading">
+                <td style="width: 40%" style="color: red"> <i>No Resi : {{ $data->no_resi  }}  </i></td>
+            </tr>
+        </table>
+
+
     </div>
 </body>
 

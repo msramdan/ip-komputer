@@ -8,6 +8,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
+
 class PesanController extends Controller
 {
 
@@ -29,6 +30,16 @@ class PesanController extends Controller
             $query = Pesan::query();
             return DataTables::of($query)
                 ->addIndexColumn()
+                ->addColumn('is_read', function ($row) {
+                    if ($row->is_read == 0) {
+                        // $status = '<span class="badge badge-success">Terbaca</span>';
+                        $status = 'Belum Terbaca';
+                    } else {
+                        // $status = '<span class="badge badge-danger">Belum Terbaca</span>';
+                        $status = 'Terbaca';
+                    }
+                    return $status;
+                })
                 ->addColumn('action', 'pesan._action')
                 ->toJson();
         }
@@ -60,7 +71,8 @@ class PesanController extends Controller
                 'judul' => 'required|string|max:100',
                 'telpon' => 'required|string',
                 'deskripsi' => 'required|string',
-            ]);
+            ]
+        );
         if ($validator->fails()) {
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
@@ -78,7 +90,6 @@ class PesanController extends Controller
             Alert::toast('Data gagal disimpan', 'error');
             return redirect()->route('pesan.index');
         }
-
     }
 
     /**
@@ -119,7 +130,8 @@ class PesanController extends Controller
                 'judul' => 'required|string|max:100',
                 'telpon' => 'required|string',
                 'deskripsi' => 'required|string',
-            ]);
+            ]
+        );
         if ($validator->fails()) {
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
@@ -140,7 +152,7 @@ class PesanController extends Controller
             DB::rollback();
             Alert::toast('Data gagal diupdate', 'error');
             return redirect()->route('pesan.index');
-        }finally {
+        } finally {
             DB::commit();
         }
     }
@@ -160,6 +172,20 @@ class PesanController extends Controller
             return redirect()->route('pesan.index');
         } else {
             Alert::toast('Data gagal dihapus', 'error');
+            return redirect()->route('pesan.index');
+        }
+    }
+
+    public function updateStatus($id)
+    {
+        $pesan = Pesan::findOrFail($id);
+        $pesan->is_read = 1;
+        $pesan->save();
+        if ($pesan) {
+            Alert::toast('Status terbaca berhasil diupdate', 'success');
+            return redirect()->route('pesan.index');
+        } else {
+            Alert::toast('Status terbaca gagal diupdate', 'error');
             return redirect()->route('pesan.index');
         }
     }

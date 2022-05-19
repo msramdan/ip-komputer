@@ -17,7 +17,8 @@
     </style>
     <center>
         <h3>IP-KOMPUTER</h3>
-        <span style="font-size: 11px">Jl. pandhawa gang nakula no.02 karangmloko, RT.01/RW.17, Tegal Weru, Sariharjo, Kec. Ngaglik, Kabupaten
+        <span style="font-size: 11px">Jl. pandhawa gang nakula no.02 karangmloko, RT.01/RW.17, Tegal Weru, Sariharjo,
+            Kec. Ngaglik, Kabupaten
             Sleman, Daerah Istimewa Yogyakarta 55581</span>
 
     </center>
@@ -33,12 +34,12 @@
                 <th>Invoce</th>
                 <th>Customer</th>
                 <th>Tanggal Pembelian</th>
-                <th>Subtotal</th>
-                <th>Ongkir</th>
-                <th>Grand Total</th>
                 <th>Pengiriman</th>
                 <th>Berat Total</th>
                 <th>Status Pembayaran</th>
+                <th>Subtotal</th>
+                <th>Ongkir</th>
+                <th>Grand Total</th>
             </tr>
         </thead>
         <tbody>
@@ -47,15 +48,27 @@
                     <td>{{ $row->invoice }}</td>
                     <td>{{ $row->nama_customer }}</td>
                     <td>{{ $row->tanggal_pembelian }}</td>
-                    <td> @currency($row->sub_total)</td>
-                    <td> @currency($row->ongkir)</td>
-                    <td> @currency($row->grand_total)</td>
                     <td>{{ $row->jasa_kirim }}</td>
                     <td>{{ $row->berat_total }}</td>
                     <td>{{ $row->status_bayar }}</td>
+                    <td> @currency($row->sub_total)</td>
+                    <td> @currency($row->ongkir)</td>
+                    <td> @currency($row->grand_total)</td>
                 </tr>
             @endforeach
+            <tr>
+                <td colspan="8"> <b style="float: right">Total Transaksi</b> </td>
+                <td>@currency($totalTransaksi)</td>
 
-            </tbod </body>
+            </tr>
+        </tbody>
+    </table>
+    <span style="font-size: 10px; float: right;margin-right:10px">Sleman, {{ date('d-m-Y') }}</span>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <span style="font-size: 10px;float: right;margin-right:10px">{{ Auth::user()->name }}</span>
 
 </html>

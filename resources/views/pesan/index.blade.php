@@ -20,6 +20,7 @@
                                         <th>Judul/Sub</th>
                                         <th>Email</th>
                                         <th>Deskripsi</th>
+                                        <th>Status</th>
                                         @canany(['pesan_update', 'pesan_delete'])
                                             <th>Action</th>
                                         @endcanany
@@ -62,6 +63,11 @@
             {
                 data: 'deskripsi',
                 name: 'deskripsi'
+            },
+            {
+                data: 'is_read',
+                name: 'is_read',
+                orderable: false
             },
         ]
 

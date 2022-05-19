@@ -92,6 +92,7 @@
         $('#ajaxModel #modal-berat-total').text(berat_total);
         $('#ajaxModel #modal-status-bayar').text(status_bayar);
         $('#ajaxModel #modal-catatan').text(catatan);
+        $('#ajaxModel #download').attr("href", "../invoice/"+id);
 
         $.ajax({
             url: '/getDetailItem/' + id,
@@ -101,7 +102,7 @@
             },
             data: {},
             success: function(html) {
-                console.log(html)
+                // console.log(html)
                 $("#result").html(html);
                 $("#result_tunggu").html('');
             }
@@ -122,11 +123,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Detail transaksi</h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <a href="" id="download" class="btn btn-md btn-danger mb-3"><i class="fa fa-print" aria-hidden="true"></i> Print Invoice</a>
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -139,7 +142,7 @@
                                     <tr>
                                         <th>Customer</th>
                                         <td><span id="modal-customer"></span></td>
-                                    </tr>
+                                    </tr>`
                                     <tr>
                                         <th>No Telpon</th>
                                         <td><span id="modal-telpon"></span></td>

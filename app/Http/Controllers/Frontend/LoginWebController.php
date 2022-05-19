@@ -28,6 +28,7 @@ class LoginWebController extends Controller
                 'telpon' => 'required|string',
                 'email' => "required|email|unique:customer,email",
                 'password' => 'required|string',
+                'captcha' => 'required|captcha',
             ],
         );
         if ($validator->fails()) {
@@ -47,6 +48,11 @@ class LoginWebController extends Controller
             Alert::error('Failed', 'Registrasi Gagal, Silahkan Coba Lagi');
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
+    }
+
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
 
     public function login(Request $request)
