@@ -3,6 +3,9 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomerAlamatController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
+
+
 // Back end
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\HomeController;
@@ -36,6 +39,12 @@ use App\Http\Controllers\Frontend\PaymentController;
 use App\Models\Payment;
 
 
+
+// test redis
+// Route::get('/redis',function(){
+//     $redis = Redis::incr('p');
+//     return $redis;
+// });
 
 // Route Front end
 Route::get('/', [DashboardCrontroller::class, 'index'])->name('dashboard');
@@ -98,6 +107,8 @@ Route::get('payments/unfinish', [PaymentController::class, 'unfinish'])->name('p
 // Route Back end
 Route::get('/localization/{language}', [LocalizationController::class, 'switch'])->name('localization.switch');
 Route::get('panel-login', [LoginController::class, 'showLoginForm'])->name('panel-login');
+
+
 // auth admin cms
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');

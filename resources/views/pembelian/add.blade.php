@@ -190,7 +190,6 @@
         const diskon = $('#diskon')
         const btnSave = $('#btn-save')
         const btnCancel = $('#btn-cancel')
-
         const tanggal = $('#tanggal')
         const supplier = $('#supplier')
         const kode = $('#kode')
@@ -309,6 +308,8 @@
                 produk.focus()
             }
         })
+
+
         btnUpdate.click(function() {
             let index = $('#index-tr').val()
 
@@ -392,6 +393,8 @@
                 btnAdd.show()
             }
         })
+
+        
         $(document).on('click', '.btn-edit', function(e) {
             e.preventDefault()
             let index = $(this).parent().parent().index()

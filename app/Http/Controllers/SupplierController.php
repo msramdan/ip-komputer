@@ -142,7 +142,7 @@ class SupplierController extends Controller
                 Alert::toast('Data berhasil diupdate', 'success');
                 return redirect()->route('supplier.index');
             }
-            
+
         } catch (\Throwable $th) {
             DB::rollback();
             Alert::toast('Data gagal diupdate', 'error');

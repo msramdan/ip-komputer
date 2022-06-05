@@ -509,11 +509,11 @@
     <script>
         let isProcessing = false;
         $('#courier').change(function() {
+            // assign data
             let city_origin = $('#kota_id_asal').val();
             let city_destination = $('#kota_id_des').val();
             let courier = $('select[name=courier]').val();
             let weight = $('#berat_total').val();
-
             if (isProcessing) {
                 return;
             }

@@ -16,8 +16,9 @@ class MailController extends Controller
 
     public function index(Request $request)
     {
+
         // dd($request->email);
-        // Alert::success('Success', 'Link reset password berhasil di kirim');
+
         $user = DB::table('customer')->where('email', '=', $request->email)
             ->first();
 
@@ -54,7 +55,8 @@ class MailController extends Controller
                 'title' => 'Mail from IP-Komputer',
                 'body' => 'Klin link untuk reset password : ' . $link
             ];
-            \Mail::to($email)->send(new \App\Mail\MyTestMail($details));
+        //    \Mail::to($email)->send(new \App\Mail\MyTestMail($details));
+            \Mail::to($email)->queue(new \App\Mail\MyTestMail($details));
             return true;
         } catch (\Exception $e) {
             return false;
