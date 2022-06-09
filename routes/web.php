@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomerAlamatController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SettingTokoController;
 use App\Http\Controllers\PembelianController;
+
 
 
 
@@ -135,6 +137,7 @@ Route::prefix('panel')->middleware('auth')->group(function () {
         Route::get('/setting-toko', 'index')->name('setting-toko.index');
         Route::put('/setting-toko/update/{id}', 'update')->name('setting-toko.update');
     });
+
     Route::get('/laporan-pembelian', [LaporanController::class, 'laporan_pembelian'])->name('laporan-pembelian');
     Route::get('/laporan-penjualan', [LaporanController::class, 'laporan_penjualan'])->name('laporan-penjualan');
     Route::get('/cities/{provinsi_id}', [CustomerController::class, 'getCities']);

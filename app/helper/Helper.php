@@ -1,5 +1,7 @@
 <?php
 
+
+
 if (!function_exists('set_active')) {
     function set_active($uri)
     {
@@ -16,4 +18,5 @@ if (!function_exists('set_active')) {
         }
         // return request()->routeIs($uri) ? 'active' : '';
     }
+
 }

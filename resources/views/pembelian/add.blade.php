@@ -394,7 +394,7 @@
             }
         })
 
-        
+
         $(document).on('click', '.btn-edit', function(e) {
             e.preventDefault()
             let index = $(this).parent().parent().index()

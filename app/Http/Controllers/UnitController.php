@@ -8,6 +8,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Redis;
 
 class UnitController extends Controller
 {
@@ -61,7 +62,9 @@ class UnitController extends Controller
         $unit = Unit::create([
             'nama_unit'   => $request->nama_unit
         ]);
+        $insertedId = $unit->id;
         if ($unit) {
+            Redis::set('unit_' . $insertedId, $unit);
             Alert::toast('Data berhasil disimpan', 'success');
             return redirect()->route('unit.index');
         } else {
@@ -89,7 +92,15 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        return view('unit.edit', compact('unit'));
+        $unitCached = Redis::get('unit_' . $unit->id);
+        if (isset($unitCached)) {
+            $unit = json_decode($unitCached, FALSE);
+            return view('unit.edit',['unit' => $unit]
+            );
+        } else {
+            Redis::set('unit_' . $unit->id, $unit);
+            return view('unit.edit', compact('unit'));
+        }
     }
 
     /**
@@ -118,6 +129,11 @@ class UnitController extends Controller
                 'nama_unit'   => $request->nama_unit
             ]);
             if ($unit) {
+                // del redis lama
+                Redis::del('unit_' . $unit->id);
+                $unitUpdate = Unit::find($unit->id);
+                // set redis baru
+                Redis::set('unit_' . $unit->id, $unitUpdate);
                 Alert::toast('Data berhasil diupdate', 'success');
                 return redirect()->route('unit.index');
             }
@@ -141,6 +157,8 @@ class UnitController extends Controller
         $unit = Unit::findOrFail($unit->id);
         $unit->delete();
         if ($unit) {
+            // delete data redis
+            Redis::del('unit_' . $unit->id);
             Alert::toast('Data berhasil dihapus', 'success');
             return redirect()->route('unit.index');
         } else {

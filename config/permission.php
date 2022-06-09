@@ -81,7 +81,6 @@ return [
             'belanja_update',
             'belanja_delete',
         ],
-
     ],
 
     'models' => [

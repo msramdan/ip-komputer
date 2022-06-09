@@ -227,3 +227,4 @@ Breadcrumbs::for('laporan-transaksi', function (BreadcrumbTrail $trail) {
     $trail->push('Laporan transaksi', route('laporan-transaksi'));
 });
 
+
